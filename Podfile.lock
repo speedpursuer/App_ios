@@ -1,0 +1,12 @@
+PODS:
+  - UINavigationItem+Margin (2.0.2)
+
+DEPENDENCIES:
+  - UINavigationItem+Margin
+
+SPEC CHECKSUMS:
+  UINavigationItem+Margin: ef678ebbbbbd4b91d8e0db359889965a4fd1b941
+
+PODFILE CHECKSUM: d7a7a884ac4ed28508a8e61e74305446ee484b4b
+
+COCOAPODS: 1.1.0.rc.2

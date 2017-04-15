@@ -1,0 +1,36 @@
+//
+//  eService.pch
+//  eService
+//
+//  Created by 邢磊 on 2017/4/12.
+//  Copyright © 2017年 邢磊. All rights reserved.
+//
+
+#ifndef eService_pch
+#define eService_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* eService_pch */
+
+#define APP_COLOR [UIColor colorWithRed:0.13 green:0.13 blue:0.13 alpha:1]
+
+#ifdef __OBJC__
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+//Model Class
+//#import "ImageEntity.h"
+//Service
+//#import "CBLService.h"
+//#import "LBService.h"
+//Controller
+//#import "ClipController.h"
+//Others
+//#import "Helper.h"
+
+#endif
+
+#ifndef DEBUG
+#define NSLog(...);
+#endif

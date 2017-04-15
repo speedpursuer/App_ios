@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[EditTableViewController lf_PhotoEdittingController:didFinishPhotoEdit:]:EditTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[self entityForIndex:_indexInEditing].image">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

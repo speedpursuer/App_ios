@@ -37,8 +37,8 @@
 }
 
 - (void)setupDesc {
-	if(_desc) {
-		_descView.text = _desc;
+	if(_text) {
+		_descView.text = _text;
 	}
 	[_descView setPlaceholder:_descPlaceholder];
 	[_descView becomeFirstResponder];
@@ -70,14 +70,16 @@
 - (IBAction)goBack:(id)sender {
 	[self.view endEditing:YES];
 	if(sender == self.confirmButton) {
-		[_delegate saveDesc:_descView.text];
-//		if(_actionType == sendClip) {
-//			[_delegate sendClip:_url desc:_descView.text];
-//		}else{
-//			[_delegate saveDesc:_descView.text];
-//		}
+//		[_delegate saveDesc:_descView.text];
+		if(_actionType == editTitle) {
+			[_delegate saveTitle:_descView.text];
+		}
+		if(_actionType == editDesc){
+			[_delegate saveDesc:_descView.text];
+		}
 	}
-	[self dismissViewControllerAnimated:YES completion:nil];
+	[self.navigationController popViewControllerAnimated:YES];
+//	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

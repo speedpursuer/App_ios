@@ -7,11 +7,14 @@
 //
 
 #import "EditTableViewCell.h"
+#import <FontAwesomeKit/FAKIonIcons.h>
 //#import "CALayer+YYAdd.h"
 
 @interface EditTableViewCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *image;
 @property (weak, nonatomic) IBOutlet UITextView *desc;
+@property (weak, nonatomic) IBOutlet UIView *background;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 @property (nonatomic, weak) id<EditArticle> delegate;
 @end
 
@@ -20,17 +23,31 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+	[self setupButtons];
 	[self addClickControlToImageView];
 	[self addClickControlToTextView];
+	
+	[_desc.layer setBorderColor: [[UIColor lightGrayColor] CGColor]];
+//	[_desc.layer setBorderWidth: 0.8];
 //	[self.layer setBorderColor: [[UIColor lightGrayColor] CGColor]];
 //	[self.layer setBorderWidth: 0.1];
 //	[self.layer setCornerRadius: 2.0];
 	
-	_desc.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-	_desc.layer.borderWidth = 1.0;
-//	_desc.layer.cornerRadius = 5.0;
-	
+	_background.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+	_background.layer.borderWidth = 1.0;
+	_background.layer.cornerRadius = 10.0;
+//
+//	self.selectedBackgroundView.backgroundColor = [UIColor lightGrayColor];
+//	
     // Initialization code
+}
+
+- (void)setupButtons {
+	CGSize size = CGSizeMake(25, 25);
+	FAKIonIcons *icon1 = [FAKIonIcons iosCloseEmptyIconWithSize:30];
+	[_deleteButton setTintColor:[UIColor lightGrayColor]];
+	[_deleteButton setImage:[icon1 imageWithSize:size] forState:UIControlStateNormal];
+	[_deleteButton setImage:[icon1 imageWithSize:size] forState:UIControlStateHighlighted];
 }
 
 - (void)addClickControlToImageView{
@@ -65,6 +82,10 @@
 	[_desc addGestureRecognizer:singleTap];
 }
 
+- (IBAction)deletePhoto:(id)sender {
+	[_delegate deletePhoto:self];
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
@@ -75,8 +96,21 @@
 	_image.image = image;
 }
 
-- (void)setCellData:(UIImage *)image withDelegate:(id<EditArticle>)delegate {
-	_image.image = image;
+- (void)setCellData:(NSString *)url desc:(NSString *)desc withDelegate:(id<EditArticle>)delegate {
+//	_image.image = image;
+	[_image requestImageWithURL:url];
+	[self setDescText:desc];
+	_delegate = delegate;
+}
+
+- (void)setCellData:(UIImage *)image url:(NSString *)url desc:(NSString *)desc withDelegate:(id<EditArticle>)delegate {
+	if(image) {
+		_image.image = image;
+	}else {
+		[_image requestImageWithURL:url];
+	}
+	
+	[self setDescText:desc];
 	_delegate = delegate;
 }
 

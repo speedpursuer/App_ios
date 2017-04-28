@@ -12,14 +12,13 @@
 
 //- (void)editPhoto:(NSInteger)index;
 - (void)editDesc:(UITableViewCell *)cell;
-
 - (void)editPhoto:(UITableViewCell *)cell;
-
+- (void)deletePhoto:(UITableViewCell *)cell;
 @end
 
 @interface EditTableViewCell : UITableViewCell
-- (void)setCellData:(UIImage *)image;
-- (void)setCellData:(UIImage *)image withDelegate:(id<EditArticle>)delegate;
-- (void)setDescText:(NSString *)desc;
+- (void)setCellData:(UIImage *)image url:(NSString *)url desc:(NSString *)desc withDelegate:(id<EditArticle>)delegate;
+//- (void)setCellData:(UIImage *)image;
+//- (void)setDescText:(NSString *)desc;
 @end
 

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Article.h"
 
 @interface ArticleTableViewController : UITableViewController
-@property NSMutableArray *articles;
+@property NSArray <Article*> *articles;
 @end

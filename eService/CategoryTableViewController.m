@@ -52,9 +52,9 @@
 #pragma mark - Picker delegate
 - (void)lf_imagePickerController:(LFImagePickerController *)picker didFinishPickingThumbnailImages:(NSArray<UIImage *> *)thumbnailImages originalImages:(NSArray<UIImage *> *)originalImages {
 	
-	EditTableViewController *ctr = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"edit"];
+	EditTableViewController *ctr = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"edit1"];
 	
-	ctr.images = originalImages;
+//	ctr.images = originalImages;
 	
 	ctr.modalPresentationStyle = UIModalPresentationCurrentContext;
 	

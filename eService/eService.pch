@@ -14,20 +14,27 @@
 
 #endif /* eService_pch */
 
+#define WeakSelf                    __weak typeof(self)weakSelf = self;
+
+#define MLImagePickerUIScreenScale  ([[UIScreen mainScreen] scale])
+#define UIScreenWidth               ([UIScreen mainScreen].bounds.size.width)
+
 #define APP_COLOR [UIColor colorWithRed:0.13 green:0.13 blue:0.13 alpha:1]
 
 #ifdef __OBJC__
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 //Model Class
-//#import "ImageEntity.h"
+#import "ArticleEntry.h"
+#import "Article.h"
 //Service
-//#import "CBLService.h"
+#import "CBLService.h"
+#import "CacheManager.h"
 //#import "LBService.h"
 //Controller
 //#import "ClipController.h"
 //Others
-//#import "Helper.h"
+#import "Helper.h"
 
 #endif
 

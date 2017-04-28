@@ -1,0 +1,62 @@
+/* clip edit */
+"Add Comment" = "添加文字";
+
+/* for photo deletion */
+"Are you sure to delete" = "确认删除？";
+
+/* Article title */
+"Articles" = "内容";
+
+/* photo deletion */
+"Cancel" = "取消";
+
+/* title for category */
+"Choose Category" = "选择类别";
+
+/* Add desc for image */
+"Click to add desc" = "点击添加文字";
+
+/* Init category */
+"Default Category" = "默认分类";
+
+/* clip edit */
+"Edit Comment" = "编辑文字";
+
+/* Message for empty table view */
+"No Content" = "点击右上角添加内容";
+
+/* Confirm photo selection
+   photo deletion */
+"OK" = "确定";
+
+/* text for category */
+"Please enter category" = "输入分类名";
+
+/* text for image */
+"Please enter desc" = "输入文字";
+
+/* Article title
+   text for title */
+"Please enter title" = "输入标题";
+
+/* Cancel */
+"REComposeSheetView_Cancel" = "取消";
+
+/* Post */
+"REComposeSheetView_Post" = "保存";
+
+/* clip edit */
+"Save" = "保存";
+
+/* Share to weibo */
+"Send" = "保存";
+
+/* Main page title */
+"Service Catalog" = "分类";
+
+/* Init title */
+"Untitled" = "未命名标题";
+
+/* pics */
+"pics" = "张图";
+

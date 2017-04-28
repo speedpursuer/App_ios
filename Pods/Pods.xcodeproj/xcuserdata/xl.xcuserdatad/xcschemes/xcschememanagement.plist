@@ -4,7 +4,32 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>CocoaSecurity.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FCUUID.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FontAwesomeKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>JDStatusBarNotification.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-eService.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>UICKeyChainStore.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -14,15 +39,70 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>YYCache.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>YYImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>YYWebImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1A51A9D8AC481AC19FA3983022DFA0B3</key>
+		<key>2FD30AA2E891A607399B7734CFBFCE15</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3222A15AFFB914CF5A27D28D0267EF89</key>
+		<key>5B205F50A9EF0B3FE80E849510A05096</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>80B20710F32ADC4E9B9DAEA058716119</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8404075883633CC2D3E8F7028DB5F7BC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B412E0D1AA7CFCC3B6CBEC582819D45</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B2B0F87BC788FA547E5356A9006F455A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CB4153638DA5FE448C017B2E68BCDC7A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EC4680F5214EA7674417F5CF37CF8FC1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F12D94652DF759C5065B81DCEC440F77</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FF5CFD6F2B044B2583AE363E38A9D0EF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

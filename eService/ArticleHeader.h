@@ -11,4 +11,5 @@
 @interface ArticleHeader : UIView
 @property (weak, nonatomic) IBOutlet UIImageView *background;
 @property (weak, nonatomic) IBOutlet UILabel *title;
+@property (weak, nonatomic) IBOutlet UILabel *category;
 @end

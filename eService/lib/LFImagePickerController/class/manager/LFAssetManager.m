@@ -31,7 +31,7 @@ static LFAssetManager *manager;
         
         LFAM_ScreenWidth = [UIScreen mainScreen].bounds.size.width;
         // 测试发现，如果scale在plus真机上取到3.0，内存会增大特别多。故这里写死成2.0
-        LFAM_ScreenScale = 2.0;
+        LFAM_ScreenScale = 6.0;
         if (LFAM_ScreenWidth > 700) {
             LFAM_ScreenScale = 1.5;
         }
@@ -464,7 +464,7 @@ static LFAssetManager *manager;
     [self getPhotoWithAsset:asset isOrigin:NO completion:^(UIImage *thumbnail, UIImage *source, NSMutableDictionary *info) {
         thumbnail = [thumbnail fastestCompressImageWithSize:10];
         
-        NSData *sourceData = [source fastestCompressImageDataWithSize:100];
+        NSData *sourceData = [source fastestCompressImageDataWithSize:2000];
         source = [UIImage imageWithData:sourceData];
         /** 图片宽高 */
         CGSize imageSize = source.size;
@@ -526,17 +526,17 @@ static LFAssetManager *manager;
         option.resizeMode = PHImageRequestOptionsResizeModeFast;
         
         /** 缩略图 */
-        [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:CGSizeMake(th_pixelWidth, th_pixelHeight) contentMode:PHImageContentModeAspectFit options:option resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-            BOOL downloadFinined = (![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey]&& ![[info objectForKey:PHImageResultIsDegradedKey] boolValue]);
-            if (downloadFinined) {
-                if (self.shouldFixOrientation) {
-                    thumbnail = [result fixOrientation];
-                } else {
-                    thumbnail = result;
-                }
-                if (completion && thumbnail && source && imageInfo.count) completion(thumbnail, source, imageInfo);
-            }
-        }];
+//        [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:CGSizeMake(th_pixelWidth, th_pixelHeight) contentMode:PHImageContentModeAspectFit options:option resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+//            BOOL downloadFinined = (![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey]&& ![[info objectForKey:PHImageResultIsDegradedKey] boolValue]);
+//            if (downloadFinined) {
+//                if (self.shouldFixOrientation) {
+//                    thumbnail = [result fixOrientation];
+//                } else {
+//                    thumbnail = result;
+//                }
+//                if (completion && thumbnail && source && imageInfo.count) completion(thumbnail, source, imageInfo);
+//            }
+//        }];
         if (isOrigin == NO) {
             CGFloat pixelWidth = LFAM_ScreenWidth * 0.5 * LFAM_ScreenScale;
             CGFloat pixelHeight = pixelWidth / aspectRatio;
@@ -551,6 +551,8 @@ static LFAssetManager *manager;
                 } else {
                     source = result;
                 }
+				
+				thumbnail = source;
                 
                 if (completion && thumbnail && source && imageInfo.count) completion(thumbnail, source, imageInfo);
             }

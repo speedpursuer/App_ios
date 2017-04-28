@@ -22,6 +22,8 @@
 
 @property (nonatomic, weak) LFClippingView *clippingView;
 @property (nonatomic, weak) LFGridView *gridView;
+/** 因为LFClippingView需要调整transform属性，需要额外创建一层进行缩放处理，理由：UIScrollView的缩放会自动重置transform */
+@property (nonatomic, weak) UIView *clipZoomView;
 
 /** 剪裁尺寸, CGRectInset(self.bounds, 30, 50) */
 @property (nonatomic, assign) CGRect clippingRect;
@@ -57,8 +59,12 @@
     
     LFClippingView *clippingView = [[LFClippingView alloc] initWithFrame:self.bounds];
     clippingView.clippingDelegate = self;
-    [self addSubview:clippingView];
+    /** 创建缩放层，避免直接缩放LFClippingView，会改变其transform */
+    UIView *clipZoomView = [[UIView alloc] initWithFrame:self.bounds];
+    [clipZoomView addSubview:clippingView];
+    [self addSubview:clipZoomView];
     self.clippingView = clippingView;
+    self.clipZoomView = clipZoomView;
     
     LFGridView *gridView = [[LFGridView alloc] initWithFrame:self.bounds];
     gridView.delegate = self;
@@ -74,11 +80,11 @@
 - (void)setImage:(UIImage *)image
 {
     _image = image;
-    self.clippingView.image = image;
-    if (image) {        
+    if (image) {
         CGRect cropRect = AVMakeRectWithAspectRatioInsideRect(image.size, self.frame);
         self.gridView.gridRect = cropRect;
     }
+    self.clippingView.image = image;
 }
 
 - (void)setClippingRect:(CGRect)clippingRect
@@ -86,7 +92,14 @@
     _clippingRect = clippingRect;
     self.gridView.gridRect = clippingRect;
     self.clippingView.cropRect = clippingRect;
-    self.maximumZoomScale = MIN(MAX(self.minimumZoomScale + kMaxZoomScale - kMaxZoomScale * (self.clippingView.zoomScale/self.clippingView.maximumZoomScale), self.minimumZoomScale), kMaxZoomScale);
+    
+    if (_isClipping) {
+        /** 关闭缩放 */
+        self.maximumZoomScale = self.minimumZoomScale;
+        [self setZoomScale:self.zoomScale];
+    } else {
+        self.maximumZoomScale = MIN(MAX(self.minimumZoomScale + kMaxZoomScale - kMaxZoomScale * (self.clippingView.zoomScale/self.clippingView.maximumZoomScale), self.minimumZoomScale), kMaxZoomScale);
+    }
 }
 
 - (void)setClippingMinSize:(CGSize)clippingMinSize
@@ -113,7 +126,6 @@
 - (void)setIsClipping:(BOOL)isClipping animated:(BOOL)animated
 {
     _isClipping = isClipping;
-    [self setZoomScale:1.f];
     if (isClipping) {
         /** 动画切换 */
         if (animated) {
@@ -168,13 +180,19 @@
             self.gridView.alpha = 0.f;
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.25f animations:^{
-                [self.clippingView cancel];
-                self.gridView.gridRect = self.clippingView.frame;
+                [self cancel];
             }];
         }];
     } else {
-        [self.clippingView cancel];
+        [self cancel];
     }
+}
+
+- (void)cancel
+{
+    [self.clippingView cancel];
+    self.gridView.gridRect = self.clippingView.frame;
+    self.maximumZoomScale = MIN(MAX(self.minimumZoomScale + kMaxZoomScale - kMaxZoomScale * (self.clippingView.zoomScale/self.clippingView.maximumZoomScale), self.minimumZoomScale), kMaxZoomScale);
 }
 
 /** 还原 */
@@ -193,6 +211,14 @@
     return NO;
 }
 
+/** 旋转 isClipping=YES 的情况有效 */
+- (void)rotate
+{
+    if (_isClipping) {
+        [self.clippingView rotateClockwise:YES];
+    }
+}
+
 /** 创建编辑图片 */
 - (UIImage *)createEditImage
 {
@@ -208,7 +234,7 @@
 {
     __weak typeof(self) weakSelf = self;
     void (^block)(CGRect) = ^(CGRect rect){
-        if (clippingView.isReseting) { /** 重置需要将遮罩显示也重置 */
+        if (clippingView.isReseting || clippingView.isRotating) { /** 重置/旋转 需要将遮罩显示也重置 */
             [weakSelf.gridView setGridRect:rect maskLayer:YES animated:YES];
         } else {
             [weakSelf.gridView setGridRect:rect animated:YES];
@@ -254,10 +280,12 @@
 }
 - (void)lf_gridViewDidResizing:(LFGridView *)gridView
 {
-//    [self.zoomView zoomInToRect:gridView.gridRect];
+    /** 放大 */
+    [self.clippingView zoomInToRect:gridView.gridRect];
 }
 - (void)lf_gridViewDidEndResizing:(LFGridView *)gridView
 {
+    /** 缩小 */
     [self.clippingView zoomOutToRect:gridView.gridRect];
     /** 让clippingView的动画回调后才显示showMaskLayer */
     //    self.gridView.showMaskLayer = YES;
@@ -265,11 +293,26 @@
 
 #pragma mark - UIScrollViewDelegate
 - (nullable UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    return self.clippingView;
+    return self.clipZoomView;
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+    self.contentInset = UIEdgeInsetsZero;
+    self.scrollIndicatorInsets = UIEdgeInsetsZero;
     [self refreshImageZoomViewCenter];
+}
+
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
+{
+    /** 重置contentSize */
+    CGRect realClipZoomRect = AVMakeRectWithAspectRatioInsideRect(self.clippingView.size, self.clipZoomView.frame);
+    CGFloat width = MAX(self.frame.size.width, realClipZoomRect.size.width);
+    CGFloat height = MAX(self.frame.size.height, realClipZoomRect.size.height);
+    CGFloat diffWidth = (width-self.clipZoomView.frame.size.width)/2;
+    CGFloat diffHeight = (height-self.clipZoomView.frame.size.height)/2;
+    self.contentInset = UIEdgeInsetsMake(diffHeight, diffWidth, 0, 0);
+    self.scrollIndicatorInsets = UIEdgeInsetsMake(diffHeight, diffWidth, 0, 0);
+    self.contentSize = CGSizeMake(width, height);
 }
 
 
@@ -277,7 +320,7 @@
 
 - (BOOL)touchesShouldBegin:(NSSet *)touches withEvent:(UIEvent *)event inContentView:(UIView *)view {
     
-    if (![[self subviews] containsObject:view]) { /** 非自身子视图 */
+    if (!([[self subviews] containsObject:view] || [[self.clipZoomView subviews] containsObject:view])) { /** 非自身子视图 */
         if (event.allTouches.count == 2) { /** 2个手指 */
             return NO;
         }
@@ -287,7 +330,7 @@
 
 - (BOOL)touchesShouldCancelInContentView:(UIView *)view
 {
-    if (![[self subviews] containsObject:view]) { /** 非自身子视图 */
+    if (!([[self subviews] containsObject:view] || [[self.clipZoomView subviews] containsObject:view])) { /** 非自身子视图 */
         return NO;
     }
     return [super touchesShouldCancelInContentView:view];
@@ -296,9 +339,9 @@
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
     UIView *view = [super hitTest:point withEvent:event];
-    if (!self.isClipping && [view isKindOfClass:[LFClippingView class]]) { /** 非编辑状态，改变触发响应最顶层的scrollView */
+    if (!self.isClipping && (self.clippingView == view || self.clipZoomView == view)) { /** 非编辑状态，改变触发响应最顶层的scrollView */
         return self;
-    } else if (self.isClipping && view == self) {
+    } else if (self.isClipping && (view == self || self.clipZoomView == view)) {
         return self.clippingView;
     }
     return view;
@@ -308,7 +351,7 @@
 - (void)refreshImageZoomViewCenter {
     CGFloat offsetX = (self.width > self.contentSize.width) ? ((self.width - self.contentSize.width) * 0.5) : 0.0;
     CGFloat offsetY = (self.height > self.contentSize.height) ? ((self.height - self.contentSize.height) * 0.5) : 0.0;
-    self.clippingView.center = CGPointMake(self.contentSize.width * 0.5 + offsetX, self.contentSize.height * 0.5 + offsetY);
+    self.clipZoomView.center = CGPointMake(self.contentSize.width * 0.5 + offsetX, self.contentSize.height * 0.5 + offsetY);
 }
 
 #pragma mark - LFEdittingProtocol
@@ -337,6 +380,7 @@
 - (void)setPhotoEditData:(NSDictionary *)photoEditData
 {
     self.clippingView.photoEditData = photoEditData;
+    self.maximumZoomScale = MIN(MAX(self.minimumZoomScale + kMaxZoomScale - kMaxZoomScale * (self.clippingView.zoomScale/self.clippingView.maximumZoomScale), self.minimumZoomScale), kMaxZoomScale);
 }
 
 #pragma mark - 绘画功能

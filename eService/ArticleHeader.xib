@@ -18,7 +18,12 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVQ-D9-Fm8">
-                    <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GTI-b3-Na1">
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -26,13 +31,16 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="yXU-WE-sOm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="27j-UY-reI"/>
+                <constraint firstItem="GTI-b3-Na1" firstAttribute="trailing" secondItem="yXU-WE-sOm" secondAttribute="trailing" constant="-10" id="VMN-wj-sej"/>
                 <constraint firstAttribute="trailing" secondItem="yXU-WE-sOm" secondAttribute="trailing" id="a4n-Qz-WJE"/>
                 <constraint firstItem="ZVQ-D9-Fm8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="jyg-0F-IvA"/>
+                <constraint firstItem="GTI-b3-Na1" firstAttribute="bottom" secondItem="yXU-WE-sOm" secondAttribute="bottom" constant="-10" id="prs-G9-5nT"/>
                 <constraint firstItem="yXU-WE-sOm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sZd-ox-61T"/>
                 <constraint firstItem="ZVQ-D9-Fm8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="sn7-y9-KgX"/>
             </constraints>
             <connections>
                 <outlet property="background" destination="yXU-WE-sOm" id="547-aG-NgL"/>
+                <outlet property="category" destination="GTI-b3-Na1" id="OQG-lh-p6B"/>
                 <outlet property="title" destination="ZVQ-D9-Fm8" id="eIk-R7-enz"/>
             </connections>
             <point key="canvasLocation" x="26" y="-60"/>

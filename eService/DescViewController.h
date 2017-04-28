@@ -9,17 +9,18 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, DescActionType) {
-	addDesc,
 	editDesc,
+	editTitle,
 };
 
 @protocol DescDelegate <NSObject>
 @optional
 -(void)saveDesc:(NSString *)desc;
+-(void)saveTitle:(NSString *)title;
 @end
 
 @interface DescViewController : UIViewController
-@property NSString *desc;
+@property NSString *text;
 @property UIImage *image;
 @property NSString *descPlaceholder;
 @property DescActionType actionType;

@@ -31,7 +31,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="iIu-Nh-Ng5"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -45,11 +45,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="BBj-DH-H09">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="RLC-ge-ozf">
-                            <connections>
-                                <action selector="goBack:" destination="2HY-Ow-fJH" id="6SC-xi-HGn"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="Nee-bW-Yzh">
                             <connections>
                                 <action selector="goBack:" destination="2HY-Ow-fJH" id="EAL-Ps-zyl"/>
@@ -57,7 +52,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="cancelButton" destination="RLC-ge-ozf" id="IVc-8H-0B0"/>
                         <outlet property="confirmButton" destination="Nee-bW-Yzh" id="ffD-ea-QTy"/>
                         <outlet property="descView" destination="QmP-su-WgN" id="9G3-OM-PFJ"/>
                         <outlet property="thumbView" destination="iG1-Fl-eVb" id="GI5-Xv-1ak"/>
@@ -72,7 +66,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oxC-Te-wnR" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1LD-Jt-Hby">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1LD-Jt-Hby">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

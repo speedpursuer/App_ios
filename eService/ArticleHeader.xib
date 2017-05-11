@@ -17,12 +17,15 @@
                         <constraint firstAttribute="height" constant="150" id="d4W-nC-QRs"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVQ-D9-Fm8">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVQ-D9-Fm8">
+                    <constraints>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="120" id="7Sm-rW-UZd"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GTI-b3-Na1">
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GTI-b3-Na1">
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -37,6 +40,7 @@
                 <constraint firstItem="GTI-b3-Na1" firstAttribute="bottom" secondItem="yXU-WE-sOm" secondAttribute="bottom" constant="-10" id="prs-G9-5nT"/>
                 <constraint firstItem="yXU-WE-sOm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sZd-ox-61T"/>
                 <constraint firstItem="ZVQ-D9-Fm8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="sn7-y9-KgX"/>
+                <constraint firstAttribute="trailing" secondItem="ZVQ-D9-Fm8" secondAttribute="trailing" constant="15" id="xdZ-Le-IF3"/>
             </constraints>
             <connections>
                 <outlet property="background" destination="yXU-WE-sOm" id="547-aG-NgL"/>

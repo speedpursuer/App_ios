@@ -17,4 +17,16 @@
 	UIGraphicsEndImageContext();
 	return newImage;
 }
+
+- (UIImage *)resizeToWidth:(CGFloat)width {
+	if (self.size.width <= width) {
+		return self;
+	}
+	CGSize size = CGSizeMake(width, (int)(width * self.size.height / self.size.width));
+	UIGraphicsBeginImageContext(size);
+	[self drawInRect:CGRectMake(0, 0, size.width, size.height)];
+	UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	return newImage;
+}
 @end

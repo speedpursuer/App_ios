@@ -11,7 +11,6 @@
 #import "EditTableViewController.h"
 #import "ArticleTableViewCell.h"
 #import "ArticleDisplayTableViewController.h"
-#import "DBService.h"
 #import "TZImagePickerController.h"
 
 @interface ArticleTableViewController ()  <TZImagePickerControllerDelegate, LFImagePickerControllerDelegate>
@@ -24,11 +23,6 @@
     [super viewDidLoad];
 	[self configCrl];
 	[self hideBackButtonText];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,16 +30,22 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kArticleListChange object:nil];
+}
+
 - (void)configCrl {
 	[self setTitle:NSLocalizedString(@"Articles", @"Article title")];
-//	_articles = [NSMutableArray arrayWithObjects:@"Article1", @"Article2", @"Article3", nil];
-//	_articles = [DBService sharedService].articleList;
-//	[[CacheManager sharedManager] removeAllCache];
 	[self loadData];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(loadData)
+												 name:kArticleListChange
+											   object:nil];
 }
 
 - (void)loadData{
-	_articles = [[CBLService sharedManager] loadArticles];
+	_articles = [[[CBLService sharedManager] loadArticles] mutableCopy];
+	[self.tableView reloadData];
 }
 
 - (void)hideBackButtonText {
@@ -53,29 +53,14 @@
 }
 
 - (IBAction)createNewService:(id)sender {
-//	LFImagePickerController *imagePicker = [[LFImagePickerController alloc] initWithMaxImagesCount:9 delegate:self];
-//	
-//	//    imagePicker.allowTakePicture = NO;
-//	imagePicker.sortAscendingByCreateDate = NO;
-//	imagePicker.doneBtnTitleStr = NSLocalizedString(@"OK", @"Confirm photo selection");
-//	imagePicker.allowEditting = NO;
-//	imagePicker.allowPickingOriginalPhoto = NO;
-////	imagePicker.isSelectOriginalPhoto = YES;
-//	imagePicker.maxImagesCount = 50;
-//	imagePicker.minImagesCount = 1;
-//	imagePicker.allowPickingVideo = NO;
-//	[self presentViewController:imagePicker animated:YES completion:nil];
-	
-	
-	TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:9 delegate:self];
+	TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:30 delegate:self];
 	
 	imagePickerVc.allowPickingOriginalPhoto = NO;
 	imagePickerVc.allowPickingGif = NO;
 	imagePickerVc.allowPickingVideo = NO;
 	imagePickerVc.autoDismiss = NO;
-	imagePickerVc.maxImagesCount = 30;
+	//	imagePickerVc.maxImagesCount = 30;
 	//	imagePickerVc.photoPreviewMaxWidth = 1000;
-	//	[self pushController:imagePickerVc];
 	
 	[self presentViewController:imagePickerVc animated:YES completion:nil];
 }
@@ -87,37 +72,23 @@
 	EditTableViewController *ctr = [[UIStoryboard storyboardWithName:@"Article" bundle:nil] instantiateViewControllerWithIdentifier:@"edit"];
 	ctr.images = photos;
 	ctr.imageInfos = infos;
-	//	ctr.dataArray = [self articleEntryFromPhotos:photos infos:infos];
+	
 	[self.navigationController pushViewController:ctr animated:YES];
 	[picker dismissViewControllerAnimated:YES completion:nil];
 }
-
-//- (NSMutableArray *)articleEntryFromPhotos:(NSArray *)photos infos:(NSArray *)infos {
-//	NSMutableArray *entries = [NSMutableArray new];
-//	for (NSInteger i = 0; i < photos.count; i++) {
-//		ArticleEntry *entry = [[ArticleEntry alloc]initWithImage:photos[i] withImageKey:[infos[i] objectForKey:@"PHImageFileURLKey"]];
-//		[entries addObject:entry];
-//	}
-//	return entries;
-//}
 
 - (void)tz_imagePickerControllerDidCancel:(TZImagePickerController *)picker {
 	[picker dismissViewControllerAnimated:YES completion:nil];
 }
 
-//- (void)lf_imagePickerController:(LFImagePickerController *)picker didFinishPickingThumbnailImages:(NSArray<UIImage *> *)thumbnailImages originalImages:(NSArray<UIImage *> *)originalImages {
-//	
-//	EditTableViewController *ctr = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"edit1"];
-//	
-//	ctr.images = originalImages;
-//	[self.navigationController pushViewController:ctr animated:YES];
-//}
-
 - (IBAction)unwindFromEditView:(UIStoryboardSegue *)segue {
-//	EditTableViewController *source = [segue sourceViewController];
-//	_articles = [[DBService sharedService].articleList copy];
-	[self loadData];
-	[self.tableView reloadData];
+//	[self loadData];
+//	WeakSelf
+//	[Helper performBlock:^{
+//		ArticleDisplayTableViewController *vc = [ArticleDisplayTableViewController new];
+//		vc.article = _articles[0];
+//		[weakSelf.navigationController pushViewController:vc animated:YES];
+//	} afterDelay:0.2];
 }
 
 #pragma mark - Table view data source
@@ -139,6 +110,7 @@
 		self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 		return 0;
 	}
+//	return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -151,7 +123,7 @@
 	
 	Article *article = _articles[indexPath.row];
 	
-	[cell setCellData:article.entryList[0].imageURL
+	[cell setCellData:article.thumbURL
 				title:article.title
 				count:[NSString stringWithFormat:@"%ld %@", article.entryList.count, NSLocalizedString(@"pics", @"pics")]
 	];
@@ -164,6 +136,24 @@
 	ArticleDisplayTableViewController *vc = [ArticleDisplayTableViewController new];
 	vc.article = _articles[indexPath.row];
 	[self.navigationController pushViewController:vc animated:YES];
+}
+
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return UITableViewCellEditingStyleDelete;
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (editingStyle == UITableViewCellEditingStyleDelete) {
+		// Delete the row from the data source
+		[[CBLService sharedManager] deleteArticle:_articles[indexPath.row]];
+		[_articles removeObjectAtIndex:indexPath.row];
+		if (_articles.count == 0) {
+			[tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationLeft];
+			return;
+		}		
+		[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+	}
 }
 
 /*

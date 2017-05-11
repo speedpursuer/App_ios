@@ -1,5 +1,5 @@
 /* clip edit */
-"Add Comment" = "添加文字";
+"Add Comment" = "编辑文字";
 
 /* for photo deletion */
 "Are you sure to delete" = "确认删除？";
@@ -26,11 +26,9 @@
 "No Content" = "点击右上角添加内容";
 
 /* Confirm photo selection
+   for alertView
    photo deletion */
 "OK" = "确定";
-
-/* text for category */
-"Please enter category" = "输入分类名";
 
 /* text for image */
 "Please enter desc" = "输入文字";
@@ -44,6 +42,9 @@
 
 /* Post */
 "REComposeSheetView_Post" = "保存";
+
+/* cblservice */
+"Request failed, please retry" = "操作失败，请重试";
 
 /* clip edit */
 "Save" = "保存";

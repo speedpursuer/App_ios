@@ -11,8 +11,6 @@
 //#import "CALayer+YYAdd.h"
 
 @interface EditTableViewCell ()
-@property (weak, nonatomic) IBOutlet UIImageView *image;
-@property (weak, nonatomic) IBOutlet UITextView *desc;
 @property (weak, nonatomic) IBOutlet UIView *background;
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 @property (nonatomic, weak) id<EditArticle> delegate;

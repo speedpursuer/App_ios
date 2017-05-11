@@ -417,13 +417,7 @@ static CGFloat TZScreenScale;
         PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
         option.resizeMode = PHImageRequestOptionsResizeModeFast;
         PHImageRequestID imageRequestID = [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:imageSize contentMode:PHImageContentModeAspectFill options:option resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-			
-			NSLog(@"PHImageFileURLKey from requestImageForAsset = %@", [[info objectForKey:@"PHImageFileURLKey"] absoluteString]);
-			
             BOOL downloadFinined = (![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey]);
-			
-//			BOOL downloadFinined = (![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey] && [info objectForKey:@"PHImageFileURLKey"]);
-			
             if (downloadFinined && result) {
                 result = [self fixOrientation:result];
                 if (completion) completion(result,info,[[info objectForKey:PHImageResultIsDegradedKey] boolValue]);
@@ -450,12 +444,6 @@ static CGFloat TZScreenScale;
                 }];
             }
         }];
-		
-		PHImageRequestID imageRequestID1 = [[PHImageManager defaultManager] requestImageDataForAsset:asset options:option resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
-//			NSLog(@"");
-			NSLog(@"PHImageFileURLKey from requestImageDataForAsset = %@", [[info objectForKey:@"PHImageFileURLKey"] absoluteString]);
-		}];
-		
         return imageRequestID;
     } else if ([asset isKindOfClass:[ALAsset class]]) {
         ALAsset *alAsset = (ALAsset *)asset;

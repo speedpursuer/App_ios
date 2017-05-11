@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "WXApiManager.h"
 
 @interface AppDelegate ()
 
@@ -17,7 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	// Override point for customization after application launch.
-	[self setupTheme];
+	[self setupApp];
 	return YES;
 }
 
@@ -48,6 +49,19 @@
 	// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+	return [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+	return [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
+}
+
+- (void)setupApp {
+	[self setupTheme];
+	[self setupWeixin];
+}
+
 - (void)setupTheme {
 	[[UINavigationBar appearance] setTintColor: [UIColor whiteColor]];
 	[[UINavigationBar appearance] setBarTintColor:APP_COLOR];
@@ -57,5 +71,9 @@
 //	[[UISegmentedControl appearance] setTintColor:CLIPLAY_COLOR];
 //	[[UISlider appearance] setTintColor:CLIPLAY_COLOR];
 //	[[UIButton appearance] setTintColor:CLIPLAY_COLOR];
+}
+
+- (void)setupWeixin {
+	[WXApi registerApp:@"wx515ffccc2692d76d" enableMTA:YES];
 }
 @end

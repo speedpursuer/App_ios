@@ -17,6 +17,9 @@
 @end
 
 @interface EditTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *image;
+@property (weak, nonatomic) IBOutlet UITextView *desc;
+
 - (void)setCellData:(UIImage *)image url:(NSString *)url desc:(NSString *)desc withDelegate:(id<EditArticle>)delegate;
 //- (void)setCellData:(UIImage *)image;
 //- (void)setDescText:(NSString *)desc;

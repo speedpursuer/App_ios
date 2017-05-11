@@ -16,11 +16,12 @@
 #import "UIImage+ImageEffects.h"
 #import "CategoryViewController.h"
 #import "DBService.h"
+#import "TZImagePickerController.h"
 #import <FontAwesomeKit/FAKIonIcons.h>
 
-@interface EditTableViewController () <EditArticle, LFPhotoEdittingControllerDelegate, DescDelegate>
+@interface EditTableViewController () <EditArticle, LFPhotoEdittingControllerDelegate, TZImagePickerControllerDelegate>
 //@property (strong, nonatomic) IBOutlet XRDragTableView *dragTableView;
-@property (nonatomic, strong) NSMutableArray <ArticleEntry *> *dataArray;
+@property NSMutableArray <ArticleEntry *> *entriesToEdit;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 @property NSInteger indexInEditing;
 @property NSString *articleTitle;
@@ -42,12 +43,11 @@
 }
 
 - (void)configCrl {
-//	self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:self.navigationItem.rightBarButtonItem, self.editButtonItem, nil];
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 //	self.tableView.backgroundColor = [UIColor lightGrayColor];
 	
-	[self setupDataArray];
+	[self setupEntryData];
 	[self configHeader];
 	[self setupThumbs];
 	
@@ -62,10 +62,18 @@
 
 - (void)configHeader {
 	_headerView = [[[NSBundle mainBundle] loadNibNamed:@"ArticleHeader" owner:nil options:nil] lastObject];
-//	_headerView.background.image = [_images[0] applyLightDarkEffect];
-	_headerView.background.image = [_dataArray[0].image applyLightDarkEffect];
-	_headerView.title.text = _articleTitle = NSLocalizedString(@"Untitled", @"Init title");
-	_headerView.category.text = _articleCategory = NSLocalizedString(@"Default Category", @"Init category");
+	
+	if([self isEditMode]) {
+		_headerView.background.image = [[_existingArticle thumbImage] applyLightDarkEffect];
+		_headerView.title.text = _articleTitle = _existingArticle.title;
+		_headerView.category.text = _articleCategory = _existingArticle.category;
+	}else {
+		_headerView.background.image = [_entriesToEdit[0].image applyLightDarkEffect];
+		_headerView.title.text = [self defaultTitle];
+		_articleTitle = @"";
+		_headerView.category.text = _articleCategory = NSLocalizedString(@"Default Category", @"Init category");
+	}
+	
 //	[view setPickerData:@[@"Wash", @"Care", @"Others"]];
 	[self.tableView setTableHeaderView:_headerView];
 	
@@ -98,45 +106,43 @@
 	_blankPhoto = [icon imageWithSize:imageSize];
 }
 
-- (void)setupDataArray {
+- (void)setupEntryData {
 	
-	if(_articleEntries) {
-		_dataArray = [[NSMutableArray alloc] initWithArray:_articleEntries];
+	if([self isEditMode]) {
+//		_dataArray = [[NSMutableArray alloc] initWithArray:_existingArticle.entryList];
+//		_entriesToEdit = [_existingArticle.entryList mutableCopy];
+		_entriesToEdit = [[_existingArticle copyOfEntryList] mutableCopy];
 	}else {
 		//首次编辑状态
-		_dataArray = [NSMutableArray new];
+		_entriesToEdit = [NSMutableArray new];
 		for (NSInteger i = 0; i < _images.count; i++) {
-			ArticleEntry *entry = [[ArticleEntry alloc]initWithImage:_images[i] withImageURL:[[_imageInfos[i] objectForKey:@"PHImageFileURLKey"]absoluteString]];
-			[_dataArray addObject:entry];
+			ArticleEntry *entry = [[ArticleEntry alloc]initWithImage:_images[i] withImagePath:[[_imageInfos[i] objectForKey:@"PHImageFileURLKey"]absoluteString]];
+			[_entriesToEdit addObject:entry];
 		}
 	}
-	
-//	for (UIImage *image in _images) {
-//		[_dataArray addObject:[[ArticleEntry alloc] initWithImage:image]];
-//	}
-}
-
-//- (NSString *)remoteURLFromLocalURL:(NSString *)localURL withUUID:(NSString *)uuid{
-//	return [NSString stringWithFormat:@"%@", kOSSURL] uuid
-//}
-
-- (IBAction)goBack:(id)sender {
-	[self.view endEditing:YES];
-	if(sender == self.saveButton) {		
-	}
-	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Edit Article Delegate for cell action
 
 - (void)editPhoto:(UITableViewCell *)cell {
-	LFPhotoEdittingController *photoEdittingVC = [[LFPhotoEdittingController alloc] init];
 	
-	photoEdittingVC.editImage = [self entryForCell:cell].image;
-	photoEdittingVC.delegate = self;
-//	photoEdittingVC.isHiddenStatusBar = NO;
-//	photoEdittingVC.isHiddenNavBar = NO;
-	[self presentViewController:photoEdittingVC animated:YES completion:nil];
+	ArticleEntry *selectedEntry = [self entryForCell:cell];
+	
+	if([selectedEntry isNewEntry]) {
+		TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
+		imagePickerVc.allowPickingOriginalPhoto = NO;
+		imagePickerVc.allowPickingGif = NO;
+		imagePickerVc.allowPickingVideo = NO;
+		imagePickerVc.autoDismiss = NO;
+		//	imagePickerVc.maxImagesCount = 30;
+		//	imagePickerVc.photoPreviewMaxWidth = 1000;
+		[self presentViewController:imagePickerVc animated:YES completion:nil];
+	}else {
+		LFPhotoEdittingController *photoEdittingVC = [[LFPhotoEdittingController alloc] init];
+		photoEdittingVC.editImage = [selectedEntry fetchImage];
+		photoEdittingVC.delegate = self;
+		[self presentViewController:photoEdittingVC animated:YES completion:nil];
+	}
 }
 
 - (void)editDesc:(UITableViewCell *)cell {
@@ -144,11 +150,16 @@
 	
 	ArticleEntry *entity = [self entryForCell:cell];
 	
-	[ctr setImage:entity.image];
-	ctr.delegate = self;
+	ctr.image = [[self entryForCell:cell] fetchImage];
+//	ctr.delegate = self;
 	ctr.text = entity.desc;
 	ctr.descPlaceholder = NSLocalizedString(@"Please enter desc", @"text for image");
-	ctr.actionType = editDesc;
+	WeakSelf
+	ctr.saveDescHandle = ^(NSString *desc){
+		[weakSelf saveDesc:desc];
+	};
+//	[self presentViewController:ctr];
+//	ctr.actionType = editDesc;
 	[self.navigationController pushViewController:ctr animated:YES];
 }
 
@@ -164,10 +175,15 @@
 - (void)changeTitle {
 	DescViewController *ctr = [[UIStoryboard storyboardWithName:@"common" bundle:nil] instantiateViewControllerWithIdentifier:@"desc"];
 	
-	ctr.delegate = self;
+//	ctr.delegate = self;
 	ctr.text = _articleTitle;
 	ctr.descPlaceholder = NSLocalizedString(@"Please enter title", @"text for title");
-	ctr.actionType = editTitle;
+	WeakSelf
+	ctr.saveDescHandle = ^(NSString *desc){
+		[weakSelf saveTitle:desc];
+	};
+//	[self presentViewController:ctr];
+//	ctr.actionType = editTitle;
 	[self.navigationController pushViewController:ctr animated:YES];
 }
 
@@ -189,22 +205,51 @@
 
 -(void)saveTitle:(NSString *)title {
 	if(![_articleTitle isEqualToString:title]) {
-		_headerView.title.text = _articleTitle = title;
+		_articleTitle = _headerView.title.text = title;
+		if(_articleTitle.length == 0) {
+			_headerView.title.text = [self defaultTitle];
+		}
 	}
 }
 
+- (void)savePhoto:(UIImage *)editedPhoto {
+	UIImage *compressedImage = [UIImage imageWithData:UIImageJPEGRepresentation(editedPhoto, 0.8)];
+	[[self currentEntity] updateImageWithNewImage:compressedImage];
+	[self.tableView reloadData];
+}
+
 - (void)saveArticle {
-//	Article *article = [Article createArticle:_dataArray title:_articleTitle category:_articleCategory];
-//	[[DBService sharedService] saveArticle:article];
 	
-	[[CBLService sharedManager] creatAlubmWithTitle:_articleTitle category:_articleCategory entryList:_dataArray];
+	if(_articleTitle.length == 0) {
+		_articleTitle = [self defaultTitle];
+	}
+	
+	if([self isEditMode]) {
+		[[CBLService sharedManager] updateArticle:_existingArticle WithTitle:_articleTitle category:_articleCategory entryList:_entriesToEdit];
+	}else {
+		[[CBLService sharedManager] creatArticleWithTitle:_articleTitle category:_articleCategory entryList:_entriesToEdit];
+	}
 }
 
 #pragma mark - Navigation
 
+- (IBAction)goBack:(id)sender {
+	NSString *identifier;
+	if([self isEditMode]) {
+		identifier = @"backToDisplayPage";
+	}else {
+		identifier = @"backToArticleList";
+	}
+	[self performSegueWithIdentifier:identifier sender:sender];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 	if(sender == self.saveButton) {
 		[self saveArticle];
+	}else {
+		if([self isEditMode]) {
+			[_existingArticle revertChanges];
+		}
 	}
 }
 
@@ -217,12 +262,20 @@
 
 - (void)alertView:(UIAlertView *)alert didDismissWithButtonIndex:(NSInteger)buttonIndex {
 	if (buttonIndex > 0) {
-		[_dataArray removeObjectAtIndex:_indexInEditing];
+		[_entriesToEdit removeObjectAtIndex:_indexInEditing];
 		[self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_indexInEditing inSection:0]] withRowAnimation:UITableViewRowAnimationLeft];
 	}
 }
 
 #pragma mark - Helper
+
+- (NSString *)defaultTitle {
+	return NSLocalizedString(@"Untitled", @"Init title");
+}
+
+- (BOOL)isEditMode {
+	return (_existingArticle != nil);
+}
 
 - (ArticleEntry *)entryForCell:(UITableViewCell *)cell {
 	return [self entityForIndex:[self indexForCell:cell]];
@@ -239,7 +292,16 @@
 }
 
 - (ArticleEntry *)entityForIndex:(NSInteger)index {
-	return _dataArray[index];
+	return _entriesToEdit[index];
+}
+
+- (void)presentViewController:(UIViewController *)ctr {
+	ctr.modalPresentationStyle = UIModalPresentationCurrentContext;
+	
+	UINavigationController *navigationController =
+	[[UINavigationController alloc] initWithRootViewController:ctr];
+	
+	[self presentViewController:navigationController animated:YES completion:nil];
 }
 
 #pragma mark - LFPhotoEdittingControllerDelegate
@@ -250,10 +312,20 @@
 
 - (void)lf_PhotoEdittingController:(LFPhotoEdittingController *)photoEdittingVC didFinishPhotoEdit:(LFPhotoEdit *)photoEdit {
 	if(photoEdit) {
-		[[self currentEntity] updateImageWithNewImage:photoEdit.editPreviewImage];
-		[self.tableView reloadData];
+		[self savePhoto:photoEdit.editPreviewImage];
 	}
 	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto infos:(NSArray<NSDictionary *> *)infos {
+	if(photos.count > 0) {
+		[self savePhoto:photos[0]];
+	}
+	[picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)tz_imagePickerControllerDidCancel:(TZImagePickerController *)picker {
+	[picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Table view data source
@@ -263,28 +335,24 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _dataArray.count;
+    return _entriesToEdit.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     EditTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"edit" forIndexPath:indexPath];
 	
-	ArticleEntry *entry = _dataArray[indexPath.row];
+	ArticleEntry *entry = _entriesToEdit[indexPath.row];
 	
 //	[cell setCellData:entry.image url:entry.imageURL desc:entry.desc withDelegate:self];
 //	
-	[cell setCellData:[self isNewEntry:entry]? _blankPhoto: entry.image
+	[cell setCellData:[entry isNewEntry]? _blankPhoto: entry.image
 				  url:entry.imageURL
 				 desc:entry.desc
 		 withDelegate:self
 	];
 	
     return cell;
-}
-
-- (BOOL)isNewEntry:(ArticleEntry *)entry {
-	return entry.imageURL.length == 0? YES: NO;
 }
 
 // Override to support conditional editing of the table view.
@@ -301,10 +369,10 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-		[_dataArray removeObjectAtIndex:indexPath.row];
+		[_entriesToEdit removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-		[_dataArray insertObject:[[ArticleEntry alloc] initEmptyEntry] atIndex:indexPath.row];
+		[_entriesToEdit insertObject:[[ArticleEntry alloc] initEmptyEntry] atIndex:indexPath.row];
 		[tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
@@ -315,9 +383,9 @@
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
 	if(fromIndexPath.row != toIndexPath.row) {
-		id row = [_dataArray objectAtIndex:fromIndexPath.row];
-		[_dataArray removeObjectAtIndex:fromIndexPath.row];
-		[_dataArray insertObject:row atIndex:toIndexPath.row];
+		id row = [_entriesToEdit objectAtIndex:fromIndexPath.row];
+		[_entriesToEdit removeObjectAtIndex:fromIndexPath.row];
+		[_entriesToEdit insertObject:row atIndex:toIndexPath.row];
 	}
 }
 

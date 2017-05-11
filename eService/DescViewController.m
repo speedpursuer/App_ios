@@ -8,6 +8,7 @@
 
 #import "DescViewController.h"
 #import "DEComposeTextView.h"
+#import "UIImage+Resize.h"
 
 @interface DescViewController ()
 @property (weak, nonatomic) IBOutlet DEComposeTextView *descView;
@@ -38,16 +39,58 @@
 
 - (void)setupDesc {
 	if(_text) {
-		_descView.text = _text;
+//		_descView.text = _text;
+		
+		UIFont *systemFont = [UIFont systemFontOfSize:18.0f];
+		
+		NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:systemFont
+																	forKey:NSFontAttributeName];
+		
+		NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:_text attributes:attrsDictionary];
+		NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+		paragraphStyle.lineSpacing = 5;
+		paragraphStyle.paragraphSpacingBefore = 6;
+		//	paragraphStyle.firstLineHeadIndent = 30;
+		[attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, _text.length)];
+		
+		_descView.attributedText = attributedString;
 	}
 	[_descView setPlaceholder:_descPlaceholder];
 	[_descView becomeFirstResponder];
 }
 
 - (void)setupThumb {
-	_thumbView.contentMode = UIViewContentModeScaleAspectFill;
-	_thumbView.layer.masksToBounds = YES;
-	_thumbView.image = _image;
+	_thumbView.contentMode = UIViewContentModeScaleAspectFit;
+	_thumbView.layer.masksToBounds = NO;
+	
+	if(_image) {
+		_thumbView.image = _image;
+		NSLayoutConstraint* constraint1 = [NSLayoutConstraint constraintWithItem: _thumbView
+																	   attribute: NSLayoutAttributeWidth
+																	   relatedBy: NSLayoutRelationEqual
+																		  toItem: _thumbView
+																	   attribute: NSLayoutAttributeHeight
+																	  multiplier: _image.size.width/_image.size.height
+																		constant: 0];
+		NSLayoutConstraint* constraint2 = [NSLayoutConstraint constraintWithItem: _thumbView
+																	  attribute: NSLayoutAttributeWidth
+																	  relatedBy: NSLayoutRelationEqual
+																		 toItem: nil
+																	  attribute: NSLayoutAttributeNotAnAttribute
+																	 multiplier: 0
+																	   constant: 120];
+		[_thumbView addConstraint: constraint1];
+		[_thumbView addConstraint: constraint2];
+	}else {
+		NSLayoutConstraint* constraint = [NSLayoutConstraint constraintWithItem: _thumbView
+												  attribute: NSLayoutAttributeWidth
+												  relatedBy: NSLayoutRelationEqual
+													 toItem: nil
+												  attribute: NSLayoutAttributeNotAnAttribute
+												 multiplier: 0
+												   constant: 0];
+		[_thumbView addConstraint: constraint];
+	}
 }
 
 //- (void)setupButton {
@@ -70,13 +113,14 @@
 - (IBAction)goBack:(id)sender {
 	[self.view endEditing:YES];
 	if(sender == self.confirmButton) {
+		_saveDescHandle(_descView.text);
 //		[_delegate saveDesc:_descView.text];
-		if(_actionType == editTitle) {
-			[_delegate saveTitle:_descView.text];
-		}
-		if(_actionType == editDesc){
-			[_delegate saveDesc:_descView.text];
-		}
+//		if(_actionType == editTitle) {
+//			[_delegate saveTitle:_descView.text];
+//		}
+//		if(_actionType == editDesc){
+//			[_delegate saveDesc:_descView.text];
+//		}
 	}
 	[self.navigationController popViewControllerAnimated:YES];
 //	[self dismissViewControllerAnimated:YES completion:nil];

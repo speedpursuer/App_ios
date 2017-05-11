@@ -11,11 +11,17 @@
 #import "ArticleEntry.h"
 
 @interface Article : CBLBaseModel
-@property NSArray <ArticleEntry*> *entryList;
+@property (copy) NSArray *entryList;
 @property NSString *title;
 @property NSString *category;
+@property NSString *thumbURL;
 
-+ (Article*) getAlbumInDatabase:(CBLDatabase*) database title:(NSString *)title category:(NSString *)category entryList: (NSArray *)entryList withUUID:(NSString *)uuid;
++ (Article*) createArticleInDatabase:(CBLDatabase*) database title:(NSString *)title category:(NSString *)category entryList: (NSArray *)entryList withUUID:(NSString *)uuid;
 
-+ (id)createArticle:(NSArray *)entryList title:(NSString *)title category:(NSString *)category;
+- (UIImage *)thumbImage;
+
+- (BOOL)updateEntryList: (NSError**)outError;
+
+- (NSArray <ArticleEntry *>*)copyOfEntryList;
+
 @end

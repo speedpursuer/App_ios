@@ -3,10 +3,34 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[ArticleTableViewController unwindFromEditView:]:ArticleTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_articles[0]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[EditTableViewController lf_PhotoEdittingController:didFinishPhotoEdit:]:EditTableViewController.m">
          <PersistentStrings>
             <PersistentString
                value = "[self entityForIndex:_indexInEditing].image">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ArticleTableViewController loadData]:ArticleTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_articles[0]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[CBLService loadArticles]:CBLService.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "row.document">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

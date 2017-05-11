@@ -292,34 +292,70 @@ static CGSize AssetGridThumbnailSize;
     NSMutableArray *infoArr = [NSMutableArray array];
     for (NSInteger i = 0; i < tzImagePickerVc.selectedModels.count; i++) { [photos addObject:@1];[assets addObject:@1];[infoArr addObject:@1]; }
     
-    __block BOOL havenotShowAlert = YES;
+//    __block BOOL havenotShowAlert = YES;
     [TZImageManager manager].shouldFixOrientation = YES;
     for (NSInteger i = 0; i < tzImagePickerVc.selectedModels.count; i++) {
         TZAssetModel *model = tzImagePickerVc.selectedModels[i];
-        [[TZImageManager manager] getPhotoWithAsset:model.asset completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded) {
-            if (isDegraded) return;
-            if (photo) {
-//                photo = [self scaleImage:photo toSize:CGSizeMake(tzImagePickerVc.photoWidth, (int)(tzImagePickerVc.photoWidth * photo.size.height / photo.size.width))];
+//        [[TZImageManager manager] getPhotoWithAsset:model.asset completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded) {
+//            if (isDegraded) return;
+//            if (photo) {
+////                photo = [self scaleImage:photo toSize:CGSizeMake(tzImagePickerVc.photoWidth, (int)(tzImagePickerVc.photoWidth * photo.size.height / photo.size.width))];
+//				photo = [UIImage imageWithData:UIImageJPEGRepresentation(photo, 0.75)];
+//                [photos replaceObjectAtIndex:i withObject:photo];
+//            }
+//            if (info)  [infoArr replaceObjectAtIndex:i withObject:info];
+//            [assets replaceObjectAtIndex:i withObject:model.asset];
+//
+//            for (id item in photos) { if ([item isKindOfClass:[NSNumber class]]) return; }
+//            
+//            if (havenotShowAlert) {
+//                [self didGetAllPhotos:photos assets:assets infoArr:infoArr];
+//            }
+//        } progressHandler:^(double progress, NSError *error, BOOL *stop, NSDictionary *info) {
+//            // 如果图片正在从iCloud同步中,提醒用户
+//            if (progress < 1 && havenotShowAlert) {
+//                [tzImagePickerVc hideProgressHUD];
+//                [tzImagePickerVc showAlertWithTitle:[NSBundle tz_localizedStringForKey:@"Synchronizing photos from iCloud"]];
+//                havenotShowAlert = NO;
+//                return;
+//            }
+//        } networkAccessAllowed:YES];
+//		
+		[[TZImageManager manager] getOriginalPhotoDataWithAsset:model.asset completion:^(NSData *data, NSDictionary *info, BOOL isDegraded) {
+			if (isDegraded) return;
+			if (data) {
+				UIImage *photo = [UIImage imageWithData:data];
+				photo = [self scaleImage:photo toSize:CGSizeMake(tzImagePickerVc.photoWidth, (int)(tzImagePickerVc.photoWidth * photo.size.height / photo.size.width))];
 				photo = [UIImage imageWithData:UIImageJPEGRepresentation(photo, 0.75)];
-                [photos replaceObjectAtIndex:i withObject:photo];
-            }
-            if (info)  [infoArr replaceObjectAtIndex:i withObject:info];
-            [assets replaceObjectAtIndex:i withObject:model.asset];
-
-            for (id item in photos) { if ([item isKindOfClass:[NSNumber class]]) return; }
-            
-            if (havenotShowAlert) {
-                [self didGetAllPhotos:photos assets:assets infoArr:infoArr];
-            }
-        } progressHandler:^(double progress, NSError *error, BOOL *stop, NSDictionary *info) {
-            // 如果图片正在从iCloud同步中,提醒用户
-            if (progress < 1 && havenotShowAlert) {
-                [tzImagePickerVc hideProgressHUD];
-                [tzImagePickerVc showAlertWithTitle:[NSBundle tz_localizedStringForKey:@"Synchronizing photos from iCloud"]];
-                havenotShowAlert = NO;
-                return;
-            }
-        } networkAccessAllowed:YES];
+				[photos replaceObjectAtIndex:i withObject:photo];
+			}
+			if (info)  [infoArr replaceObjectAtIndex:i withObject:info];
+			[assets replaceObjectAtIndex:i withObject:model.asset];
+			
+			for (id item in photos) { if ([item isKindOfClass:[NSNumber class]]) return; }
+			
+			[self didGetAllPhotos:photos assets:assets infoArr:infoArr];
+		}];
+		
+//		[[TZImageManager manager] getOriginalPhotoWithAsset:model.asset newCompletion:^(UIImage *photo,NSDictionary *info,BOOL isDegraded) {
+//			if (isDegraded) return;
+//			if (isDegraded) return;
+//			if (photo) {
+//				photo = [self scaleImage:photo toSize:CGSizeMake(tzImagePickerVc.photoWidth, (int)(tzImagePickerVc.photoWidth * photo.size.height / photo.size.width))];
+//				photo = [UIImage imageWithData:UIImageJPEGRepresentation(photo, 0.75)];
+//				[photos replaceObjectAtIndex:i withObject:photo];
+//			}
+//			if (info)  [infoArr replaceObjectAtIndex:i withObject:info];
+//			[assets replaceObjectAtIndex:i withObject:model.asset];
+//			
+//			for (id item in photos) { if ([item isKindOfClass:[NSNumber class]]) return; }
+//			
+//			[self didGetAllPhotos:photos assets:assets infoArr:infoArr];
+//		}];
+		
+		
+		
+		
     }
     if (tzImagePickerVc.selectedModels.count <= 0) {
         [self didGetAllPhotos:photos assets:assets infoArr:infoArr];
@@ -456,12 +492,34 @@ static CGSize AssetGridThumbnailSize;
             gifPreviewVc.model = model;
             [self.navigationController pushViewController:gifPreviewVc animated:YES];
         }
-    } else {
+	} else if (tzImagePickerVc.maxImagesCount <= 1) {
+		[self selectSinglePhoto:model];
+	}else {
         TZPhotoPreviewController *photoPreviewVc = [[TZPhotoPreviewController alloc] init];
         photoPreviewVc.currentIndex = index;
         photoPreviewVc.models = _models;
         [self pushPhotoPrevireViewController:photoPreviewVc];
     }
+}
+
+- (void)selectSinglePhoto:(TZAssetModel *)model {
+	NSMutableArray *photos = [NSMutableArray array];
+	NSMutableArray *assets = [NSMutableArray array];
+	NSMutableArray *infoArr = [NSMutableArray array];
+	TZImagePickerController *tzImagePickerVc = (TZImagePickerController *)self.navigationController;
+	[[TZImageManager manager] getOriginalPhotoDataWithAsset:model.asset completion:^(NSData *data, NSDictionary *info, BOOL isDegraded) {
+		if (isDegraded) return;
+		if (data) {
+			UIImage *photo = [UIImage imageWithData:data];
+			photo = [self scaleImage:photo toSize:CGSizeMake(tzImagePickerVc.photoWidth, (int)(tzImagePickerVc.photoWidth * photo.size.height / photo.size.width))];
+			photo = [UIImage imageWithData:UIImageJPEGRepresentation(photo, 0.75)];
+			[photos addObject:photo];
+		}
+		if (info)  [infoArr addObject:info];
+		[assets addObject:model.asset];
+		
+		[self didGetAllPhotos:photos assets:assets infoArr:infoArr];
+	}];
 }
 
 #pragma mark - UIScrollViewDelegate

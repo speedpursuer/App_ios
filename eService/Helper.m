@@ -26,4 +26,14 @@
 	return theImage;
 }
 
++ (void)showAlertMessage:(NSString *)title withMessage:(NSString *)message {
+	[self performBlock:^{
+		[[[UIAlertView alloc] initWithTitle:title
+									message:message
+								   delegate:nil
+						  cancelButtonTitle:NSLocalizedString(@"OK", @"for alertView")
+						  otherButtonTitles:nil] show];
+	} afterDelay:0.1];
+}
+
 @end

@@ -10,5 +10,6 @@
 #import "Article.h"
 
 @interface ArticleTableViewController : UITableViewController
-@property NSArray <Article*> *articles;
+@property NSMutableArray <Article*> *articles;
+//@property NSArray <Article*> *articles;
 @end

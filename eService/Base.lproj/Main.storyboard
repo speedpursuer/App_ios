@@ -92,9 +92,11 @@
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="vD3-N4-cuf" secondAttribute="trailing" id="2Qu-3T-bUl"/>
                                         <constraint firstItem="QKk-wo-StE" firstAttribute="leading" secondItem="vD3-N4-cuf" secondAttribute="leading" id="IWo-Og-Q4V"/>
                                         <constraint firstItem="EcU-KQ-TXE" firstAttribute="centerY" secondItem="O7k-uO-jEh" secondAttribute="centerY" id="LUA-aw-Rpn"/>
                                         <constraint firstItem="vD3-N4-cuf" firstAttribute="top" secondItem="O7k-uO-jEh" secondAttribute="topMargin" constant="6" id="NDq-SJ-0bD"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="QKk-wo-StE" secondAttribute="trailing" id="YBu-qo-TS9"/>
                                         <constraint firstItem="vD3-N4-cuf" firstAttribute="leading" secondItem="EcU-KQ-TXE" secondAttribute="trailing" constant="10" id="YC7-zD-DsG"/>
                                         <constraint firstAttribute="topMargin" secondItem="EcU-KQ-TXE" secondAttribute="top" id="gBq-lv-0VC"/>
                                         <constraint firstItem="EcU-KQ-TXE" firstAttribute="leading" secondItem="O7k-uO-jEh" secondAttribute="leadingMargin" id="uEF-F0-Vfs"/>

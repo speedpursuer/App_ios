@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AliyunOSSiOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>CocoaSecurity.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -24,7 +29,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-eService.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Popover.OC.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -57,7 +72,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2FD30AA2E891A607399B7734CFBFCE15</key>
+		<key>010B1FFC9B5A15421BA64A7777414FEF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>07E2AAB19C7FECB0FE7D8FCE158EAB51</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>26F9787468043A3C9D6D5198B9A2FD1F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>442D0A25803E9481ABD443125A8406D6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,7 +97,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>80B20710F32ADC4E9B9DAEA058716119</key>
+		<key>5B72439117ED209CAFF280B1524EE3B7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>829C4C4B0D6DA1AB1FC133539C4EE886</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,17 +122,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CB4153638DA5FE448C017B2E68BCDC7A</key>
+		<key>F2B5AFE5F5152BF16C2E09471DD07ACD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EC4680F5214EA7674417F5CF37CF8FC1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F12D94652DF759C5065B81DCEC440F77</key>
+		<key>FE2F1D7B9D9FCEA148517E4657B243F4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

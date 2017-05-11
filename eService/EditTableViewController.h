@@ -11,5 +11,5 @@
 @interface EditTableViewController : UITableViewController
 @property (nonatomic, strong) NSArray<UIImage *> *images;
 @property (nonatomic, strong) NSArray<NSDictionary *> *imageInfos;
-@property (nonatomic, strong) NSArray<ArticleEntry *> *articleEntries;
+@property (nonatomic, strong) Article *existingArticle;
 @end

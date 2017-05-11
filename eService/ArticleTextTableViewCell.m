@@ -28,7 +28,17 @@
 }
 
 - (void)setCellData:(NSString *)url desc:(NSString *)desc {
-	_desc.text = desc;
+//	_desc.text = desc;
+	
+	NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:desc];
+	NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+	paragraphStyle.lineSpacing = 8;
+	paragraphStyle.paragraphSpacingBefore = 9;
+//	paragraphStyle.firstLineHeadIndent = 30;
+	[attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, desc.length)];
+	
+	_desc.attributedText = attributedString;
+	
 	[self layoutIfNeeded];
 }
 

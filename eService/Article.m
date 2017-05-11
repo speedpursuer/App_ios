@@ -12,31 +12,62 @@
 
 @implementation Article
 
-@dynamic entryList, title, category;
+@dynamic entryList, title, category, thumbURL;
 
 + (NSString*) docType {
 	return kArticleDocType;
 }
 
 + (NSString*) docID:(NSString *)uuid {
-	return [NSString stringWithFormat:@"article_%@_%d", uuid, (int)[NSDate date].timeIntervalSinceReferenceDate];
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+	[formatter setDateFormat:@"yyyy-MM-dd-HH:mm:ss"];
+	return [NSString stringWithFormat:@"article_%@_%@", uuid, [formatter stringFromDate:[NSDate date]]];
 }
 
-+ (Article*) getAlbumInDatabase:(CBLDatabase*) database title:(NSString *)title category:(NSString *)category entryList: (NSArray *)entryList withUUID:(NSString *)uuid {
++ (Article*) createArticleInDatabase:(CBLDatabase*) database title:(NSString *)title category:(NSString *)category entryList: (NSArray *)entryList withUUID:(NSString *)uuid {
 	Article *article = (Article *)[super getModelInDatabase:database withUUID:uuid];
 	article.title = title;
 	article.category = category;
 	article.entryList = entryList;
+//	article.thumbURL = [self thumbURLWithEntryList:entryList];
 	return article;
 }
 
-+ (id)createArticle:(NSArray *)entryList title:(NSString *)title category:(NSString *)category {
-	Article *article = [[self alloc] init];
-	article.entryList = entryList;
-	article.title = title;
-	article.category = category;
-	return article;
+- (NSArray <ArticleEntry *>*)copyOfEntryList {
+	NSMutableArray *entriesToModify = [[NSMutableArray alloc] initWithCapacity:self.entryList.count];
+	for(ArticleEntry *entry in self.entryList) {
+		[entriesToModify addObject:[[ArticleEntry alloc] initWithCopy:entry]];
+	}
+	return [entriesToModify copy];
 }
+
+- (BOOL)updateEntryList:(NSError**)outError {
+	self.entryList = [self copyOfEntryList];
+	return [self save:outError];
+}
+
+- (UIImage *)thumbImage {
+	return [[CacheManager sharedManager] getImageWithKey:self.thumbURL];
+}
+
+#pragma mark - Private
+
++ (NSString *)thumbURLWithEntryList:(NSArray *)entryList {
+	for(ArticleEntry *entry in entryList) {
+		if(entry.imageURL.length > 0) {
+			return entry.imageURL;
+		}
+	}
+	return @"";
+}
+
+//+ (id)createArticle:(NSArray *)entryList title:(NSString *)title category:(NSString *)category {
+//	Article *article = [[self alloc] init];
+//	article.entryList = entryList;
+//	article.title = title;
+//	article.category = category;
+//	return article;
+//}
 
 +(Class)entryListItemClass {
 	return [ArticleEntry class];

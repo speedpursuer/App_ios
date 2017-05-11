@@ -9,12 +9,21 @@
 #import <CouchbaseLite/CouchbaseLite.h>
 
 @interface ArticleEntry : NSObject <CBLJSONEncoding>
-@property (strong, nonatomic) UIImage *image;
-@property (strong, nonatomic) NSString *imageURL;
-@property (strong, nonatomic) NSString *desc;
+@property UIImage *image;
+@property NSString *imageURL;
+@property NSString *imagePath;
+@property NSString *desc;
+@property BOOL uploaded;
 @property CGSize size;
-- (instancetype)initWithImage:(UIImage *)image withImageURL:(NSString *)url;
-- (instancetype)initWithImageURL:(NSString *)url withSize:(CGSize)size;
+
+- (instancetype)initWithImage:(UIImage *)image withImagePath:(NSString *)path;
+- (instancetype)initForPhotoDisplayOnlyWithImageURL:(NSString *)url withSize:(CGSize)size;
 - (instancetype)initEmptyEntry;
+- (instancetype)initWithCopy:(ArticleEntry *)entry;
 - (void)updateImageWithNewImage:(UIImage *)image;
+- (BOOL)isNewEntry;
+- (BOOL)needCache;
+- (UIImage *)fetchImage;
+//- (instancetype)initWithImageURL:(NSString *)url withSize:(CGSize)size;
+//- (instancetype)initWithImage:(UIImage *)image withImageURL:(NSString *)url;
 @end

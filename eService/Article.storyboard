@@ -118,7 +118,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="W3E-JE-Umj" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6pX-qk-WuG">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="6pX-qk-WuG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -149,10 +149,16 @@
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k1m-Xs-uoY">
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="TopLeft" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wno-DM-Fb2">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="TopLeft" scrollEnabled="NO" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wno-DM-Fb2">
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment>
+                                                            <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                            <attributes>
+                                                                <font key="NSFont" metaFont="system" size="15"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bgU-Fe-4BY">
@@ -204,17 +210,19 @@
                     <navigationItem key="navigationItem" id="Us2-57-tXG">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="5fj-f0-Yq5">
                             <connections>
-                                <segue destination="cqS-q8-dws" kind="unwind" unwindAction="unwindFromEditView:" id="5qC-ZA-zm9"/>
+                                <action selector="goBack:" destination="dtj-gh-yfS" id="g0T-gH-K8H"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="03X-2L-6QN">
                             <connections>
-                                <segue destination="cqS-q8-dws" kind="unwind" unwindAction="unwindFromEditView:" id="6Ve-4q-pa9"/>
+                                <action selector="goBack:" destination="dtj-gh-yfS" id="715-Gw-XOU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="saveButton" destination="03X-2L-6QN" id="uod-B4-sjX"/>
+                        <segue destination="cqS-q8-dws" kind="unwind" identifier="backToArticleList" unwindAction="unwindFromEditView:" id="Yfb-dW-me1"/>
+                        <segue destination="cqS-q8-dws" kind="unwind" identifier="backToDisplayPage" unwindAction="unwindFromEditExistingView:" id="7su-Ln-kvz"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b34-h4-X9i" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -227,7 +235,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3Vt-dz-JNO" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="F0e-JK-xSK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="F0e-JK-xSK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -240,5 +248,95 @@
             </objects>
             <point key="canvasLocation" x="-583" y="770"/>
         </scene>
+        <!--Nine Grid View Controller-->
+        <scene sceneID="My8-Dq-t4q">
+            <objects>
+                <viewController storyboardIdentifier="nineGrid" id="5Vr-fB-oV8" customClass="NineGridViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="k51-lY-zwi"/>
+                        <viewControllerLayoutGuide type="bottom" id="nRU-SH-teo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hj9-dK-Qbd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dco-JA-vAi">
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppIcon40x40" translatesAutoresizingMaskIntoConstraints="NO" id="6C7-dw-rc3">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="3am-nX-3zz"/>
+                                            <constraint firstAttribute="width" constant="40" id="A0e-RN-iHU"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2dc-fu-cYy">
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T44-Dd-5I3">
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="T44-Dd-5I3" firstAttribute="top" secondItem="2dc-fu-cYy" secondAttribute="bottom" constant="4" id="0Uj-ru-Rbj"/>
+                                    <constraint firstItem="6C7-dw-rc3" firstAttribute="leading" secondItem="Dco-JA-vAi" secondAttribute="leading" constant="10" id="5LU-in-Vr8"/>
+                                    <constraint firstItem="T44-Dd-5I3" firstAttribute="leading" secondItem="6C7-dw-rc3" secondAttribute="trailing" constant="10" id="Ffa-Ps-OfH"/>
+                                    <constraint firstItem="2dc-fu-cYy" firstAttribute="leading" secondItem="6C7-dw-rc3" secondAttribute="trailing" constant="10" id="KZ1-pD-mx1"/>
+                                    <constraint firstItem="2dc-fu-cYy" firstAttribute="top" secondItem="6C7-dw-rc3" secondAttribute="top" id="VQU-Ju-FgI"/>
+                                    <constraint firstAttribute="height" constant="320" id="XBB-Ae-p5h"/>
+                                    <constraint firstAttribute="trailing" secondItem="T44-Dd-5I3" secondAttribute="trailing" constant="10" id="otu-WF-Fe5"/>
+                                    <constraint firstAttribute="trailing" secondItem="2dc-fu-cYy" secondAttribute="trailing" constant="10" id="sn9-V6-v6a"/>
+                                    <constraint firstItem="6C7-dw-rc3" firstAttribute="top" secondItem="Dco-JA-vAi" secondAttribute="top" constant="10" id="vpx-Xu-cgj"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Dco-JA-vAi" firstAttribute="top" secondItem="k51-lY-zwi" secondAttribute="bottom" constant="20" id="YVG-Fx-bX0"/>
+                            <constraint firstAttribute="trailing" secondItem="Dco-JA-vAi" secondAttribute="trailing" id="h40-bq-n6w"/>
+                            <constraint firstItem="Dco-JA-vAi" firstAttribute="leading" secondItem="hj9-dK-Qbd" secondAttribute="leading" id="ocI-jG-9eM"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="FXa-fK-c16">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="tPm-Rz-4Fl">
+                            <connections>
+                                <action selector="saveCroppedPicAction:" destination="5Vr-fB-oV8" id="4kp-Cd-6XG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="desc" destination="T44-Dd-5I3" id="aeC-ee-QXp"/>
+                        <outlet property="name" destination="2dc-fu-cYy" id="Y3l-ZN-8Ot"/>
+                        <outlet property="sampleView" destination="Dco-JA-vAi" id="Svd-Gy-qtS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TJx-bJ-JBh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="209" y="1548"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="1Jz-wA-tHk">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="z5t-A7-ByC" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="U9b-3e-1L8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="5Vr-fB-oV8" kind="relationship" relationship="rootViewController" id="Zqj-jv-8Yy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZQA-jK-CEi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-583.20000000000005" y="1547.6761619190406"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="AppIcon40x40" width="16" height="16"/>
+    </resources>
 </document>

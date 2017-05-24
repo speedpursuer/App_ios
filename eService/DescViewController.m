@@ -9,12 +9,14 @@
 #import "DescViewController.h"
 #import "DEComposeTextView.h"
 #import "UIImage+Resize.h"
+#import "MWPhotoBrowser.h"
 
-@interface DescViewController ()
+@interface DescViewController () <MWPhotoBrowserDelegate>
 @property (weak, nonatomic) IBOutlet DEComposeTextView *descView;
 @property (weak, nonatomic) IBOutlet UIImageView *thumbView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *confirmButton;
+@property MWPhoto *photo;
 @end
 
 @implementation DescViewController
@@ -31,10 +33,16 @@
 }
 
 - (void)loadUI {
+	[self hideBackButtonText];
 	[self setupThumb];
 	[self setupDesc];
 //	[self setupButton];
-	[self setupTitle];
+	[self addClickControlToImageView];
+	[self setupOthers];
+}
+
+- (void)hideBackButtonText {
+	self.navigationItem.backBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
 - (void)setupDesc {
@@ -91,6 +99,9 @@
 												   constant: 0];
 		[_thumbView addConstraint: constraint];
 	}
+	
+	_photo = [MWPhoto photoWithImage:_image];
+	_photo.caption = _text;
 }
 
 //- (void)setupButton {
@@ -101,13 +112,15 @@
 //	}
 //}
 
-- (void)setupTitle {
+- (void)setupOthers {
 //	if(_actionType == editDesc) {
 //		self.title = NSLocalizedString(@"Edit Comment", @"clip edit");
 //	}else {
 //		self.title = NSLocalizedString(@"Add Comment", @"clip edit");
 //	}
-	self.title = NSLocalizedString(@"Add Comment", @"clip edit");
+	
+	self.title = _purpose.length == 0? NSLocalizedString(@"Add Comment", @"clip edit"): _purpose;
+	_descView.keyboardType = _keyboardType? _keyboardType: UIKeyboardTypeDefault;
 }
 
 - (IBAction)goBack:(id)sender {
@@ -124,6 +137,48 @@
 	}
 	[self.navigationController popViewControllerAnimated:YES];
 //	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)addClickControlToImageView{
+	
+	_thumbView.userInteractionEnabled = YES;
+	
+	UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]
+										 initWithTarget:self
+										 action:@selector(showPhotoBrowser)];
+	
+	singleTap.numberOfTapsRequired = 1;
+	
+	[_thumbView addGestureRecognizer:singleTap];
+}
+
+-(void)showPhotoBrowser {
+	
+	_photo.caption = _descView.text;
+	
+	MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+	browser.displayActionButton = NO;
+	//	browser.displayNavArrows = YES;
+	//	browser.displaySelectionButtons = displaySelectionButtons;
+	//	browser.alwaysShowControls = YES;
+	browser.zoomPhotosToFill = YES;
+	//	browser.enableGrid = enableGrid;
+	//	browser.startOnGrid = startOnGrid;
+	browser.enableSwipeToDismiss = NO;
+	//	browser.autoPlayOnAppear = autoPlayOnAppear;
+	[browser setCurrentPhotoIndex:0];
+	
+	[self.navigationController pushViewController:browser animated:YES];
+}
+
+#pragma mark - MWPhotoBrowserDelegate
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+	return 1;
+}
+
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+	return _photo;
 }
 
 /*

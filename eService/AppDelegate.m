@@ -8,9 +8,10 @@
 
 #import "AppDelegate.h"
 #import "WXApiManager.h"
+//#import <QMapKit.h>
+//#import <QMapSearchKit/QMapSearchKit.h>
 
 @interface AppDelegate ()
-
 @end
 
 @implementation AppDelegate
@@ -57,9 +58,15 @@
 	return [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
 }
 
+//- (UIInterfaceOrientationMask)application:(UIApplication *)application
+//  supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+//	return UIInterfaceOrientationMaskPortrait;
+//}
+
 - (void)setupApp {
 	[self setupTheme];
 	[self setupWeixin];
+//	[self setupQMap];
 }
 
 - (void)setupTheme {
@@ -76,4 +83,25 @@
 - (void)setupWeixin {
 	[WXApi registerApp:@"wx515ffccc2692d76d" enableMTA:YES];
 }
+
+//- (void)setupQMap {
+//	NSString *aipKey = @"EEQBZ-YXG3D-AL643-PPLVA-2GRW5-K6BQY";
+////	[[QMapServices sharedServices] setApiKey:aipKey];
+//	[[[QAppKeyCheck alloc] init] start:aipKey withDelegate:self];
+////	[[QMSSearchServices sharedServices] setApiKey:aipKey];
+//}
+
+#pragma mark -  QAppKeyCheckDelegate
+//- (void)notifyAppKeyCheckResult:(QErrorCode)errCode
+//{
+//	if(QErrorNone == errCode)
+//		NSLog(@"Appkey check passed.");
+//	else if(QNetError == errCode)
+//		NSLog(@"QNetError");
+//	else if(errCode == QAppKeyCheckFail)
+//		NSLog(@"QAppKeyCheckFail");
+//	else
+//		return;
+//}
+
 @end

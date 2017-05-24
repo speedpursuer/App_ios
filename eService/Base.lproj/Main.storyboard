@@ -80,7 +80,7 @@
                                                 <constraint firstAttribute="width" secondItem="EcU-KQ-TXE" secondAttribute="height" multiplier="1:1" id="50A-tz-2jI"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vD3-N4-cuf">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="articleTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vD3-N4-cuf">
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -118,16 +118,32 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Title" id="Zr3-ay-gsn">
+                        <barButtonItem key="leftBarButtonItem" title="Setup" id="NZC-Sp-fAJ">
+                            <connections>
+                                <segue destination="lb4-99-MXf" kind="show" id="urd-Pa-i5m"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="o2I-Ax-jH6">
                             <connections>
                                 <action selector="createNewService:" destination="FbI-RA-8X6" id="8WZ-ke-uZB"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="setupBtn" destination="NZC-Sp-fAJ" id="HgZ-Aw-po0"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sgH-mE-XNZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1944.8" y="841.52923538230891"/>
+        </scene>
+        <!--setting-->
+        <scene sceneID="iLb-PT-08h">
+            <objects>
+                <viewControllerPlaceholder storyboardName="shop" referencedIdentifier="setting" id="lb4-99-MXf" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bnw-Aj-goi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2577" y="611"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gx3-5j-gv3">

@@ -49,7 +49,7 @@
                                 <action selector="goBack:" destination="2HY-Ow-fJH" id="9iW-44-RxM"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="Nee-bW-Yzh">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Nee-bW-Yzh">
                             <connections>
                                 <action selector="goBack:" destination="2HY-Ow-fJH" id="EAL-Ps-zyl"/>
                             </connections>

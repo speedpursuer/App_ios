@@ -36,4 +36,18 @@
 	} afterDelay:0.1];
 }
 
++ (void)showConfirmation:(NSString *)title withMessage:(NSString *)message withDelegate:(id<UIAlertViewDelegate>)delegate {
+	[self performBlock:^{
+		[[[UIAlertView alloc] initWithTitle:title
+									message:message
+								   delegate:delegate
+						  cancelButtonTitle:NSLocalizedString(@"OK", @"for alertView")
+						  otherButtonTitles:nil] show];
+	} afterDelay:0.1];
+}
+
++ (NSString *)appName {
+	return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
+}
+
 @end

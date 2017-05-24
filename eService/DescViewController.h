@@ -22,6 +22,8 @@
 @property NSString *text;
 @property UIImage *image;
 @property NSString *descPlaceholder;
+@property UIKeyboardType keyboardType;
+@property NSString *purpose;
 @property (nonatomic, copy) void (^saveDescHandle)(NSString *desc);
 //@property DescActionType actionType;
 //@property (weak) id<DescDelegate> delegate;

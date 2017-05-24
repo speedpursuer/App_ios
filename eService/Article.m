@@ -12,7 +12,8 @@
 
 @implementation Article
 
-@dynamic entryList, title, category, thumbURL;
+@dynamic entryList, title, category, thumbURL, isShopEnabled;
+@synthesize thumb;
 
 + (NSString*) docType {
 	return kArticleDocType;
@@ -24,11 +25,11 @@
 	return [NSString stringWithFormat:@"article_%@_%@", uuid, [formatter stringFromDate:[NSDate date]]];
 }
 
-+ (Article*) createArticleInDatabase:(CBLDatabase*) database title:(NSString *)title category:(NSString *)category entryList: (NSArray *)entryList withUUID:(NSString *)uuid {
++ (Article*) createArticleInDatabase:(CBLDatabase*) database withUUID:(NSString *)uuid {
 	Article *article = (Article *)[super getModelInDatabase:database withUUID:uuid];
-	article.title = title;
-	article.category = category;
-	article.entryList = entryList;
+//	article.title = title;
+//	article.category = category;
+//	article.entryList = entryList;
 //	article.thumbURL = [self thumbURLWithEntryList:entryList];
 	return article;
 }

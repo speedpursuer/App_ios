@@ -9,7 +9,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>AppSettings.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>CocoaSecurity.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>DACircularProgress.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -34,12 +44,37 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MWPhotoBrowser-MWPhotoBrowser.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MWPhotoBrowser.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-eService.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Popover.OC.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SDWebImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>TOCropViewController-TOCropViewControllerBundle.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>TOCropViewController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -72,22 +107,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>010B1FFC9B5A15421BA64A7777414FEF</key>
+		<key>1ECA18A0FB3566773098C7777FCD82AF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>07E2AAB19C7FECB0FE7D8FCE158EAB51</key>
+		<key>2164E89DC2EE2083B6F144920F4892E7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>26F9787468043A3C9D6D5198B9A2FD1F</key>
+		<key>31D9CB0ECD61BC3D36CE5A75ED6E2C51</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>442D0A25803E9481ABD443125A8406D6</key>
+		<key>43B6883BD582DA2B0E12A237A60B36A6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5813251FEA21E4AEE97385709F1912DE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,7 +137,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5B72439117ED209CAFF280B1524EE3B7</key>
+		<key>6EB6C59C76FE31B6679F07CE096BE526</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7610D6CF7C4C2415217E050DCCD6A7F5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -112,6 +157,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>9775596B3CA16905FC8F66DA8E2A3C67</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9B412E0D1AA7CFCC3B6CBEC582819D45</key>
 		<dict>
 			<key>primary</key>
@@ -122,7 +172,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F2B5AFE5F5152BF16C2E09471DD07ACD</key>
+		<key>B2FC5A74E878298737C3B276D38966EF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D9699DDB22369084AD0C426AD6F8F2A7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DE3B07ED7FF04F506B0C5E00F4973589</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E2FE87384A67337831E53490EEA8BF11</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ECA8DD5D66A82D7581F3A68195D4656E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

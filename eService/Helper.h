@@ -12,4 +12,5 @@
 + (void)performBlock:(void(^)())block afterDelay:(NSTimeInterval)delay;
 + (UIImage *)createImageWithColor: (UIColor *) color;
 + (void)showAlertMessage:(NSString *)title withMessage:(NSString *)message;
++ (NSString *)appName;
 @end

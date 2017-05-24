@@ -1,3 +1,6 @@
+/* Class = "UIBarButtonItem"; title = "Setup"; ObjectID = "NZC-Sp-fAJ"; */
+"NZC-Sp-fAJ.title" = "门店";
+
 /* Class = "UILabel"; text = "Label"; ObjectID = "QKk-wo-StE"; */
 "QKk-wo-StE.text" = "Label";
 
@@ -13,6 +16,6 @@
 /* Class = "UILabel"; text = "Subtitle"; ObjectID = "tRb-yP-y0b"; */
 "tRb-yP-y0b.text" = "Subtitle";
 
-/* Class = "UILabel"; text = "Label"; ObjectID = "vD3-N4-cuf"; */
+/* Class = "UILabel"; text = "articleTitle"; ObjectID = "vD3-N4-cuf"; */
 "vD3-N4-cuf.text" = "Label";
 

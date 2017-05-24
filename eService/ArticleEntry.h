@@ -21,7 +21,7 @@
 - (instancetype)initEmptyEntry;
 - (instancetype)initWithCopy:(ArticleEntry *)entry;
 - (void)updateImageWithNewImage:(UIImage *)image;
-- (BOOL)isNewEntry;
+- (BOOL)hasNoImage;
 - (BOOL)needCache;
 - (UIImage *)fetchImage;
 //- (instancetype)initWithImageURL:(NSString *)url withSize:(CGSize)size;

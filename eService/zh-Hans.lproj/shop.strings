@@ -1,0 +1,27 @@
+/* Class = "UILabel"; text = "Tel"; ObjectID = "5jI-Pn-jpS"; */
+"5jI-Pn-jpS.text" = "电话";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "6I8-l8-4te"; */
+"6I8-l8-4te.text" = "Label";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "6n6-O4-DfK"; */
+"6n6-O4-DfK.text" = "店名";
+
+/* Class = "UILabel"; text = "Avatar"; ObjectID = "BFz-JJ-y6P"; */
+"BFz-JJ-y6P.text" = "照片";
+
+/* Class = "UITableViewController"; title = "Shop Settings"; ObjectID = "Gzr-jL-0Tw"; */
+"Gzr-jL-0Tw.title" = "门店设置";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "iyx-cP-iBl"; */
+"iyx-cP-iBl.text" = "Label";
+
+/* Class = "UIViewController"; title = "Shop Location Selection"; ObjectID = "j1A-Hd-FN9"; */
+"j1A-Hd-FN9.title" = "地址设置";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "j7n-fR-G3A"; */
+"j7n-fR-G3A.text" = "Label";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "sIb-0b-HgR"; */
+"sIb-0b-HgR.text" = "地址";
+

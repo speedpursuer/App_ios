@@ -33,9 +33,12 @@
 	NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:desc];
 	NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
 	paragraphStyle.lineSpacing = 8;
-	paragraphStyle.paragraphSpacingBefore = 9;
+	paragraphStyle.paragraphSpacing = 8;
+//	paragraphStyle.paragraphSpacingBefore = 9;
 //	paragraphStyle.firstLineHeadIndent = 30;
 	[attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, desc.length)];
+	
+	_desc.font = [UIFont fontWithName:@"PingFangSC-Regular" size:17];
 	
 	_desc.attributedText = attributedString;
 	

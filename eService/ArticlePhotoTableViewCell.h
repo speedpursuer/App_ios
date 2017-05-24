@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ArticlePhotoTableViewCell : UITableViewCell
-
+@property (nonatomic, copy) void (^clickImageHandle)(NSInteger index);
+- (void)setCellData:(NSString *)url desc:(NSString *)desc;
+- (void)setCellData:(NSString *)url photoIndex:(NSInteger)index;
 @end

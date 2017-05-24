@@ -67,7 +67,7 @@
 		_HUDLabel = [[UILabel alloc] init];
 		_HUDLabel.frame = CGRectMake(0,40, 120, 50);
 		_HUDLabel.textAlignment = NSTextAlignmentCenter;
-		_HUDLabel.text = @"Processing";
+		_HUDLabel.text = @"正在处理...";
 		_HUDLabel.font = [UIFont systemFontOfSize:15];
 		_HUDLabel.textColor = [UIColor whiteColor];
 		

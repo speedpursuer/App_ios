@@ -16,13 +16,14 @@
 
 @interface ArticlePhotoTableViewCell() <ArticleTableViewCell>
 @property (weak, nonatomic) IBOutlet UIImageView *photo;
-
+@property NSInteger photoIndex;
 @end
 
 @implementation ArticlePhotoTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+	[self addClickControlToImageView];
     // Initialization code
 }
 
@@ -30,6 +31,31 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)addClickControlToImageView{
+	
+	_photo.userInteractionEnabled = YES;
+	
+	UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]
+										 initWithTarget:self
+										 action:@selector(showPhotoBrowser:)];
+	
+	singleTap.numberOfTapsRequired = 1;
+	
+	
+	[_photo addGestureRecognizer:singleTap];
+	
+	UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc]
+									   initWithTarget:self
+									   action:@selector(showPhotoBrowser:)];
+	
+	[_photo addGestureRecognizer:pinch];
+}
+
+- (void)showPhotoBrowser:(UIGestureRecognizer *)sender {
+	if ([sender isKindOfClass:[UIPinchGestureRecognizer class]] && sender.state != UIGestureRecognizerStateBegan) return;
+	_clickImageHandle(_photoIndex);
 }
 
 - (void)setCellData:(NSString *)url desc:(NSString *)desc {
@@ -49,6 +75,11 @@
 //		image = [image resizeToSize:(CGSizeMake(photoWidth, image.size.height * (photoWidth / image.size.width)))];
 //		_photo.image = image;
 //	}];
+}
+
+- (void)setCellData:(NSString *)url photoIndex:(NSInteger)index {
+	_photoIndex = index;
+	[_photo requestImageWithNoPlaceholderWithURL:url];
 }
 
 //- (CGSize)sizeThatFits:(CGSize)size {	

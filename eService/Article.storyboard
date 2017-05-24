@@ -210,7 +210,7 @@
                     <navigationItem key="navigationItem" id="Us2-57-tXG">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="5fj-f0-Yq5">
                             <connections>
-                                <action selector="goBack:" destination="dtj-gh-yfS" id="g0T-gH-K8H"/>
+                                <action selector="showAlert:" destination="dtj-gh-yfS" id="3Nj-m5-6Mv"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="03X-2L-6QN">
@@ -220,6 +220,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cancelBtn" destination="5fj-f0-Yq5" id="ylW-fE-AaA"/>
                         <outlet property="saveButton" destination="03X-2L-6QN" id="uod-B4-sjX"/>
                         <segue destination="cqS-q8-dws" kind="unwind" identifier="backToArticleList" unwindAction="unwindFromEditView:" id="Yfb-dW-me1"/>
                         <segue destination="cqS-q8-dws" kind="unwind" identifier="backToDisplayPage" unwindAction="unwindFromEditExistingView:" id="7su-Ln-kvz"/>

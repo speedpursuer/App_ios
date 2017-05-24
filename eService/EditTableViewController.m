@@ -15,19 +15,20 @@
 #import "ArticleHeader.h"
 #import "UIImage+ImageEffects.h"
 #import "CategoryViewController.h"
-#import "DBService.h"
 #import "TZImagePickerController.h"
-#import <FontAwesomeKit/FAKIonIcons.h>
+#import "ShopSettingTableViewController.h"
 
 @interface EditTableViewController () <EditArticle, LFPhotoEdittingControllerDelegate, TZImagePickerControllerDelegate>
 //@property (strong, nonatomic) IBOutlet XRDragTableView *dragTableView;
 @property NSMutableArray <ArticleEntry *> *entriesToEdit;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelBtn;
 @property NSInteger indexInEditing;
 @property NSString *articleTitle;
 @property NSString *articleCategory;
 @property ArticleHeader *headerView;
 @property UIImage *blankPhoto;
+@property BOOL isShopSetup;
 @end
 
 @implementation EditTableViewController
@@ -35,6 +36,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[self configCrl];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	_isShopSetup = [[CBLService sharedManager] loadShop]? YES: NO;
+	if(![self isEditMode]) {
+		if(_isShopSetup) {
+			_headerView.enableShopSwitch.on = YES;
+		}else {
+			_headerView.enableShopSwitch.on = NO;
+		}
+	}
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,10 +76,13 @@
 - (void)configHeader {
 	_headerView = [[[NSBundle mainBundle] loadNibNamed:@"ArticleHeader" owner:nil options:nil] lastObject];
 	
+//	Shop *shop = [[CBLService sharedManager] loadShop];
+	
 	if([self isEditMode]) {
 		_headerView.background.image = [[_existingArticle thumbImage] applyLightDarkEffect];
 		_headerView.title.text = _articleTitle = _existingArticle.title;
 		_headerView.category.text = _articleCategory = _existingArticle.category;
+		_headerView.enableShopSwitch.on = _existingArticle.isShopEnabled;
 	}else {
 		_headerView.background.image = [_entriesToEdit[0].image applyLightDarkEffect];
 		_headerView.title.text = [self defaultTitle];
@@ -97,6 +113,32 @@
 	
 	[_headerView.category addGestureRecognizer:Tap2];
 	
+	[_headerView.enableShopSwitch addTarget:self
+				 action:@selector(switchChanged:)
+	   forControlEvents:UIControlEventValueChanged];
+	
+//	WeakSelf
+//	_headerView.switchHandle = ^(BOOL enabled){
+//		if(weakSelf.isShopSetup) {
+//			[weakSelf.headerView.enableShopInfo setOn:NO animated:NO];
+//			[Helper showAlertMessage:NSLocalizedString(@"Please setup shop first", @"shop enable for article alert") withMessage:nil];
+//		}
+//	};
+}
+
+- (IBAction)switchChanged:(id)sender {
+	if(!_isShopSetup && _headerView.enableShopSwitch.on) {
+		[_headerView.enableShopSwitch setOn:NO animated:NO];		
+		UIAlertView * alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Please setup shop first", @"shop enable for article alert") message:nil cancelButtonTitle:@"Cancel" otherButtonTitles:NSLocalizedString(@"Go to Set up", @"shop enable for article alert") block:^(UIAlertView *alertView, NSInteger buttonIndex) {
+			if (buttonIndex == 1) {
+				ShopSettingTableViewController *vc = [[UIStoryboard storyboardWithName:@"shop" bundle:nil] instantiateViewControllerWithIdentifier:@"setting"];
+				[self.navigationController pushViewController:vc animated:YES];
+			}
+		}];
+		[alert show];
+		
+		
+	}
 }
 
 - (void)setupThumbs {
@@ -128,7 +170,7 @@
 	
 	ArticleEntry *selectedEntry = [self entryForCell:cell];
 	
-	if([selectedEntry isNewEntry]) {
+	if([selectedEntry hasNoImage]) {
 		TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
 		imagePickerVc.allowPickingOriginalPhoto = NO;
 		imagePickerVc.allowPickingGif = NO;
@@ -138,8 +180,13 @@
 		//	imagePickerVc.photoPreviewMaxWidth = 1000;
 		[self presentViewController:imagePickerVc animated:YES completion:nil];
 	}else {
+		UIImage *editImage = [selectedEntry fetchImage];
+		if(!editImage) {
+			[Helper showAlertMessage:NSLocalizedString(@"Photo not loaded", @"editi photo alert") withMessage:@"Please check your network"];
+			return;
+		}
 		LFPhotoEdittingController *photoEdittingVC = [[LFPhotoEdittingController alloc] init];
-		photoEdittingVC.editImage = [selectedEntry fetchImage];
+		photoEdittingVC.editImage = editImage;
 		photoEdittingVC.delegate = self;
 		[self presentViewController:photoEdittingVC animated:YES completion:nil];
 	}
@@ -164,12 +211,16 @@
 }
 
 - (void)deletePhoto:(UITableViewCell *)cell {
-	[self entryForCell:cell];
-	[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Are you sure to delete", @"for photo deletion")
-								message:nil
-							   delegate:self
-					  cancelButtonTitle:NSLocalizedString(@"Cancel", @"photo deletion")
-					  otherButtonTitles:NSLocalizedString(@"OK", @"photo deletion"), nil] show];
+	ArticleEntry *entry = [self entryForCell:cell];
+	if(entry.desc.length == 0 && [entry hasNoImage]) {
+		[self removeCurrentEntry];
+	}else {
+		[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Are you sure to delete", @"for photo deletion")
+									message:nil
+								   delegate:self
+						  cancelButtonTitle:NSLocalizedString(@"Cancel", @"photo deletion")
+						  otherButtonTitles:NSLocalizedString(@"OK", @"photo deletion"), nil] show];
+	}
 }
 
 - (void)changeTitle {
@@ -225,9 +276,9 @@
 	}
 	
 	if([self isEditMode]) {
-		[[CBLService sharedManager] updateArticle:_existingArticle WithTitle:_articleTitle category:_articleCategory entryList:_entriesToEdit];
+		[[CBLService sharedManager] updateArticle:_existingArticle WithTitle:_articleTitle category:_articleCategory entryList:_entriesToEdit isShopEnabled:_headerView.enableShopSwitch.on];
 	}else {
-		[[CBLService sharedManager] creatArticleWithTitle:_articleTitle category:_articleCategory entryList:_entriesToEdit];
+		[[CBLService sharedManager] creatArticleWithTitle:_articleTitle category:_articleCategory entryList:_entriesToEdit isShopEnabled:_headerView.enableShopSwitch.on];
 	}
 }
 
@@ -253,6 +304,15 @@
 	}
 }
 
+- (IBAction)showAlert:(id)sender {
+	UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"放弃当前修改？" message:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定" block:^(UIAlertView *alertView, NSInteger buttonIndex) {
+		if (buttonIndex == 1) {
+			[self goBack:_cancelBtn];
+		}
+	}];
+	[alert show];
+}
+
 - (IBAction)unwindFromCategoryView:(UIStoryboardSegue *)segue {
 	CategoryViewController *source = [segue sourceViewController];
 	_headerView.category.text = _articleCategory = source.selectedCategory;
@@ -262,12 +322,16 @@
 
 - (void)alertView:(UIAlertView *)alert didDismissWithButtonIndex:(NSInteger)buttonIndex {
 	if (buttonIndex > 0) {
-		[_entriesToEdit removeObjectAtIndex:_indexInEditing];
-		[self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_indexInEditing inSection:0]] withRowAnimation:UITableViewRowAnimationLeft];
+		[self removeCurrentEntry];
 	}
 }
 
 #pragma mark - Helper
+
+- (void)removeCurrentEntry {
+	[_entriesToEdit removeObjectAtIndex:_indexInEditing];
+	[self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_indexInEditing inSection:0]] withRowAnimation:UITableViewRowAnimationLeft];
+}
 
 - (NSString *)defaultTitle {
 	return NSLocalizedString(@"Untitled", @"Init title");
@@ -346,7 +410,7 @@
 	
 //	[cell setCellData:entry.image url:entry.imageURL desc:entry.desc withDelegate:self];
 //	
-	[cell setCellData:[entry isNewEntry]? _blankPhoto: entry.image
+	[cell setCellData:[entry hasNoImage]? _blankPhoto: entry.image
 				  url:entry.imageURL
 				 desc:entry.desc
 		 withDelegate:self

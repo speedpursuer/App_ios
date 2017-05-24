@@ -34,7 +34,7 @@
 }
 
 - (void)setupConfig {
-	_name.text = [self appName];
+	_name.text = [Helper appName];
 	_desc.text = @"朋友圈-九宫分图, 效果如下:";
 	[self cropNineGridView];
 }
@@ -75,7 +75,7 @@
 		_hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 //		_hud.color = kAppColorMain;
 		_hud.mode = MBProgressHUDModeIndeterminate;
-		_hud.labelText = [NSString stringWithFormat:@"保存到相册: %@", [self appName]];
+		_hud.labelText = [NSString stringWithFormat:@"保存到相册..."];
 		[self addHintImages];
 		UIImage *image = _croppedImageMa[0];
 		[self saveImageToAlbum:image index:0];
@@ -91,7 +91,7 @@
 	ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		[assetsLibrary saveImage:image
-						 toAlbum:[self appName]
+						 toAlbum:[Helper appName]
 			 withCompletionBlock:^(NSError *error) {
 				 dispatch_async(dispatch_get_main_queue(), ^{
 					 if (error) {
@@ -118,9 +118,6 @@
 	});
 }
 
-- (NSString *)appName {
-	return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
-}
 /*
 #pragma mark - Navigation
 

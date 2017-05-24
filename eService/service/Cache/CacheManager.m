@@ -16,6 +16,7 @@
 #define kOSSBucket       @"eserviceimg"
 #define KOSSAccessKey    @"LTAIywqqkWBF5iqt"
 #define KOSSSecretKey    @"7sry21aUF02f8kOpElGiMng5ceQfnZ"
+#define KCDNDomain       @"cdn.carlub.cn"
 
 
 @interface CacheManager()
@@ -80,14 +81,45 @@
 //	[self uploadImage:key imageData:UIImageJPEGRepresentation(image, 0.8)];
 }
 
+- (void)saveImage:(UIImage *)image forKey:(NSString *)key completion:(void (^)(void))completion{
+	[_imageCache.diskCache setObject:image forKey:[self URLWithImageURL:key] withBlock:^{
+		completion();
+	}];
+//	[_imageCache setImage:image imageData:nil forKey:[self URLWithImageURL:key] withType:YYImageCacheTypeAll];
+	
+	//	[self uploadImage:key imageData:UIImageJPEGRepresentation(image, 0.8)];
+}
+
 - (UIImage *)getImageWithKey:(NSString *)key {
 	return [_imageCache getImageForKey:[self URLWithImageURL:key]];
 }
 
+- (void)getImageWithKey:(NSString *)key progress:(void(^)(NSInteger receivedSize, NSInteger expectedSize))progress completion:(void (^)(UIImage *image))completion {
+	if([_imageCache containsImageForKey:[self URLWithImageURL:key] withType:YYImageCacheTypeDisk]){
+		[_imageCache getImageForKey:[self URLWithImageURL:key] withType:YYImageCacheTypeAll withBlock:^(UIImage *image, YYImageCacheType type) {
+			completion(image);
+		}];
+	}else {
+		[_imageManager requestImageWithURL:[NSURL URLWithString:[self URLWithImageURL:key]]
+								   options:YYWebImageOptionShowNetworkActivity
+								  progress:progress
+								 transform:nil
+								completion:^(UIImage *image,
+											 NSURL *url,
+											 YYWebImageFromType from,
+											 YYWebImageStage stage,
+											 NSError *error){
+									completion(image);
+								}];
+	}
+}
+
 - (void)getImageWithKey:(NSString *)key completion:(void (^)(UIImage *image))completion{
-	[_imageCache getImageForKey:key withType:YYImageCacheTypeAll withBlock:^(UIImage *image, YYImageCacheType type) {
-		completion(image);
-	}];
+	[self getImageWithKey:key progress:nil completion:completion];
+}
+
+- (void)cancelAllRequest {
+	[_imageManager.queue cancelAllOperations];
 }
 
 - (void)requestImageWithURL:(NSString *)url forImageView:(UIImageView *)imageView{
@@ -167,7 +199,7 @@
 #pragma mark - Helper
 
 - (NSString *)URLWithImageURL:(NSString *)url{
-	return [NSString stringWithFormat:@"%@%@.%@/%@.%@", kHTTPPrefix, kOSSBucket, kOSSEndPoint, url, kJPGPostfix];
+	return [NSString stringWithFormat:@"%@%@/%@.%@", kHTTPPrefix, KCDNDomain, url, kJPGPostfix];
 }
 
 @end

@@ -12,9 +12,10 @@
 #import "CocoaSecurity.h"
 #import "FCUUID.h"
 #import "UIImage+Resize.h"
+#import "Configuration.h"
 
 #define kDBName @"eservice"
-#define kStorageType kCBLForestDBStorage
+#define kStorageType kCBLSQLiteStorage
 #define cbserverURL @"http://121.40.197.226:8000/eservice"
 #define didSyncedFlag @"didSynced"
 
@@ -23,7 +24,6 @@
 @property (nonatomic) CBLReplication *push;
 @property (nonatomic) CBLReplication *pull;
 @property (nonatomic) BOOL isSynced;
-@property (nonatomic) NSError *lastSyncError;
 //@property MRProgressOverlayView *progressView;
 @property NSString *uuid;
 @property dispatch_group_t group;
@@ -56,21 +56,11 @@
 			NSLog(@"Cannot create database with an error : %@", [error description]);
 		
 		_uuid = [FCUUID uuidForDevice];
+		
+		_isSynced = ((Configuration *)[Configuration load]).isSynced;
 	}
 	
 //	[self enableLogging];
-	
-	//	CBLModelFactory* factory = _database.modelFactory;
-	//	[factory registerClass:[Album class] forDocumentType:@"album"];
-	//	[factory registerClass:[Favorite class] forDocumentType:@"favorite"];
-	//	[factory registerClass:[AlbumSeq class] forDocumentType:@"albumSeq"];
-//	[self initContentDB];
-//	[self loadContent];
-//	[self loadFavorite];
-//	[self loadAlbumSeq];
-//	[self loadSynced];
-//	[self observeChanges];
-//	[self syncToRemote];
 	
 	//For test ONLY
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
@@ -82,14 +72,20 @@
 
 #pragma mark - Public methods
 
-- (Article*)creatArticleWithTitle:(NSString *) title category:(NSString *)category entryList:(NSArray *)entryList  {
+- (Article*)creatArticleWithTitle:(NSString *) title category:(NSString *)category entryList:(NSArray *)entryList isShopEnabled:(BOOL)isShopEnabled{
 	
-	Article* article = [Article createArticleInDatabase:_database title:title category:category entryList:entryList withUUID:_uuid];
+	Article* article = [Article createArticleInDatabase:_database withUUID:_uuid];
+	
+	article.title = title;
+	article.category = category;
+	article.entryList = entryList;
+	article.isShopEnabled = isShopEnabled;
 	
 	[self cachePhotosForArticle:article];
 	
 	NSError *error;
 	if ([article save:&error]) {
+		[self syncToServerForArticleAsyncly:article completion:nil];
 		[self notifyArticleChanges];
 //		[JDStatusBarNotification showWithStatus:[NSString stringWithFormat:NSLocalizedString(@"New article \"%@\" created", @"cblservice"), article.title] dismissAfter:2.0 styleName:JDStatusBarStyleSuccess];
 		return article;
@@ -99,16 +95,18 @@
 	}
 }
 
-- (Article*)updateArticle:(Article*)article WithTitle:(NSString *) title category:(NSString *)category entryList:(NSArray *)entryList  {
+- (Article*)updateArticle:(Article*)article WithTitle:(NSString *) title category:(NSString *)category entryList:(NSArray *)entryList isShopEnabled:(BOOL)isShopEnabled{
 	
 	article.title = title;
 	article.category = category;
 	article.entryList = entryList;
+	article.isShopEnabled = isShopEnabled;
 	
 	[self cachePhotosForArticle:article];
 	
 	NSError *error;
 	if ([article save:&error]) {
+		[self syncToServerForArticleAsyncly:article completion:nil];
 		[self notifyArticleChanges];
 //		[JDStatusBarNotification showWithStatus:[NSString stringWithFormat:NSLocalizedString(@"Article \"%@\" modified", @"cblservice"), article.title] dismissAfter:2.0 styleName:JDStatusBarStyleSuccess];
 		return article;
@@ -118,30 +116,21 @@
 	}
 }
 
-- (BOOL)cachePhotosForArticle:(Article *)article {
+- (void)cachePhotosForArticle:(Article *)article {
 	CacheManager *cacheMgr = [CacheManager sharedManager];
-	BOOL hasImage = NO;
+	
+	//首先保存第一张为缩略图
+	ArticleEntry *firstEntry = [self getFirstEntryWithArticle:article];
+	if(firstEntry && [firstEntry needCache]) {
+		UIImage *thumb = [firstEntry.image resizeToWidth:300];
+		article.thumbURL = [self remoteURLForThumbWithDocID:[article docID]];
+		article.thumb = thumb;
+		[cacheMgr saveImage:thumb forKey:article.thumbURL];
+	}
+	
 	for(ArticleEntry *entry in article.entryList) {
 		if([entry needCache]) {
-			entry.imageURL = [self remoteFileNameFromURL:entry.imagePath];
-			[cacheMgr saveImage:entry.image forKey:entry.imageURL];
-			//保存缩略图
-			if(!hasImage) {
-				article.thumbURL = [self remoteFileNameFromURL:[NSString stringWithFormat:@"%@_thumb", entry.imagePath]];
-				[cacheMgr saveImage:[entry.image resizeToWidth:300] forKey:article.thumbURL];
-			}
-			
-			hasImage = YES;
-		}
-	}
-	return hasImage;
-}
-
-- (void)cachePhotosWithEntryList:(NSArray *)entryList {
-	CacheManager *cacheMgr = [CacheManager sharedManager];
-	for(ArticleEntry *entry in entryList) {
-		if([entry needCache]) {
-			entry.imageURL = [self remoteFileNameFromURL:entry.imagePath];
+			entry.imageURL = [self remoteURLForImagePath:entry.imagePath withDocID:[article docID]];
 			[cacheMgr saveImage:entry.image forKey:entry.imageURL];
 		}
 	}
@@ -164,7 +153,36 @@
 	for (CBLQueryRow* row in result) {
 		[allArticles addObject:[Article modelForDocument:row.document]];
 	}
+	
 	return [allArticles copy];
+}
+
+- (Shop *)loadShop {
+	return [Shop getShopInDatabase:_database withUUID:_uuid];
+}
+
+- (void)saveShop:(Shop *)shop withAvatar:(UIImage *)avatar {
+	
+	CacheManager *cacheMgr = [CacheManager sharedManager];
+	shop.avatar = avatar;
+	shop.avatarURL = [self remoteURLForShopAvatar];
+	
+	[cacheMgr saveImage:avatar forKey:shop.avatarURL];
+	
+	NSError *error;
+	if ([shop save:&error]) {
+		[self syncToServerForShopAsyncly:shop completion:nil];
+	}else {
+		[self showError];
+	}
+	
+//	[cacheMgr saveImage:avatar forKey:shop.avatarURL completion:^{
+//		dispatch_group_leave(group);
+//	}];
+
+	
+//	dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+//	});
 }
 
 - (void)deleteArticle:(Article *)article {
@@ -172,9 +190,9 @@
 	
 	[article deleteDocument:&error];
 	
-//	if(!error) {
-//		[self notifyArticleChanges];
-//	}
+	if(!error) {
+		[self syncToServerForArticleAsyncly:article completion:nil];
+	}
 }
 
 - (void)loadAllImagesForArticle:(Article *)article completion:(void (^)(BOOL success))completion{
@@ -183,6 +201,7 @@
 	CacheManager *cacheMgr = [CacheManager sharedManager];
 	
 	for(ArticleEntry *entry in article.entryList) {
+		if(entry.imageURL.length == 0) continue;
 		dispatch_group_enter(group);
 		[cacheMgr getImageWithKey:entry.imageURL completion:^(UIImage *image) {
 			dispatch_group_leave(group);
@@ -194,31 +213,38 @@
 	});
 }
 
-- (void)loadAllImagesForArticle:(Article *)article {
-	CacheManager *cacheMgr = [CacheManager sharedManager];
-	for(ArticleEntry *entry in article.entryList) {
-		[cacheMgr getImageWithKey:entry.imageURL];
-	}
-}
-
 - (void)uploadPhotosForArticle:(Article *)article completion:(void (^)(BOOL success))completion {
 	
 	dispatch_group_t group = dispatch_group_create();
 	CacheManager *cacheMgr = [CacheManager sharedManager];
 	
-	ArticleEntry *firstEntry = [self getFirstEntryWithArticle:article];
-	BOOL needUploadThumb = firstEntry && !firstEntry.uploaded;
-	
 	__block BOOL allUploaded = YES;
 	__block BOOL thumbUploaded = YES;
 	__block int numberOfPhotosUploaded = 0;
+	
+	//上传第一张为缩略图
+	ArticleEntry *firstEntry = [self getFirstEntryWithArticle:article];
+	if(firstEntry && !firstEntry.uploaded) {
+		dispatch_group_enter(group);
+		UIImage *thumb = article.thumb? article.thumb: [article thumbImage];
+		[cacheMgr uploadImage:article.thumbURL imageData:UIImageJPEGRepresentation(thumb, 0.8) completion:^(BOOL uploadeded){
+			if(!uploadeded) {
+				thumbUploaded = NO;
+			}
+			dispatch_group_leave(group);
+		}];
+	}
 	
 	for(ArticleEntry *entry in article.entryList) {
 		
 		if(entry.imageURL.length == 0 || entry.uploaded) continue;
 		
 		dispatch_group_enter(group);
-		[cacheMgr uploadImage:entry.imageURL imageData:UIImageJPEGRepresentation([cacheMgr getImageWithKey:entry.imageURL], 0.8) completion:^(BOOL uploadeded){
+		
+		//在新建时可以直接调用，避免未cache而取空
+		UIImage *image = entry.image? entry.image: [cacheMgr getImageWithKey:entry.imageURL];
+		
+		[cacheMgr uploadImage:entry.imageURL imageData:UIImageJPEGRepresentation(image, 0.8) completion:^(BOOL uploadeded){
 			if(uploadeded) {
 				entry.uploaded = YES;
 				numberOfPhotosUploaded++;
@@ -229,17 +255,7 @@
 		}];
 	}
 	
-	if(needUploadThumb) {
-		dispatch_group_enter(group);
-		[cacheMgr uploadImage:article.thumbURL imageData:UIImageJPEGRepresentation([article thumbImage], 0.8) completion:^(BOOL uploadeded){
-			if(!uploadeded) {
-				thumbUploaded = NO;
-			}
-			dispatch_group_leave(group);
-		}];
-	}
-	
-	dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+	dispatch_group_notify(group, dispatch_get_main_queue(), ^{
 		NSError *error;
 		if(numberOfPhotosUploaded > 0) {			
 			[article updateEntryList:&error];
@@ -252,13 +268,71 @@
 	});
 }
 
+- (void)uploadAvaterForShop:(Shop *)shop completion:(void (^)(BOOL success))completion {
+	
+	CacheManager *cacheMgr = [CacheManager sharedManager];
+	
+//	UIImage *avatar = [cacheMgr getImageWithKey:shop.avatarURL];
+	
+	[cacheMgr uploadImage:shop.avatarURL imageData:UIImageJPEGRepresentation(shop.avatar, 0.8) completion:^(BOOL uploadeded){
+		if(uploadeded) {
+			completion(YES);
+		}else {
+			completion(NO);
+		}
+	}];
+}
+
 - (ArticleEntry *)getFirstEntryWithArticle:(Article *)article {
 	for(ArticleEntry *entry in article.entryList) {
-		if(entry.imageURL.length > 0) {
+		if(entry.imagePath.length > 0) {
 			return entry;
 		}
 	}
 	return nil;
+}
+
+- (void)syncToServerForArticleAsyncly:(Article *)article completion:(void (^)(BOOL success))completion{
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		[self syncToServerForArticle:article completion:^(BOOL success) {
+			dispatch_async(dispatch_get_main_queue(), ^{
+				if(completion) completion(success);
+			});
+		}];
+	});
+}
+
+- (void)syncToServerForShopAsyncly:(Shop *)shop completion:(void (^)(BOOL success))completion{
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		[self syncToServerForShop:shop completion:^(BOOL success) {
+			dispatch_async(dispatch_get_main_queue(), ^{
+				if(completion) completion(success);
+			});
+		}];
+	});
+}
+
+- (void)syncToServerForShop:(Shop *)shop completion:(void (^)(BOOL success))completion{
+	
+	_group = dispatch_group_create();
+	
+	dispatch_group_enter(_group);
+	
+	[self uploadAvaterForShop:shop completion:^(BOOL sucesss) {
+		if(sucesss) {
+			[self syncToRemote];
+		}else {
+			completion(NO);
+		}
+	}];
+	
+	dispatch_group_notify(_group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+		if(_push.lastError) {
+			completion(NO);
+		}else {
+			completion(YES);
+		}
+	});
 }
 
 - (void)syncToServerForArticle:(Article *)article completion:(void (^)(BOOL success))completion{
@@ -266,6 +340,7 @@
 	_group = dispatch_group_create();
 	
 	dispatch_group_enter(_group);
+	
 	[self uploadPhotosForArticle:article completion:^(BOOL sucesss) {
 		if(sucesss) {
 			[self syncToRemote];
@@ -293,10 +368,7 @@
 		return ![revision[@"_id"] isEqual:didSyncedFlag];
 	})];
 	
-	id<CBLAuthenticator> auth;
-	auth = [CBLAuthenticator basicAuthenticatorWithName: @"eservice_user"
-											   password: @"xiaodianzhang123"];
-	_push.authenticator = auth;
+	_push.authenticator = [self CBLAuthenticator];
 	_push.filter = @"syncedFlag";
 	//	_push.continuous = YES;
 	
@@ -323,6 +395,52 @@
 	}
 }
 
+- (void)syncFromRemote {
+	
+	if(_isSynced) return;
+	
+	NSURL *syncUrl = [NSURL URLWithString:cbserverURL];
+	
+	_pull = [_database createPullReplication:syncUrl];
+	
+	_pull.authenticator = [self CBLAuthenticator];
+	_pull.channels = @[[NSString stringWithFormat:@"user_%@", _uuid]];
+	
+	NSNotificationCenter *nctr = [NSNotificationCenter defaultCenter];
+	[nctr addObserver:self selector:@selector(pullProgress:)
+				 name:kCBLReplicationChangeNotification object:_pull];
+	
+	[_pull start];
+}
+
+- (void)pullProgress:(NSNotification *)notification {
+	if(_pull.status == kCBLReplicationStopped) {
+		if(_pull.changesCount > 0) {
+			if(_pull.completedChangesCount == _pull.changesCount) {
+				NSLog(@"Sync to remote completed");
+				[self setSynced];
+				[self notifyArticleChanges];				
+			}else{
+				NSLog(@"Sync to remote in progress");
+			}
+		}else {
+			[self setSynced];
+			NSLog(@"No need to sync to remote");
+		}
+	}
+}
+
+- (void)setSynced {
+	Configuration *config = [Configuration load];
+	config.isSynced = YES;
+	[config save];
+}
+
+- (id<CBLAuthenticator>)CBLAuthenticator {
+	return [CBLAuthenticator basicAuthenticatorWithName: @"eservice_user"
+											   password: @"xiaodianzhang123"];
+}
+
 #pragma mark - Helper 
 - (void)showErrorWithMessage:(NSString *)msg {
 	[JDStatusBarNotification showWithStatus:msg dismissAfter:2.0 styleName:JDStatusBarStyleWarning];
@@ -332,8 +450,20 @@
 	[self showErrorWithMessage:NSLocalizedString(@"Request failed, please retry", @"cblservice")];
 }
 
-- (NSString *)remoteFileNameFromURL:(NSString *)url {
-	return [NSString stringWithFormat:@"%@/%@", _uuid, [self MD5:url]];
+- (NSString *)remoteURLForImagePath:(NSString *)path withDocID:(NSString *)docID {
+	return [self remoteURLFromFileName:[self MD5:path] withPath:docID];
+}
+
+- (NSString *)remoteURLForThumbWithDocID:(NSString *)docID {
+	return [self remoteURLFromFileName:@"thumb" withPath:docID];
+}
+
+- (NSString *)remoteURLForShopAvatar {
+	return [self remoteURLFromFileName:@"avatar" withPath:@"shop"];
+}
+
+- (NSString *)remoteURLFromFileName:(NSString *)FileName withPath:(NSString *)path {
+	return [NSString stringWithFormat:@"%@/%@/%@", _uuid, path, FileName];
 }
 
 - (NSString *)MD5:(NSString *)string {

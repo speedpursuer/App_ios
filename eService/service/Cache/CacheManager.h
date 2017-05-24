@@ -12,8 +12,11 @@
 @interface CacheManager : NSObject
 + (id)sharedManager;
 - (void)saveImage:(UIImage *)image forKey:(NSString *)key;
+- (void)saveImage:(UIImage *)image forKey:(NSString *)key completion:(void (^)(void))completion;
 - (UIImage *)getImageWithKey:(NSString *)key;
 - (void)getImageWithKey:(NSString *)key completion:(void (^)(UIImage *image))completion;
+- (void)getImageWithKey:(NSString *)key progress:(void(^)(NSInteger receivedSize, NSInteger expectedSize))progress completion:(void (^)(UIImage *image))completion;
+- (void)cancelAllRequest;
 - (void)removeAllCache;
 //- (void)uploadPhotosWithArticle:(Article *)article completion:(void (^)(BOOL success))completion;
 - (void)uploadImage:(NSString *)fileKey imageData:(NSData *)imageData completion:(void (^)(BOOL))completion;

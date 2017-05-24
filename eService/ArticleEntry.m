@@ -72,7 +72,7 @@
 	_uploaded = NO;
 }
 
-- (BOOL)isNewEntry {
+- (BOOL)hasNoImage {
 	return (!_image && _imageURL.length == 0)? YES: NO;
 }
 

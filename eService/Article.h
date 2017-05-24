@@ -14,9 +14,11 @@
 @property (copy) NSArray *entryList;
 @property NSString *title;
 @property NSString *category;
+@property UIImage *thumb;
 @property NSString *thumbURL;
+@property BOOL isShopEnabled;
 
-+ (Article*) createArticleInDatabase:(CBLDatabase*) database title:(NSString *)title category:(NSString *)category entryList: (NSArray *)entryList withUUID:(NSString *)uuid;
++ (Article*) createArticleInDatabase:(CBLDatabase*) database withUUID:(NSString *)uuid;
 
 - (UIImage *)thumbImage;
 

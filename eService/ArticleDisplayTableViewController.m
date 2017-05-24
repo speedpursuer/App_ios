@@ -105,7 +105,7 @@
 }
 
 - (void)configCtr {
-	self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithTitle:@"分享" style:UIBarButtonItemStylePlain target:self action:@selector(selectWX:)], [[UIBarButtonItem alloc] initWithTitle:@"修改" style:UIBarButtonItemStylePlain target:self action:@selector(editArticle:)], nil];
+	self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Share", @"Share button") style:UIBarButtonItemStylePlain target:self action:@selector(selectWX:)], [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Modify", @"Modify button") style:UIBarButtonItemStylePlain target:self action:@selector(editArticle:)], nil];
 }
 
 -(BOOL)hasPhotoInEntry:(ArticleEntry *)entry {

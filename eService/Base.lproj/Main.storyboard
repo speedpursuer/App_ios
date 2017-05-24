@@ -120,7 +120,7 @@
                     <navigationItem key="navigationItem" title="Title" id="Zr3-ay-gsn">
                         <barButtonItem key="leftBarButtonItem" title="Setup" id="NZC-Sp-fAJ">
                             <connections>
-                                <segue destination="lb4-99-MXf" kind="show" id="urd-Pa-i5m"/>
+                                <action selector="shopSetup:" destination="FbI-RA-8X6" id="SMD-Uq-7ep"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="o2I-Ax-jH6">
@@ -136,14 +136,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sgH-mE-XNZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1944.8" y="841.52923538230891"/>
-        </scene>
-        <!--setting-->
-        <scene sceneID="iLb-PT-08h">
-            <objects>
-                <viewControllerPlaceholder storyboardName="shop" referencedIdentifier="setting" id="lb4-99-MXf" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bnw-Aj-goi" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2577" y="611"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gx3-5j-gv3">

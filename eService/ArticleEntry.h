@@ -7,6 +7,7 @@
 //
 
 #import <CouchbaseLite/CouchbaseLite.h>
+#import "CachedImage.h"
 
 @interface ArticleEntry : NSObject <CBLJSONEncoding>
 @property UIImage *image;
@@ -15,6 +16,7 @@
 @property NSString *desc;
 @property BOOL uploaded;
 @property CGSize size;
+@property CachedImage *cachedImage;
 
 - (instancetype)initWithImage:(UIImage *)image withImagePath:(NSString *)path;
 - (instancetype)initForPhotoDisplayOnlyWithImageURL:(NSString *)url withSize:(CGSize)size;

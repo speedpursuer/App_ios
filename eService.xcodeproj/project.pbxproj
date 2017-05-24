@@ -18,6 +18,8 @@
 		761304C41E9CDAF4007EF4DE /* EditTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 761304C31E9CDAF4007EF4DE /* EditTableViewController.m */; };
 		761304C91E9CE00C007EF4DE /* EditTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 761304C81E9CE00C007EF4DE /* EditTableViewCell.m */; };
 		761304D01E9E1603007EF4DE /* ArticleEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 761304CF1E9E1603007EF4DE /* ArticleEntry.m */; };
+		764612461ED5115F002CC396 /* CachedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 764612451ED5115F002CC396 /* CachedImage.m */; };
+		764612471ED5AE3F002CC396 /* ArticleHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 764612491ED5AE3F002CC396 /* ArticleHeader.xib */; };
 		76479DA71EAEEAB80053A8C1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 76479DA91EAEEAB80053A8C1 /* InfoPlist.strings */; };
 		76479DAC1EAEEAB90053A8C1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 76479DAE1EAEEAB90053A8C1 /* InfoPlist.strings */; };
 		76479DB11EAEEABA0053A8C1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 76479DB31EAEEABA0053A8C1 /* Localizable.strings */; };
@@ -38,7 +40,6 @@
 		76479E051EB5A3650053A8C1 /* SendMessageToWXReq+requestWithTextOrMediaMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 76479DFC1EB5A3650053A8C1 /* SendMessageToWXReq+requestWithTextOrMediaMessage.m */; };
 		76479E061EB5A3650053A8C1 /* UIAlertView+WX.m in Sources */ = {isa = PBXBuildFile; fileRef = 76479DFE1EB5A3650053A8C1 /* UIAlertView+WX.m */; };
 		76479E071EB5A3650053A8C1 /* WXMediaMessage+messageConstruct.m in Sources */ = {isa = PBXBuildFile; fileRef = 76479E001EB5A3650053A8C1 /* WXMediaMessage+messageConstruct.m */; };
-		7660ED251EA0CC5E0049F800 /* ArticleHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7660ED241EA0CC5E0049F800 /* ArticleHeader.xib */; };
 		7660ED281EA0DA080049F800 /* ArticleHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7660ED271EA0DA080049F800 /* ArticleHeader.m */; };
 		766A747D1EBEA88C0017809C /* PECropRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 766A74731EBEA88C0017809C /* PECropRectView.m */; };
 		766A747E1EBEA88C0017809C /* PECropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 766A74751EBEA88C0017809C /* PECropView.m */; };
@@ -199,6 +200,10 @@
 		761304CE1E9E1603007EF4DE /* ArticleEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleEntry.h; sourceTree = "<group>"; };
 		761304CF1E9E1603007EF4DE /* ArticleEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleEntry.m; sourceTree = "<group>"; };
 		761304D11E9E17AB007EF4DE /* eService.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eService.pch; sourceTree = "<group>"; };
+		764612441ED5115F002CC396 /* CachedImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CachedImage.h; sourceTree = "<group>"; };
+		764612451ED5115F002CC396 /* CachedImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CachedImage.m; sourceTree = "<group>"; };
+		764612481ED5AE3F002CC396 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ArticleHeader.xib; sourceTree = "<group>"; };
+		7646124B1ED5AE45002CC396 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ArticleHeader.strings"; sourceTree = "<group>"; };
 		76479DA31EAEE2B40053A8C1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		76479DA41EAEE2B40053A8C1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		76479DA81EAEEAB80053A8C1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -231,7 +236,6 @@
 		76479DFE1EB5A3650053A8C1 /* UIAlertView+WX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+WX.m"; sourceTree = "<group>"; };
 		76479DFF1EB5A3650053A8C1 /* WXMediaMessage+messageConstruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WXMediaMessage+messageConstruct.h"; sourceTree = "<group>"; };
 		76479E001EB5A3650053A8C1 /* WXMediaMessage+messageConstruct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WXMediaMessage+messageConstruct.m"; sourceTree = "<group>"; };
-		7660ED241EA0CC5E0049F800 /* ArticleHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleHeader.xib; sourceTree = "<group>"; };
 		7660ED261EA0DA080049F800 /* ArticleHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleHeader.h; sourceTree = "<group>"; };
 		7660ED271EA0DA080049F800 /* ArticleHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleHeader.m; sourceTree = "<group>"; };
 		766A74721EBEA88C0017809C /* PECropRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PECropRectView.h; sourceTree = "<group>"; };
@@ -639,6 +643,8 @@
 				761304CF1E9E1603007EF4DE /* ArticleEntry.m */,
 				76D98DFD1EA399F40027B272 /* Article.h */,
 				76D98DFE1EA399F40027B272 /* Article.m */,
+				764612441ED5115F002CC396 /* CachedImage.h */,
+				764612451ED5115F002CC396 /* CachedImage.m */,
 			);
 			name = Model;
 			path = ../..;
@@ -720,7 +726,7 @@
 				7682476D1EA3ABC200F8AF0D /* ArticleTableViewCell.m */,
 				761304C71E9CE00C007EF4DE /* EditTableViewCell.h */,
 				761304C81E9CE00C007EF4DE /* EditTableViewCell.m */,
-				7660ED241EA0CC5E0049F800 /* ArticleHeader.xib */,
+				764612491ED5AE3F002CC396 /* ArticleHeader.xib */,
 				7660ED261EA0DA080049F800 /* ArticleHeader.h */,
 				7660ED271EA0DA080049F800 /* ArticleHeader.m */,
 				7682477A1EA4B06F00F8AF0D /* ArticleTextTableViewCell.h */,
@@ -1312,7 +1318,7 @@
 				767260FE1ECD547E00DB848B /* shop.storyboard in Resources */,
 				767260D31ECB09DC00DB848B /* map.html in Resources */,
 				761303FB1E9CBA4F007EF4DE /* LaunchScreen.storyboard in Resources */,
-				7660ED251EA0CC5E0049F800 /* ArticleHeader.xib in Resources */,
+				764612471ED5AE3F002CC396 /* ArticleHeader.xib in Resources */,
 				76479DA71EAEEAB80053A8C1 /* InfoPlist.strings in Resources */,
 				767260D51ECB0C5E00DB848B /* jquery.js in Resources */,
 				7682477E1EA4B06F00F8AF0D /* ArticleTextTableViewCell.xib in Resources */,
@@ -1516,6 +1522,7 @@
 				76D98DDC1EA1D43A0027B272 /* LFGridMaskLayer.m in Sources */,
 				76D98DDD1EA1D43A0027B272 /* LFGridView.m in Sources */,
 				76D98DCD1EA1D43A0027B272 /* NSString+LFCoreText.m in Sources */,
+				764612461ED5115F002CC396 /* CachedImage.m in Sources */,
 				768247791EA46FB900F8AF0D /* UIImage+Resize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1555,6 +1562,15 @@
 				76479DA41EAEE2B40053A8C1 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		764612491ED5AE3F002CC396 /* ArticleHeader.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				764612481ED5AE3F002CC396 /* Base */,
+				7646124B1ED5AE45002CC396 /* zh-Hans */,
+			);
+			name = ArticleHeader.xib;
 			sourceTree = "<group>";
 		};
 		76479DA91EAEEAB80053A8C1 /* InfoPlist.strings */ = {

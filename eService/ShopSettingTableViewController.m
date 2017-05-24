@@ -149,7 +149,7 @@
 }
 
 - (IBAction)showAlert:(id)sender {
-	[[[UIAlertView alloc] initWithTitle:@"放弃当前修改？" message:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定" block:^(UIAlertView *alertView, NSInteger buttonIndex) {
+	[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Exit?", @"放弃修改？") message:nil cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cacel") otherButtonTitles:NSLocalizedString(@"OK", @"OK") block:^(UIAlertView *alertView, NSInteger buttonIndex) {
 		if (buttonIndex == 1) {
 			[self saveShopSettings:_cancelBtn];
 		}

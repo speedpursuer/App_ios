@@ -12,7 +12,7 @@
 #import "ArticleTableViewCell.h"
 #import "ArticleDisplayTableViewController.h"
 #import "TZImagePickerController.h"
-
+#import "ShopSettingTableViewController.h"
 
 @interface ArticleTableViewController ()  <TZImagePickerControllerDelegate, LFImagePickerControllerDelegate, UISearchResultsUpdating>
 @property (strong, nonatomic) UISearchController *searchController;
@@ -86,6 +86,14 @@
 	
 	[self presentViewController:imagePickerVc animated:YES completion:nil];
 }
+
+#pragma mark - Action
+
+- (IBAction)shopSetup:(id)sender {	ShopSettingTableViewController *ctr = [[UIStoryboard storyboardWithName:@"shop" bundle:nil] instantiateViewControllerWithIdentifier:@"setting"];
+	
+	[self.navigationController pushViewController:ctr animated:YES];
+}
+
 
 #pragma mark - Picker delegate
 

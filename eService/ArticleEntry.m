@@ -17,6 +17,7 @@
 					  withDesc:@""
 				  withUploaded:NO
 				 withImagePath:path
+				withCacheImage:nil
 			];
 }
 
@@ -27,6 +28,7 @@
 					  withDesc:@""
 				  withUploaded:NO
 				 withImagePath:@""
+				withCacheImage:nil
 		   ];
 }
 
@@ -37,6 +39,7 @@
 					  withDesc:@""
 				  withUploaded:NO
 				 withImagePath:@""
+				withCacheImage:nil
 			];
 }
 
@@ -47,10 +50,11 @@
 					  withDesc:entry.desc
 				  withUploaded:entry.uploaded
 				 withImagePath:entry.imagePath
+				withCacheImage:entry.cachedImage
 		   ];
 }
 
-- (instancetype)initWithImage:(UIImage *)image withImageURL:(NSString *)url withSize:(CGSize)size withDesc:(NSString *)desc withUploaded:(BOOL)uploaded withImagePath:(NSString *)imagePath {
+- (instancetype)initWithImage:(UIImage *)image withImageURL:(NSString *)url withSize:(CGSize)size withDesc:(NSString *)desc withUploaded:(BOOL)uploaded withImagePath:(NSString *)imagePath withCacheImage:(CachedImage *)cachedImage{
 	self = super.init;
 	if (self) {
 		_image = image;
@@ -59,6 +63,7 @@
 		_desc = desc;
 		_uploaded = uploaded;
 		_imagePath = imagePath;
+		_cachedImage = cachedImage;
 	}
 	return self;
 }
@@ -93,6 +98,7 @@
 		NSNumber *height = [jsonObject objectForKey:@"height"];
 		self.size = CGSizeMake([width floatValue], [height floatValue]);
 		self.uploaded = [[jsonObject objectForKey:@"uploaded"] boolValue];
+//		self.cachedImage = [[CachedImage alloc] initWithJSON:[jsonObject objectForKey:@"cacheImage"]];
 	}
 	return self;
 }
@@ -103,7 +109,8 @@
 				@"desc":self.desc,
 				@"width":[NSNumber numberWithFloat:self.size.width],
 				@"height":[NSNumber numberWithFloat:self.size.height],
-				@"uploaded":[NSNumber numberWithBool:self.uploaded]
+				@"uploaded":[NSNumber numberWithBool:self.uploaded],
+//				@"cacheImage": [_cachedImage encodeAsJSON]
 		   };
 }
 

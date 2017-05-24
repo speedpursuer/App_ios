@@ -4,7 +4,7 @@
 /* for photo deletion */
 "Are you sure to delete" = "确认删除？";
 
-/* Cancel
+/* Cacel
    photo deletion */
 "Cancel" = "取消";
 
@@ -23,6 +23,15 @@
 /* clip edit */
 "Edit Comment" = "编辑文字";
 
+/* 放弃修改？ */
+"Exit?" = "放弃修改？";
+
+/* shop enable for article alert */
+"Go to Set up" = "去设置";
+
+/* Modify button */
+"Modify" = "修改";
+
 /* Message for empty table view */
 "No Content" = "点击右上角添加内容";
 
@@ -32,6 +41,9 @@
    photo deletion */
 "OK" = "确定";
 
+/* editi photo alert */
+"Photo not loaded" = "照片未成功加载";
+
 /* text for image */
 "Please enter desc" = "输入文字";
 
@@ -39,8 +51,14 @@
    text for title */
 "Please enter title" = "输入标题";
 
+/* Shop info alert */
+"Please finish all fields" = "请填写完整信息";
+
 /* address alert */
 "Please select an address from the list" = "请列表中选择地址";
+
+/* shop enable for article alert */
+"Please setup shop first" = "请先设置门店信息";
 
 /* Preview button for nine grid */
 "Preview" = "预览";
@@ -68,6 +86,9 @@
 
 /* setShopName */
 "Set Shop Phone" = "门店电话";
+
+/* Share button */
+"Share" = "分享";
 
 /* Init title */
 "Untitled" = "未命名标题";

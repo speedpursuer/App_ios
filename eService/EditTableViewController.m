@@ -40,7 +40,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	_isShopSetup = [[CBLService sharedManager] loadShop]? YES: NO;
+	Shop *shop = [[CBLService sharedManager] loadShop];
+	_isShopSetup = shop.name.length > 0 ? YES: NO;
 	if(![self isEditMode]) {
 		if(_isShopSetup) {
 			_headerView.enableShopSwitch.on = YES;
@@ -129,7 +130,7 @@
 - (IBAction)switchChanged:(id)sender {
 	if(!_isShopSetup && _headerView.enableShopSwitch.on) {
 		[_headerView.enableShopSwitch setOn:NO animated:NO];		
-		UIAlertView * alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Please setup shop first", @"shop enable for article alert") message:nil cancelButtonTitle:@"Cancel" otherButtonTitles:NSLocalizedString(@"Go to Set up", @"shop enable for article alert") block:^(UIAlertView *alertView, NSInteger buttonIndex) {
+		UIAlertView * alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Please setup shop first", @"shop enable for article alert") message:nil cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cacel") otherButtonTitles:NSLocalizedString(@"Go to Set up", @"shop enable for article alert") block:^(UIAlertView *alertView, NSInteger buttonIndex) {
 			if (buttonIndex == 1) {
 				ShopSettingTableViewController *vc = [[UIStoryboard storyboardWithName:@"shop" bundle:nil] instantiateViewControllerWithIdentifier:@"setting"];
 				[self.navigationController pushViewController:vc animated:YES];
@@ -159,6 +160,7 @@
 		_entriesToEdit = [NSMutableArray new];
 		for (NSInteger i = 0; i < _images.count; i++) {
 			ArticleEntry *entry = [[ArticleEntry alloc]initWithImage:_images[i] withImagePath:[[_imageInfos[i] objectForKey:@"PHImageFileURLKey"]absoluteString]];
+//			entry.cachedImage = [[CachedImage alloc] initWithURL:@"test" withUploaded:NO];
 			[_entriesToEdit addObject:entry];
 		}
 	}
@@ -305,7 +307,7 @@
 }
 
 - (IBAction)showAlert:(id)sender {
-	UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"放弃当前修改？" message:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定" block:^(UIAlertView *alertView, NSInteger buttonIndex) {
+	UIAlertView * alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Exit?", @"放弃修改？") message:nil cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cacel") otherButtonTitles:NSLocalizedString(@"OK", @"OK") block:^(UIAlertView *alertView, NSInteger buttonIndex) {
 		if (buttonIndex == 1) {
 			[self goBack:_cancelBtn];
 		}

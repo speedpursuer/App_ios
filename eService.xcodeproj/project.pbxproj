@@ -20,6 +20,7 @@
 		761304D01E9E1603007EF4DE /* ArticleEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 761304CF1E9E1603007EF4DE /* ArticleEntry.m */; };
 		764612461ED5115F002CC396 /* CachedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 764612451ED5115F002CC396 /* CachedImage.m */; };
 		764612471ED5AE3F002CC396 /* ArticleHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 764612491ED5AE3F002CC396 /* ArticleHeader.xib */; };
+		7646124C1ED71CD1002CC396 /* Article.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7646124E1ED71CD1002CC396 /* Article.storyboard */; };
 		76479DA71EAEEAB80053A8C1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 76479DA91EAEEAB80053A8C1 /* InfoPlist.strings */; };
 		76479DAC1EAEEAB90053A8C1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 76479DAE1EAEEAB90053A8C1 /* InfoPlist.strings */; };
 		76479DB11EAEEABA0053A8C1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 76479DB31EAEEABA0053A8C1 /* Localizable.strings */; };
@@ -148,7 +149,6 @@
 		76D98DEA1EA1D43A0027B272 /* LFTextBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D98DB81EA1D43A0027B272 /* LFTextBar.m */; };
 		76D98DED1EA1D48E0027B272 /* LFPhotoPreviewController+eService.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D98DEC1EA1D48E0027B272 /* LFPhotoPreviewController+eService.m */; };
 		76D98DF01EA254300027B272 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D98DEF1EA254300027B272 /* UIImage+ImageEffects.m */; };
-		76D98DF21EA30AC50027B272 /* Article.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76D98DF11EA30AC50027B272 /* Article.storyboard */; };
 		76D98DF51EA30D130027B272 /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D98DF41EA30D130027B272 /* CategoryViewController.m */; };
 		76D98DF81EA334400027B272 /* AddCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D98DF71EA334400027B272 /* AddCategoryViewController.m */; };
 		76D98DFF1EA399F40027B272 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D98DFE1EA399F40027B272 /* Article.m */; };
@@ -204,6 +204,8 @@
 		764612451ED5115F002CC396 /* CachedImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CachedImage.m; sourceTree = "<group>"; };
 		764612481ED5AE3F002CC396 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ArticleHeader.xib; sourceTree = "<group>"; };
 		7646124B1ED5AE45002CC396 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ArticleHeader.strings"; sourceTree = "<group>"; };
+		7646124D1ED71CD1002CC396 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Article.storyboard; sourceTree = "<group>"; };
+		764612501ED71CDC002CC396 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Article.strings"; sourceTree = "<group>"; };
 		76479DA31EAEE2B40053A8C1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		76479DA41EAEE2B40053A8C1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		76479DA81EAEEAB80053A8C1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -446,7 +448,6 @@
 		76D98DEC1EA1D48E0027B272 /* LFPhotoPreviewController+eService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LFPhotoPreviewController+eService.m"; path = "lib/LFPhotoPreviewController+eService.m"; sourceTree = "<group>"; };
 		76D98DEE1EA254300027B272 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "lib/Common/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		76D98DEF1EA254300027B272 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "lib/Common/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
-		76D98DF11EA30AC50027B272 /* Article.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Article.storyboard; sourceTree = "<group>"; };
 		76D98DF31EA30D130027B272 /* CategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryViewController.h; sourceTree = "<group>"; };
 		76D98DF41EA30D130027B272 /* CategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryViewController.m; sourceTree = "<group>"; };
 		76D98DF61EA334400027B272 /* AddCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCategoryViewController.h; sourceTree = "<group>"; };
@@ -721,7 +722,7 @@
 		7660ED211EA0CBFF0049F800 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				76D98DF11EA30AC50027B272 /* Article.storyboard */,
+				7646124E1ED71CD1002CC396 /* Article.storyboard */,
 				7682476C1EA3ABC200F8AF0D /* ArticleTableViewCell.h */,
 				7682476D1EA3ABC200F8AF0D /* ArticleTableViewCell.m */,
 				761304C71E9CE00C007EF4DE /* EditTableViewCell.h */,
@@ -1327,7 +1328,7 @@
 				766A74801EBEA88C0017809C /* PEPhotoCropEditor.bundle in Resources */,
 				76D98DC31EA1D43A0027B272 /* LFImagePickerController.bundle in Resources */,
 				76F1DDFD1E9FA4D800507F9E /* common.storyboard in Resources */,
-				76D98DF21EA30AC50027B272 /* Article.storyboard in Resources */,
+				7646124C1ED71CD1002CC396 /* Article.storyboard in Resources */,
 				767260F71ECD464800DB848B /* nprogress.css in Resources */,
 				766BCCFB1EA9E99C0068E44A /* TZImagePickerController.bundle in Resources */,
 				76479DB11EAEEABA0053A8C1 /* Localizable.strings in Resources */,
@@ -1571,6 +1572,15 @@
 				7646124B1ED5AE45002CC396 /* zh-Hans */,
 			);
 			name = ArticleHeader.xib;
+			sourceTree = "<group>";
+		};
+		7646124E1ED71CD1002CC396 /* Article.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7646124D1ED71CD1002CC396 /* Base */,
+				764612501ED71CDC002CC396 /* zh-Hans */,
+			);
+			name = Article.storyboard;
 			sourceTree = "<group>";
 		};
 		76479DA91EAEEAB80053A8C1 /* InfoPlist.strings */ = {

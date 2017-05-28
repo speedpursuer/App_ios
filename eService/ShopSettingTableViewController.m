@@ -32,6 +32,7 @@
 	[self addClickControlToImageView];
 //	[self startStandardUpdates];
 	[self setupData];
+	[self setTitle];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -43,6 +44,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setTitle {
+	self.title = NSLocalizedString(@"Set Shop Info", @"设置门店信息");
 }
 
 - (void)addClickControlToImageView{

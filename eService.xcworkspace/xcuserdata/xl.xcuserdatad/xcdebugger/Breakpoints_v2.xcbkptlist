@@ -824,7 +824,7 @@
                   moduleName = "eService"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/xl/Documents/App/eService/eService/lib/LFImagePickerController/class/manager/LFAssetManager.m"
-                  timestampString = "517320822.413042"
+                  timestampString = "517414144.174948"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "490"
@@ -839,7 +839,7 @@
                   moduleName = "eService"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/xl/Documents/App/eService/eService/lib/LFImagePickerController/class/manager/LFAssetManager.m"
-                  timestampString = "517320822.41639"
+                  timestampString = "517414144.178577"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "490"
@@ -952,7 +952,7 @@
                   moduleName = "eService"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/xl/Documents/App/eService/eService/lib/LFImagePickerController/class/manager/LFAssetManager.m"
-                  timestampString = "517320822.440241"
+                  timestampString = "517414144.207645"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "546"
@@ -967,7 +967,7 @@
                   moduleName = "eService"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/xl/Documents/App/eService/eService/lib/LFImagePickerController/class/manager/LFAssetManager.m"
-                  timestampString = "517320822.444265"
+                  timestampString = "517414144.211051"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "547"
@@ -1112,11 +1112,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "516425958.308359"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "-creatArticleWithTitle:category:entryList:isShopEnabled:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1144,11 +1144,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "443"
-            endingLineNumber = "443"
+            startingLineNumber = "444"
+            endingLineNumber = "444"
             landmarkName = "@implementation CBLService"
             landmarkType = "3">
          </BreakpointContent>
@@ -1176,11 +1176,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
             landmarkName = "-loadArticles"
             landmarkType = "7">
          </BreakpointContent>
@@ -1192,11 +1192,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517238163.341623"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "-creatArticleWithTitle:category:entryList:isShopEnabled:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1272,11 +1272,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "516182801.728849"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "-init"
             landmarkType = "7">
          </BreakpointContent>
@@ -1288,11 +1288,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517238163.341623"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "-creatArticleWithTitle:category:entryList:isShopEnabled:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1304,11 +1304,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517238163.341623"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
             landmarkName = "-creatArticleWithTitle:category:entryList:isShopEnabled:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1672,7 +1672,7 @@
                   moduleName = "eService"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/xl/Documents/App/eService/eService/TZImagePickerController/TZPhotoPickerController.m"
-                  timestampString = "517320822.467273"
+                  timestampString = "517414144.233996"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "324"
@@ -1687,7 +1687,7 @@
                   moduleName = "eService"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/xl/Documents/App/eService/eService/TZImagePickerController/TZPhotoPickerController.m"
-                  timestampString = "517320822.470909"
+                  timestampString = "517414144.242112"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "325"
@@ -2024,11 +2024,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "259"
-            endingLineNumber = "259"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
             landmarkName = "-uploadPhotosForArticle:completion:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2040,27 +2040,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
+            landmarkName = "-uploadPhotosForArticle:completion:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "eService/service/CBL/CBLService.m"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "240"
             endingLineNumber = "240"
-            landmarkName = "-uploadPhotosForArticle:completion:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "239"
-            endingLineNumber = "239"
             landmarkName = "-uploadPhotosForArticle:completion:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2312,11 +2312,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
             landmarkName = "-uploadPhotosForArticle:completion:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2615,11 +2615,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "-loadArticles"
             landmarkType = "7">
          </BreakpointContent>
@@ -2839,11 +2839,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517238163.341623"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "-updateArticle:WithTitle:category:entryList:isShopEnabled:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2871,11 +2871,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "217"
-            endingLineNumber = "217"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
             landmarkName = "-uploadPhotosForArticle:completion:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2887,11 +2887,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
             landmarkName = "-uploadPhotosForArticle:completion:"
             landmarkType = "7">
             <Locations>
@@ -2935,11 +2935,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
+            startingLineNumber = "242"
+            endingLineNumber = "242"
             landmarkName = "-uploadPhotosForArticle:completion:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2951,11 +2951,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "243"
-            endingLineNumber = "243"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
             landmarkName = "-uploadPhotosForArticle:completion:"
             landmarkType = "7">
             <Locations>
@@ -2999,11 +2999,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
             landmarkName = "-uploadPhotosForArticle:completion:"
             landmarkType = "7">
             <Locations>
@@ -3047,11 +3047,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "344"
-            endingLineNumber = "344"
+            startingLineNumber = "345"
+            endingLineNumber = "345"
             landmarkName = "-syncToServerForArticle:completion:"
             landmarkType = "7">
             <Locations>
@@ -3111,11 +3111,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "343"
-            endingLineNumber = "343"
+            startingLineNumber = "344"
+            endingLineNumber = "344"
             landmarkName = "-syncToServerForArticle:completion:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3127,11 +3127,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517238163.341623"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "-updateArticle:WithTitle:category:entryList:isShopEnabled:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3539,7 +3539,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/lib/PEPhotoCropEditor/PECropViewController.m"
@@ -3555,7 +3555,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/lib/PEPhotoCropEditor/PECropViewController.m"
@@ -3575,11 +3575,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "-cachePhotosForArticle:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3591,11 +3591,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "-cachePhotosForArticle:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3607,11 +3607,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "-cachePhotosForArticle:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3671,11 +3671,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "422"
-            endingLineNumber = "422"
+            startingLineNumber = "423"
+            endingLineNumber = "423"
             landmarkName = "-pullProgress:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3687,11 +3687,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "400"
-            endingLineNumber = "400"
+            startingLineNumber = "401"
+            endingLineNumber = "401"
             landmarkName = "-syncFromRemote"
             landmarkType = "7">
          </BreakpointContent>
@@ -3703,11 +3703,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "516182779.69532"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
             landmarkName = "-init"
             landmarkType = "7">
          </BreakpointContent>
@@ -3719,11 +3719,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "427"
-            endingLineNumber = "427"
+            startingLineNumber = "428"
+            endingLineNumber = "428"
             landmarkName = "-pullProgress:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3735,11 +3735,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "407"
-            endingLineNumber = "407"
+            startingLineNumber = "408"
+            endingLineNumber = "408"
             landmarkName = "-syncFromRemote"
             landmarkType = "7">
          </BreakpointContent>
@@ -3751,11 +3751,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "424"
-            endingLineNumber = "424"
+            startingLineNumber = "425"
+            endingLineNumber = "425"
             landmarkName = "-pullProgress:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3767,11 +3767,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "418"
-            endingLineNumber = "418"
+            startingLineNumber = "419"
+            endingLineNumber = "419"
             landmarkName = "-pullProgress:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3783,11 +3783,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "413"
-            endingLineNumber = "413"
+            startingLineNumber = "414"
+            endingLineNumber = "414"
             landmarkName = "-syncFromRemote"
             landmarkType = "7">
          </BreakpointContent>
@@ -3815,11 +3815,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "299"
-            endingLineNumber = "299"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
             landmarkName = "-syncToServerForArticleAsyncly:completion:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3831,11 +3831,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "298"
-            endingLineNumber = "298"
+            startingLineNumber = "299"
+            endingLineNumber = "299"
             landmarkName = "-syncToServerForArticleAsyncly:completion:"
             landmarkType = "7">
             <Locations>
@@ -3879,11 +3879,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
             landmarkName = "-deleteArticle:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3895,11 +3895,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "237"
-            endingLineNumber = "237"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
             landmarkName = "-uploadPhotosForArticle:completion:"
             landmarkType = "7">
             <Locations>
@@ -3943,11 +3943,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "219"
-            endingLineNumber = "219"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
             landmarkName = "-uploadPhotosForArticle:completion:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3959,11 +3959,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
             landmarkName = "-uploadPhotosForArticle:completion:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3975,11 +3975,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
             landmarkName = "-uploadPhotosForArticle:completion:"
             landmarkType = "7">
             <Locations>
@@ -3991,7 +3991,7 @@
                   moduleName = "eService"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/xl/Documents/App/eService/eService/service/CBL/CBLService.m"
-                  timestampString = "517320822.578548"
+                  timestampString = "517414144.349731"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "256"
@@ -4006,7 +4006,7 @@
                   moduleName = "eService"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/xl/Documents/App/eService/eService/service/CBL/CBLService.m"
-                  timestampString = "517320822.582188"
+                  timestampString = "517414144.356308"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "256"
@@ -4357,11 +4357,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/ShopLocationViewController.m"
-            timestampString = "516769839.201045"
+            timestampString = "517409495.288914"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "-loadWebView"
             landmarkType = "7">
          </BreakpointContent>
@@ -4373,11 +4373,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/ShopLocationViewController.m"
-            timestampString = "516769839.201045"
+            timestampString = "517409495.288914"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "-loadWebView"
             landmarkType = "7">
             <Locations>
@@ -4421,11 +4421,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/ShopLocationViewController.m"
-            timestampString = "516769839.201045"
+            timestampString = "517409495.288914"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "-webViewDidStartLoad:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4437,11 +4437,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/ShopLocationViewController.m"
-            timestampString = "516769839.201045"
+            timestampString = "517409495.288914"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "-webViewDidFinishLoad:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4469,11 +4469,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/ShopSettingTableViewController.m"
-            timestampString = "517157989.202802"
+            timestampString = "517409495.288914"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "7">
             <Locations>
@@ -4517,11 +4517,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/ShopSettingTableViewController.m"
-            timestampString = "517157989.202802"
+            timestampString = "517409495.288914"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4533,11 +4533,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/ShopSettingTableViewController.m"
-            timestampString = "517157989.202802"
+            timestampString = "517409495.288914"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
             landmarkName = "@implementation ShopSettingTableViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -4549,11 +4549,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/ShopLocationViewController.m"
-            timestampString = "516769839.201045"
+            timestampString = "517409495.288914"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "-loadWebView"
             landmarkType = "7">
          </BreakpointContent>
@@ -4565,11 +4565,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/ShopSettingTableViewController.m"
-            timestampString = "517157989.202802"
+            timestampString = "517409495.288914"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "@implementation ShopSettingTableViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -4581,11 +4581,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/ShopSettingTableViewController.m"
-            timestampString = "517157989.202802"
+            timestampString = "517409495.288914"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
             landmarkName = "@implementation ShopSettingTableViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -4597,11 +4597,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/ShopSettingTableViewController.m"
-            timestampString = "517157989.202802"
+            timestampString = "517409495.288914"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
             landmarkName = "-cropViewController:didCropToImage:withRect:angle:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4613,11 +4613,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "277"
-            endingLineNumber = "277"
+            startingLineNumber = "278"
+            endingLineNumber = "278"
             landmarkName = "-uploadAvaterForShop:completion:"
             landmarkType = "7">
             <Locations>
@@ -4629,7 +4629,7 @@
                   moduleName = "eService"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/xl/Documents/App/eService/eService/service/CBL/CBLService.m"
-                  timestampString = "517320822.635682"
+                  timestampString = "517414144.422051"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "277"
@@ -4644,7 +4644,7 @@
                   moduleName = "eService"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/xl/Documents/App/eService/eService/service/CBL/CBLService.m"
-                  timestampString = "517320822.639286"
+                  timestampString = "517414144.425505"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "278"
@@ -4661,11 +4661,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "273"
-            endingLineNumber = "273"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
             landmarkName = "-uploadAvaterForShop:completion:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4677,11 +4677,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
             landmarkName = "-saveShop:withAvatar:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4693,11 +4693,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/ShopSettingTableViewController.m"
-            timestampString = "517157989.202802"
+            timestampString = "517409495.288914"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
             landmarkName = "-showCropVCWithImage:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4709,11 +4709,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517247036.508334"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "245"
-            endingLineNumber = "245"
+            startingLineNumber = "246"
+            endingLineNumber = "246"
             landmarkName = "-uploadPhotosForArticle:completion:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4725,11 +4725,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517245653.593083"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "-cachePhotosForArticle:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4741,11 +4741,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/service/CBL/CBLService.m"
-            timestampString = "517245653.593083"
+            timestampString = "517415003.875369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "-cachePhotosForArticle:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4805,11 +4805,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eService/ShopSettingTableViewController.m"
-            timestampString = "517304458.063865"
+            timestampString = "517409495.288914"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "-setupData"
             landmarkType = "7">
          </BreakpointContent>
@@ -4859,6 +4859,22 @@
             startingLineNumber = "33"
             endingLineNumber = "33"
             landmarkName = "+getShopInDatabase:withUUID:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "eService/ArticleDisplayTableViewController.m"
+            timestampString = "517413962.148013"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
+            landmarkName = "-cropViewController:didFinishCroppingImage:transform:cropRect:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

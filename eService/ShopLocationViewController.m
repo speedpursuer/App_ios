@@ -24,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[self loadWebView];
+	[self setTitle];
     // Do any additional setup after loading the view.
 }
 
@@ -36,6 +37,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setTitle {
+	self.title = NSLocalizedString(@"Select Address", @"选择地址");
 }
 
 - (void)loadWebView {

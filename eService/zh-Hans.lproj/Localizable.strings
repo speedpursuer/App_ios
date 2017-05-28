@@ -75,11 +75,17 @@
 /* clip edit */
 "Save" = "保存";
 
+/* 选择地址 */
+"Select Address" = "选择地址";
+
 /* Share to weibo */
 "Send" = "保存";
 
 /* Main page title */
 "Service Catalog" = "分类";
+
+/* 设置门店信息 */
+"Set Shop Info" = "设置门店";
 
 /* setShopName */
 "Set Shop Name" = "门店名称";

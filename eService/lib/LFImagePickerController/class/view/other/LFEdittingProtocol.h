@@ -65,4 +65,8 @@
 /** 改变模糊状态 */
 @property (nonatomic, readwrite) BOOL splashState;
 
+/** =====================Tag功能===================== */
+
+@property (nonatomic, assign) BOOL tagEnable;
+
 @end

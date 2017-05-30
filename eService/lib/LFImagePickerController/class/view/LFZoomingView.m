@@ -15,6 +15,7 @@
 #import "LFDrawView.h"
 #import "LFSplashView.h"
 #import "LFStickerView.h"
+#import "LFTagView.h"
 
 NSString *const kLFZoomingViewData_draw = @"LFZoomingViewData_draw";
 NSString *const kLFZoomingViewData_sticker = @"LFZoomingViewData_sticker";
@@ -33,6 +34,9 @@ NSString *const kLFZoomingViewData_splash = @"LFZoomingViewData_splash";
 @property (nonatomic, weak) LFStickerView *stickerView;
 /** 模糊（马赛克、高斯模糊） */
 @property (nonatomic, weak) LFSplashView *splashView;
+
+/** Tag */
+@property (nonatomic, weak) LFTagView *tagView;
 
 /** 代理 */
 @property (nonatomic ,weak) id delegate;
@@ -89,6 +93,13 @@ NSString *const kLFZoomingViewData_splash = @"LFZoomingViewData_splash";
 //    stickerView.userInteractionEnabled = NO;
     [self addSubview:stickerView];
     self.stickerView = stickerView;
+	
+//	/** Tag */
+//	LFTagView *tagView = [[LFTagView alloc] initWithFrame:self.bounds];
+//	/** 默认不能触发Tag */
+//	tagView.userInteractionEnabled = NO;
+//	[self addSubview:tagView];
+//	self.tagView = tagView;
 }
 
 - (void)setImage:(UIImage *)image
@@ -322,4 +333,13 @@ NSString *const kLFZoomingViewData_splash = @"LFZoomingViewData_splash";
     return _splashView.state == LFSplashStateType_Blurry;
 }
 
+#pragma mark - 模糊功能
+- (void)setTagEnable:(BOOL)tagEnable {
+	_tagView.userInteractionEnabled = tagEnable;
+}
+
+- (BOOL)tagEnable
+{
+	return _tagView.userInteractionEnabled;
+}
 @end

@@ -89,6 +89,10 @@
 		7682477E1EA4B06F00F8AF0D /* ArticleTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7682477C1EA4B06F00F8AF0D /* ArticleTextTableViewCell.xib */; };
 		768247821EA4B11C00F8AF0D /* ArticlePhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 768247801EA4B11C00F8AF0D /* ArticlePhotoTableViewCell.m */; };
 		768247831EA4B11C00F8AF0D /* ArticlePhotoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 768247811EA4B11C00F8AF0D /* ArticlePhotoTableViewCell.xib */; };
+		7686B61B1EDAA4D10017DD28 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 7686B60E1EDAA4D10017DD28 /* test.png */; };
+		7686B61C1EDAA4D10017DD28 /* YBTagViewLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7686B6191EDAA4D10017DD28 /* YBTagViewLib.a */; };
+		7686B61D1EDAA4D10017DD28 /* yuandian.png in Resources */ = {isa = PBXBuildFile; fileRef = 7686B61A1EDAA4D10017DD28 /* yuandian.png */; };
+		7686B6201EDAC7730017DD28 /* LFTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7686B61F1EDAC7730017DD28 /* LFTagView.m */; };
 		76AE01851EB972F100808478 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 76AE01841EB972F100808478 /* ProgressHUD.m */; };
 		76AE01991EBA0D1C00808478 /* WXApiRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 76AE01951EBA0D1C00808478 /* WXApiRequestHandler.m */; };
 		76AE019A1EBA0D1C00808478 /* WXApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 76AE01961EBA0D1C00808478 /* WXApiManager.m */; };
@@ -97,6 +101,22 @@
 		76AE01A81EBD5F3800808478 /* UIImage+TYSnapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 76AE01A01EBD5F2F00808478 /* UIImage+TYSnapshot.m */; };
 		76AE01A91EBD5F3800808478 /* UIScrollView+TYSnapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 76AE01A21EBD5F2F00808478 /* UIScrollView+TYSnapshot.m */; };
 		76AE01AA1EBD5F3800808478 /* UITableView+TYSnapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 76AE01A41EBD5F2F00808478 /* UITableView+TYSnapshot.m */; };
+		76C8ACBB1EDC4C3B00E41941 /* AdobeCreativeSDKCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACB91EDC4C3B00E41941 /* AdobeCreativeSDKCore.framework */; };
+		76C8ACBC1EDC4C3B00E41941 /* AdobeCreativeSDKCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACB91EDC4C3B00E41941 /* AdobeCreativeSDKCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		76C8ACBD1EDC4C3B00E41941 /* AdobeCreativeSDKImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACBA1EDC4C3B00E41941 /* AdobeCreativeSDKImage.framework */; };
+		76C8ACBE1EDC4C3B00E41941 /* AdobeCreativeSDKImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACBA1EDC4C3B00E41941 /* AdobeCreativeSDKImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		76C8ACC21EDC4CF300E41941 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACC11EDC4CF300E41941 /* MobileCoreServices.framework */; };
+		76C8ACC41EDC4D8A00E41941 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACC31EDC4D8A00E41941 /* Accelerate.framework */; };
+		76C8ACC61EDC4D9200E41941 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACC51EDC4D9200E41941 /* CoreData.framework */; };
+		76C8ACC81EDC4D9A00E41941 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACC71EDC4D9A00E41941 /* libsqlite3.0.tbd */; };
+		76C8ACCA1EDC4DA300E41941 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACC91EDC4DA300E41941 /* libz.1.2.5.tbd */; };
+		76C8ACCC1EDC4DAF00E41941 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACCB1EDC4DAF00E41941 /* Foundation.framework */; };
+		76C8ACCE1EDC4DB800E41941 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACCD1EDC4DB800E41941 /* MessageUI.framework */; };
+		76C8ACD01EDC4DC000E41941 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACCF1EDC4DC000E41941 /* OpenGLES.framework */; };
+		76C8ACD21EDC4DC800E41941 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACD11EDC4DC800E41941 /* QuartzCore.framework */; };
+		76C8ACD41EDC4DD000E41941 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACD31EDC4DD000E41941 /* StoreKit.framework */; };
+		76C8ACD61EDC4DD600E41941 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACD51EDC4DD600E41941 /* UIKit.framework */; };
+		76C8ACD81EDC4DE000E41941 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACD71EDC4DE000E41941 /* WebKit.framework */; };
 		76D98DB91EA1D43A0027B272 /* LFAlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D98D421EA1D43A0027B272 /* LFAlbumCell.m */; };
 		76D98DBA1EA1D43A0027B272 /* LFAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D98D441EA1D43A0027B272 /* LFAssetCell.m */; };
 		76D98DBB1EA1D43A0027B272 /* LFPhotoPreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D98D461EA1D43A0027B272 /* LFPhotoPreviewCell.m */; };
@@ -161,7 +181,7 @@
 		76F1DE071E9FA89F00507F9E /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F1DDFF1E9FA89F00507F9E /* RECommonFunctions.m */; };
 		76F1DE081E9FA89F00507F9E /* REComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F1DE011E9FA89F00507F9E /* REComposeViewController.m */; };
 		76F1DE091E9FA89F00507F9E /* REComposeBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F1DE051E9FA89F00507F9E /* REComposeBackgroundView.m */; };
-		7C2AC877655ECAF19CC0FFE8 /* libPods-eService.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6901DDA647235D1E5DB6A69E /* libPods-eService.a */; };
+		BA66221D4BB61A67C0797008 /* libPods-eService.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B15A4AA73997B4CAB7A961F /* libPods-eService.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,9 +194,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		76C8ACBF1EDC4C3B00E41941 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				76C8ACBE1EDC4C3B00E41941 /* AdobeCreativeSDKImage.framework in Embed Frameworks */,
+				76C8ACBC1EDC4C3B00E41941 /* AdobeCreativeSDKCore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		2DE2AA3A45E4B258FD2B88DD /* Pods-eService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eService.release.xcconfig"; path = "Pods/Target Support Files/Pods-eService/Pods-eService.release.xcconfig"; sourceTree = "<group>"; };
-		6901DDA647235D1E5DB6A69E /* libPods-eService.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-eService.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B15A4AA73997B4CAB7A961F /* libPods-eService.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-eService.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		70AB8CE77AE0CB8F50845914 /* Pods-eService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eService.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eService/Pods-eService.debug.xcconfig"; sourceTree = "<group>"; };
 		761303E81E9CBA4F007EF4DE /* eService.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eService.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		761303EC1E9CBA4F007EF4DE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -325,6 +360,21 @@
 		7682477F1EA4B11C00F8AF0D /* ArticlePhotoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticlePhotoTableViewCell.h; sourceTree = "<group>"; };
 		768247801EA4B11C00F8AF0D /* ArticlePhotoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlePhotoTableViewCell.m; sourceTree = "<group>"; };
 		768247811EA4B11C00F8AF0D /* ArticlePhotoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticlePhotoTableViewCell.xib; sourceTree = "<group>"; };
+		7686B60E1EDAA4D10017DD28 /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
+		7686B60F1EDAA4D10017DD28 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		7686B6101EDAA4D10017DD28 /* YBBranchLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBBranchLayer.h; sourceTree = "<group>"; };
+		7686B6111EDAA4D10017DD28 /* YBCenterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBCenterView.h; sourceTree = "<group>"; };
+		7686B6121EDAA4D10017DD28 /* YBFocusLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBFocusLayer.h; sourceTree = "<group>"; };
+		7686B6131EDAA4D10017DD28 /* YBTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBTag.h; sourceTree = "<group>"; };
+		7686B6141EDAA4D10017DD28 /* YBTagGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBTagGestureRecognizer.h; sourceTree = "<group>"; };
+		7686B6151EDAA4D10017DD28 /* YBTagHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBTagHeader.h; sourceTree = "<group>"; };
+		7686B6161EDAA4D10017DD28 /* YBTagLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBTagLabel.h; sourceTree = "<group>"; };
+		7686B6171EDAA4D10017DD28 /* YBTagStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBTagStyle.h; sourceTree = "<group>"; };
+		7686B6181EDAA4D10017DD28 /* YBTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBTagView.h; sourceTree = "<group>"; };
+		7686B6191EDAA4D10017DD28 /* YBTagViewLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = YBTagViewLib.a; sourceTree = "<group>"; };
+		7686B61A1EDAA4D10017DD28 /* yuandian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yuandian.png; sourceTree = "<group>"; };
+		7686B61E1EDAC7730017DD28 /* LFTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFTagView.h; sourceTree = "<group>"; };
+		7686B61F1EDAC7730017DD28 /* LFTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFTagView.m; sourceTree = "<group>"; };
 		76AE01831EB972F100808478 /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressHUD.h; path = lib/Common/ProgressHUD.h; sourceTree = "<group>"; };
 		76AE01841EB972F100808478 /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressHUD.m; path = lib/Common/ProgressHUD.m; sourceTree = "<group>"; };
 		76AE01931EBA0D1C00808478 /* WXApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiManager.h; sourceTree = "<group>"; };
@@ -341,6 +391,20 @@
 		76AE01A21EBD5F2F00808478 /* UIScrollView+TYSnapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TYSnapshot.m"; sourceTree = "<group>"; };
 		76AE01A31EBD5F2F00808478 /* UITableView+TYSnapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+TYSnapshot.h"; sourceTree = "<group>"; };
 		76AE01A41EBD5F2F00808478 /* UITableView+TYSnapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+TYSnapshot.m"; sourceTree = "<group>"; };
+		76C8ACB91EDC4C3B00E41941 /* AdobeCreativeSDKCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdobeCreativeSDKCore.framework; path = ../AdobeCreativeSDKDynamicFrameworks/AdobeCreativeSDKCore.framework; sourceTree = "<group>"; };
+		76C8ACBA1EDC4C3B00E41941 /* AdobeCreativeSDKImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdobeCreativeSDKImage.framework; path = ../AdobeCreativeSDKDynamicFrameworks/AdobeCreativeSDKImage.framework; sourceTree = "<group>"; };
+		76C8ACC11EDC4CF300E41941 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		76C8ACC31EDC4D8A00E41941 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		76C8ACC51EDC4D9200E41941 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		76C8ACC71EDC4D9A00E41941 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		76C8ACC91EDC4DA300E41941 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		76C8ACCB1EDC4DAF00E41941 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		76C8ACCD1EDC4DB800E41941 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		76C8ACCF1EDC4DC000E41941 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		76C8ACD11EDC4DC800E41941 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		76C8ACD31EDC4DD000E41941 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		76C8ACD51EDC4DD600E41941 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		76C8ACD71EDC4DE000E41941 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		76D98D411EA1D43A0027B272 /* LFAlbumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFAlbumCell.h; sourceTree = "<group>"; };
 		76D98D421EA1D43A0027B272 /* LFAlbumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFAlbumCell.m; sourceTree = "<group>"; };
 		76D98D431EA1D43A0027B272 /* LFAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFAssetCell.h; sourceTree = "<group>"; };
@@ -478,6 +542,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76C8ACD81EDC4DE000E41941 /* WebKit.framework in Frameworks */,
+				76C8ACD61EDC4DD600E41941 /* UIKit.framework in Frameworks */,
+				76C8ACD41EDC4DD000E41941 /* StoreKit.framework in Frameworks */,
+				76C8ACD21EDC4DC800E41941 /* QuartzCore.framework in Frameworks */,
+				76C8ACD01EDC4DC000E41941 /* OpenGLES.framework in Frameworks */,
+				76C8ACCE1EDC4DB800E41941 /* MessageUI.framework in Frameworks */,
+				76C8ACCC1EDC4DAF00E41941 /* Foundation.framework in Frameworks */,
+				76C8ACCA1EDC4DA300E41941 /* libz.1.2.5.tbd in Frameworks */,
+				76C8ACC81EDC4D9A00E41941 /* libsqlite3.0.tbd in Frameworks */,
+				76C8ACC61EDC4D9200E41941 /* CoreData.framework in Frameworks */,
+				76C8ACC41EDC4D8A00E41941 /* Accelerate.framework in Frameworks */,
+				76C8ACC21EDC4CF300E41941 /* MobileCoreServices.framework in Frameworks */,
+				7686B61C1EDAA4D10017DD28 /* YBTagViewLib.a in Frameworks */,
 				76479DC61EB0737E0053A8C1 /* libc++.tbd in Frameworks */,
 				76479DC41EB0736B0053A8C1 /* libz.tbd in Frameworks */,
 				76479DC21EB073500053A8C1 /* libsqlite3.tbd in Frameworks */,
@@ -486,7 +563,9 @@
 				76479DBC1EB073280053A8C1 /* CFNetwork.framework in Frameworks */,
 				76479DB91EB0730D0053A8C1 /* CouchbaseLite.framework in Frameworks */,
 				76479DBA1EB0730D0053A8C1 /* libCBLForestDBStorage.a in Frameworks */,
-				7C2AC877655ECAF19CC0FFE8 /* libPods-eService.a in Frameworks */,
+				76C8ACBB1EDC4C3B00E41941 /* AdobeCreativeSDKCore.framework in Frameworks */,
+				76C8ACBD1EDC4C3B00E41941 /* AdobeCreativeSDKImage.framework in Frameworks */,
+				BA66221D4BB61A67C0797008 /* libPods-eService.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,6 +591,20 @@
 		39F9F5AAC49781772783940B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				76C8ACD71EDC4DE000E41941 /* WebKit.framework */,
+				76C8ACD51EDC4DD600E41941 /* UIKit.framework */,
+				76C8ACD31EDC4DD000E41941 /* StoreKit.framework */,
+				76C8ACD11EDC4DC800E41941 /* QuartzCore.framework */,
+				76C8ACCF1EDC4DC000E41941 /* OpenGLES.framework */,
+				76C8ACCD1EDC4DB800E41941 /* MessageUI.framework */,
+				76C8ACCB1EDC4DAF00E41941 /* Foundation.framework */,
+				76C8ACC91EDC4DA300E41941 /* libz.1.2.5.tbd */,
+				76C8ACC71EDC4D9A00E41941 /* libsqlite3.0.tbd */,
+				76C8ACC51EDC4D9200E41941 /* CoreData.framework */,
+				76C8ACC31EDC4D8A00E41941 /* Accelerate.framework */,
+				76C8ACC11EDC4CF300E41941 /* MobileCoreServices.framework */,
+				76C8ACB91EDC4C3B00E41941 /* AdobeCreativeSDKCore.framework */,
+				76C8ACBA1EDC4C3B00E41941 /* AdobeCreativeSDKImage.framework */,
 				76479DC51EB0737E0053A8C1 /* libc++.tbd */,
 				76479DC31EB0736B0053A8C1 /* libz.tbd */,
 				76479DC11EB073500053A8C1 /* libsqlite3.tbd */,
@@ -520,7 +613,7 @@
 				76479DBB1EB073280053A8C1 /* CFNetwork.framework */,
 				76479DB71EB0730D0053A8C1 /* CouchbaseLite.framework */,
 				76479DB81EB0730D0053A8C1 /* libCBLForestDBStorage.a */,
-				6901DDA647235D1E5DB6A69E /* libPods-eService.a */,
+				5B15A4AA73997B4CAB7A961F /* libPods-eService.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -589,6 +682,7 @@
 		761304101E9CBCE1007EF4DE /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				7686B60D1EDAA4D10017DD28 /* YBTagViewLib */,
 				767260DD1ECB432200DB848B /* WebViewJavascriptBridge */,
 				767260A41EC6EF5700DB848B /* MWPhoto */,
 				766A74891EC44DAB0017809C /* Configuration */,
@@ -902,6 +996,27 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		7686B60D1EDAA4D10017DD28 /* YBTagViewLib */ = {
+			isa = PBXGroup;
+			children = (
+				7686B60E1EDAA4D10017DD28 /* test.png */,
+				7686B60F1EDAA4D10017DD28 /* UIView+Extension.h */,
+				7686B6101EDAA4D10017DD28 /* YBBranchLayer.h */,
+				7686B6111EDAA4D10017DD28 /* YBCenterView.h */,
+				7686B6121EDAA4D10017DD28 /* YBFocusLayer.h */,
+				7686B6131EDAA4D10017DD28 /* YBTag.h */,
+				7686B6141EDAA4D10017DD28 /* YBTagGestureRecognizer.h */,
+				7686B6151EDAA4D10017DD28 /* YBTagHeader.h */,
+				7686B6161EDAA4D10017DD28 /* YBTagLabel.h */,
+				7686B6171EDAA4D10017DD28 /* YBTagStyle.h */,
+				7686B6181EDAA4D10017DD28 /* YBTagView.h */,
+				7686B6191EDAA4D10017DD28 /* YBTagViewLib.a */,
+				7686B61A1EDAA4D10017DD28 /* yuandian.png */,
+			);
+			name = YBTagViewLib;
+			path = lib/YBTagViewLib;
+			sourceTree = "<group>";
+		};
 		76AE019C1EBD5F2E00808478 /* TYSnapshot */ = {
 			isa = PBXGroup;
 			children = (
@@ -1160,6 +1275,8 @@
 				76D98DAB1EA1D43A0027B272 /* LFSplashView.m */,
 				76D98DAC1EA1D43A0027B272 /* LFStickerView.h */,
 				76D98DAD1EA1D43A0027B272 /* LFStickerView.m */,
+				7686B61E1EDAC7730017DD28 /* LFTagView.h */,
+				7686B61F1EDAC7730017DD28 /* LFTagView.m */,
 			);
 			path = subView;
 			sourceTree = "<group>";
@@ -1240,6 +1357,8 @@
 				761303E61E9CBA4F007EF4DE /* Resources */,
 				EE4640A0928AF4B5D1675F41 /* [CP] Embed Pods Frameworks */,
 				48CD547701CBB31C53F54E6E /* [CP] Copy Pods Resources */,
+				76C8ACBF1EDC4C3B00E41941 /* Embed Frameworks */,
+				76C8ACC01EDC4CC500E41941 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1326,6 +1445,7 @@
 				761303F81E9CBA4F007EF4DE /* Assets.xcassets in Resources */,
 				768247731EA3B17600F8AF0D /* ArticleDisplayTableViewCell.xib in Resources */,
 				766A74801EBEA88C0017809C /* PEPhotoCropEditor.bundle in Resources */,
+				7686B61B1EDAA4D10017DD28 /* test.png in Resources */,
 				76D98DC31EA1D43A0027B272 /* LFImagePickerController.bundle in Resources */,
 				76F1DDFD1E9FA4D800507F9E /* common.storyboard in Resources */,
 				7646124C1ED71CD1002CC396 /* Article.storyboard in Resources */,
@@ -1334,6 +1454,7 @@
 				76479DB11EAEEABA0053A8C1 /* Localizable.strings in Resources */,
 				761303F61E9CBA4F007EF4DE /* Main.storyboard in Resources */,
 				768247831EA4B11C00F8AF0D /* ArticlePhotoTableViewCell.xib in Resources */,
+				7686B61D1EDAA4D10017DD28 /* yuandian.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1362,6 +1483,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-eService/Pods-eService-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		76C8ACC01EDC4CC500E41941 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/AdobeCreativeSDKCore.framework/strip-frameworks.sh\"";
 		};
 		98027720351E8CD59F189B4F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1465,6 +1599,7 @@
 				76479DD11EB084430053A8C1 /* CBLService.m in Sources */,
 				76D98DD51EA1D43A0027B272 /* LF_VideoUtils.m in Sources */,
 				76F1DE091E9FA89F00507F9E /* REComposeBackgroundView.m in Sources */,
+				7686B6201EDAC7730017DD28 /* LFTagView.m in Sources */,
 				76D98DE61EA1D43A0027B272 /* LFClipToolbar.m in Sources */,
 				76AE01851EB972F100808478 /* ProgressHUD.m in Sources */,
 				76479E041EB5A3650053A8C1 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m in Sources */,
@@ -1715,11 +1850,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = NFXT343F5P;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/eService/lib/CBL",
-					"$(PROJECT_DIR)/eService/lib/QMap",
+					"$(PROJECT_DIR)",
+					/Users/xl/Documents/App/AdobeCreativeSDKDynamicFrameworks,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = eService/eService.pch;
@@ -1729,6 +1866,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/eService/lib/CBL",
+					"$(PROJECT_DIR)/eService/lib/YBTagViewLib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lee.eservice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1741,11 +1879,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = NFXT343F5P;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/eService/lib/CBL",
-					"$(PROJECT_DIR)/eService/lib/QMap",
+					"$(PROJECT_DIR)",
+					/Users/xl/Documents/App/AdobeCreativeSDKDynamicFrameworks,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = eService/eService.pch;
@@ -1755,6 +1895,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/eService/lib/CBL",
+					"$(PROJECT_DIR)/eService/lib/YBTagViewLib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lee.eservice;
 				PRODUCT_NAME = "$(TARGET_NAME)";

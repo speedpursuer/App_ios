@@ -17,8 +17,11 @@
 #import "CategoryViewController.h"
 #import "TZImagePickerController.h"
 #import "ShopSettingTableViewController.h"
+#import <AdobeCreativeSDKCore/AdobeCreativeSDKCore.h>
+#import <AdobeCreativeSDKImage/AdobeCreativeSDKImage.h>
+//#import <imglyKit/imglyKit-Swift.h>
 
-@interface EditTableViewController () <EditArticle, LFPhotoEdittingControllerDelegate, TZImagePickerControllerDelegate>
+@interface EditTableViewController () <EditArticle, LFPhotoEdittingControllerDelegate, TZImagePickerControllerDelegate, AdobeUXImageEditorViewControllerDelegate>
 //@property (strong, nonatomic) IBOutlet XRDragTableView *dragTableView;
 @property NSMutableArray <ArticleEntry *> *entriesToEdit;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
@@ -187,12 +190,47 @@
 			[Helper showAlertMessage:NSLocalizedString(@"Photo not loaded", @"editi photo alert") withMessage:@"Please check your network"];
 			return;
 		}
-		LFPhotoEdittingController *photoEdittingVC = [[LFPhotoEdittingController alloc] init];
-		photoEdittingVC.editImage = editImage;
-		photoEdittingVC.delegate = self;
-		[self presentViewController:photoEdittingVC animated:YES completion:nil];
+//		LFPhotoEdittingController *photoEdittingVC = [[LFPhotoEdittingController alloc] init];
+//		photoEdittingVC.editImage = editImage;
+//		photoEdittingVC.delegate = self;
+//		[self presentViewController:photoEdittingVC animated:YES completion:nil];
+//		[self showEditView:editImage];
+		[self displayEditorForImage:editImage];
 	}
 }
+
+- (void)displayEditorForImage:(UIImage *)imageToEdit
+{
+	//	[AdobeImageEditorCustomization setToolOrder:@[kAdobeImageEditorEnhance, kAdobeImageEditorEffects, kAdobeImageEditorStickers, kAdobeImageEditorOrientation, kAdobeImageEditorCrop, kAdobeImageEditorDraw, kAdobeImageEditorText, kAdobeImageEditorBlur, kAdobeImageEditorFrames, kAdobeImageEditorFocus]];
+	AdobeUXImageEditorViewController *ctr  = [[AdobeUXImageEditorViewController alloc] initWithImage:imageToEdit];
+	[ctr setDelegate:self];
+	[AdobeImageEditorOpenGLManager beginOpenGLLoad];
+	[self presentViewController:ctr animated:YES completion:nil];
+}
+
+- (void)photoEditor:(AdobeUXImageEditorViewController *)editor finishedWithImage:(UIImage *)image
+{
+	if(image) {
+		[self savePhoto:image];
+	}
+	[self dismissViewControllerAnimated:YES completion:nil];
+	// Handle the result image here
+}
+
+- (void)photoEditorCanceled:(AdobeUXImageEditorViewController *)editor
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
+	// Handle cancellation here
+}
+//
+//- (void)showEditView:(UIImage *)photo {
+//	IMGLYPhotoEditViewController *photoEditViewController = [[IMGLYPhotoEditViewController alloc] initWithPhoto:photo];
+////	photoEditViewController.delegate = self;
+//	
+//	IMGLYToolStackController *toolbarController = [[IMGLYToolStackController alloc] initWithPhotoEditViewController:photoEditViewController];
+////	[toolbarController pushViewController:photoEditViewController animated:NO completion:nil];
+//	[self presentViewController:toolbarController];
+//}
 
 - (void)editDesc:(UITableViewCell *)cell {
 	DescViewController *ctr = [[UIStoryboard storyboardWithName:@"common" bundle:nil] instantiateViewControllerWithIdentifier:@"desc"];

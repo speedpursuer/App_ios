@@ -11,6 +11,7 @@
 #import "UIView+LFFrame.h"
 #import "LFText.h"
 #import "LFStickerLabel.h"
+#import "YBTagHeader.h"
 
 NSString *const kLFStickerViewData_movingView = @"LFStickerViewData_movingView";
 
@@ -198,9 +199,9 @@ NSString *const kLFStickerViewData_movingView_rotation = @"LFStickerViewData_mov
 /** 创建文字 */
 - (void)createText:(LFText *)text
 {
-    LFMovingView *movingView = [self doCreateText:text active:YES];
+    LFMovingView *movingView = [self doCreateTextTag:text active:YES];
     //    CGFloat ratio = MIN( (0.5 * self.width) / movingView.width, (0.5 * self.height) / movingView.height);
-    [movingView setScale:0.6f];
+//    [movingView setScale:0.6f];
     self.selectMovingView = movingView;
 }
 
@@ -225,6 +226,27 @@ NSString *const kLFStickerViewData_movingView_rotation = @"LFStickerViewData_mov
     movingView.maxScale = 1.5f;
     
     return movingView;
+}
+
+- (LFMovingView *)doCreateTextTag:(LFText *)text active:(BOOL)active
+{
+	CGPoint point = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+	YBTagView *tagView = [[YBTagView alloc]initWithPoint:point];
+	tagView.isClick = NO;
+	tagView.tagArray = @[text.text];
+//	[tagView initWithPoint:point array:@[text.text] tagStyle:YBOneTagStyleRightAskew];
+
+	
+//	YBTag *tagView = [[YBTag alloc]initSelf];
+//	[tagView yb_setPoint:CGPointMake(150, 150) contentArray:@[text.text] tagStyle:YBOneTagStyleRightAskew];
+//	tagView.isEnableClick = NO;
+	
+	LFMovingView *movingView = [self createBaseMovingView:tagView active:NO];
+	movingView.scale = 1.1f;
+	movingView.maxScale = 1.1f;
+	movingView.minScale = 1.1f;
+	
+	return movingView;
 }
 
 #pragma mark  - 数据

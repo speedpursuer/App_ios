@@ -191,6 +191,7 @@
         {
             /** 关闭涂抹 */
             _edittingView.splashEnable = NO;
+//			_edittingView.tagEnable = NO;
             /** 打开绘画 */
             _edittingView.drawEnable = !_edittingView.drawEnable;
         }
@@ -210,6 +211,7 @@
         {
             /** 关闭绘画 */
             _edittingView.drawEnable = NO;
+//			_edittingView.tagEnable = NO;
             /** 打开涂抹 */
             _edittingView.splashEnable = !_edittingView.splashEnable;
         }
@@ -221,6 +223,16 @@
             _edit_clipping_toolBar.enableReset = _edittingView.canReset;
         }
             break;
+			
+//		case 5:
+//		{
+//			/** 关闭绘画 */
+//			_edittingView.drawEnable = NO;
+//			/** 关闭涂抹 */
+//			_edittingView.splashEnable = NO;
+//			_edittingView.tagEnable = !_edittingView.tagEnable;
+//		}
+//			break;
         default:
             break;
     }

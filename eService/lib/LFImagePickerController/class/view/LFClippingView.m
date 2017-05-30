@@ -732,4 +732,15 @@ NSString *const kLFClippingViewData_zoomingView = @"LFClippingViewData_zoomingVi
     return self.zoomingView.splashState;
 }
 
+#pragma mark - 模糊功能
+- (void)setTagEnable:(BOOL)tagEnable
+{
+	self.zoomingView.tagEnable = tagEnable;
+}
+
+- (BOOL)tagEnable
+{
+	return self.zoomingView.tagEnable;
+}
+
 @end

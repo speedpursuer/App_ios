@@ -229,6 +229,13 @@
             [self changedButton:button];
         }
             break;
+			
+//		case 5:
+//		{
+//			[self showMenuView:nil];
+//			[self changedButton:button];
+//		}
+//			break;
         default:
             break;
     }

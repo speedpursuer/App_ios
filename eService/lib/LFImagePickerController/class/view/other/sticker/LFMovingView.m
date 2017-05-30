@@ -81,7 +81,8 @@
     if(self){
         _type = type;
         _customView = view;
-        _contentView = [[UIView alloc] initWithFrame:view.bounds];
+		CGRect frame = CGRectMake(0, 0, view.frame.size.width+5, view.frame.size.height+5);
+        _contentView = [[UIView alloc] initWithFrame:frame];
         _contentView.layer.borderColor = [[UIColor colorWithWhite:1.f alpha:0.8] CGColor];
         _contentView.layer.cornerRadius = 3;
         _contentView.center = self.center;

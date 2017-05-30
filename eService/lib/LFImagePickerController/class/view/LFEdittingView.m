@@ -480,4 +480,14 @@
     return self.clippingView.splashState;
 }
 
+#pragma mark - Tag功能
+- (void)setTagEnable:(BOOL)tagEnable
+{
+	self.clippingView.tagEnable = tagEnable;
+}
+
+- (BOOL)tagEnable
+{
+	return self.clippingView.tagEnable;
+}
 @end

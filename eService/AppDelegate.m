@@ -8,6 +8,10 @@
 
 #import "AppDelegate.h"
 #import "WXApiManager.h"
+#import <AdobeCreativeSDKCore/AdobeCreativeSDKCore.h>
+#import <AdobeCreativeSDKImage/AdobeCreativeSDKImage.h>
+//#import <imglyKit/imglyKit.h>
+//#import <imglyKit/imglyKit-Swift.h>
 //#import <QMapKit.h>
 //#import <QMapSearchKit/QMapSearchKit.h>
 
@@ -16,6 +20,12 @@
 
 @implementation AppDelegate
 
+//- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+//	// Activate Photo Editor SDK license
+//	[PESDK unlockWithLicenseAt:[[NSBundle mainBundle] URLForResource:@"license" withExtension:@""]];
+//	
+//	return YES;
+//}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	// Override point for customization after application launch.
@@ -66,6 +76,7 @@
 - (void)setupApp {
 	[self setupTheme];
 	[self setupWeixin];
+	[self configEditor];
 //	[self setupQMap];
 }
 
@@ -83,6 +94,13 @@
 - (void)setupWeixin {
 	[WXApi registerApp:@"wx515ffccc2692d76d" enableMTA:YES];
 }
+
+- (void)configEditor {
+	[[AdobeUXAuthManager sharedManager] setAuthenticationParametersWithClientID:@"4da6f2e8f07b4a2284438ac00bde5267"
+															   withClientSecret:@"261bb449-a8e2-4107-af64-e5de57c7bf41"];
+//	[AdobeImageEditorOpenGLManager beginOpenGLLoad];
+}
+
 
 //- (void)setupQMap {
 //	NSString *aipKey = @"EEQBZ-YXG3D-AL643-PPLVA-2GRW5-K6BQY";

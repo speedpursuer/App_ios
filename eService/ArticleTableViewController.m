@@ -60,6 +60,9 @@
 }
 
 - (void)configSettingBtn {
+//	[_setupBtn setEnabled:NO];
+//	[_setupBtn setTintColor: [UIColor clearColor]];
+//	return;
 	FAKIonIcons *icon = [FAKIonIcons iosGearIconWithSize:20];
 	_setupBtn.image = [icon imageWithSize:CGSizeMake(20, 20)];
 	_setupBtn.title = @"";
@@ -188,10 +191,19 @@
 		
 	[cell setCellData:article.thumbURL
 				title:article.title
-				count:[NSString stringWithFormat:@"%ld %@", article.entryList.count, NSLocalizedString(@"pics", @"pics")]
+				restName:[self restNameForArticle:article]
+				 date:article.date
+//				count:[NSString stringWithFormat:@"%ld %@", article.entryList.count, NSLocalizedString(@"pics", @"pics")]
 	];
     
     return cell;
+}
+
+- (NSString *)restNameForArticle:(Article *)article {
+	if(article.rest) {
+		return article.rest.name;
+	}
+	return @"";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

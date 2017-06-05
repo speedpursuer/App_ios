@@ -12,7 +12,7 @@
 
 @implementation Article
 
-@dynamic entryList, title, category, thumbURL, isShopEnabled;
+@dynamic entryList, title, category, thumbURL, isShopEnabled, date, rest;
 @synthesize thumb;
 
 + (NSString*) docType {
@@ -20,13 +20,16 @@
 }
 
 + (NSString*) docID:(NSString *)uuid {
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"yyyy-MM-dd-HH:mm:ss"];
 	return [NSString stringWithFormat:@"article_%@_%@", uuid, [formatter stringFromDate:[NSDate date]]];
 }
 
 + (Article*) createArticleInDatabase:(CBLDatabase*) database withUUID:(NSString *)uuid {
 	Article *article = (Article *)[super getModelInDatabase:database withUUID:uuid];
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"yyyy/MM/dd"];
+	article.date = [formatter stringFromDate:[NSDate date]];
 //	article.title = title;
 //	article.category = category;
 //	article.entryList = entryList;

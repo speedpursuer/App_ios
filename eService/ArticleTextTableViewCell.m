@@ -36,7 +36,7 @@
 	paragraphStyle.paragraphSpacing = 8;
 //	paragraphStyle.paragraphSpacingBefore = 9;
 //	paragraphStyle.firstLineHeadIndent = 30;
-	[attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, desc.length)];
+	[attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, desc.length)];http://www.cocoachina.com/cms/uploads/allimg/140522/8369_140522110325_1.gif
 	
 	_desc.font = [UIFont fontWithName:@"PingFangSC-Regular" size:17];
 	

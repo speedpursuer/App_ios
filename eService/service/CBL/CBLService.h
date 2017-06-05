@@ -12,6 +12,8 @@
 
 @interface CBLService : NSObject
 + (id)sharedManager;
+- (Article *)creatNewArticle;
+- (void)saveArticle:(Article *)article;
 - (Article*)creatArticleWithTitle:(NSString *) title category:(NSString *)category entryList:(NSArray *)entryList isShopEnabled:(BOOL)isShopEnabled;
 - (Article*)updateArticle:(Article*)article WithTitle:(NSString *) title category:(NSString *)category entryList:(NSArray *)entryList isShopEnabled:(BOOL)isShopEnabled;
 - (NSArray <Article *> *)loadArticles;

@@ -24,6 +24,8 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ALAssetsLibrary+CustomPhotoAlbum.h"
 #import "MBProgressHUD.h"
+#import "ArticleDisplayHeader.h"
+#import "ArticleHeaderTableViewCell.h"
 //#import "UITableView+FDTemplateLayoutCell.h"
 
 #define photoWidth ([[UIScreen mainScreen] bounds].size.width - 2 * 8)
@@ -32,6 +34,8 @@
 @property NSArray *dataArray;
 @property NSArray *photos;
 @property MBProgressHUD *hud;
+//@property ArticleDisplayHeader *headerView;
+@property UIView *headerView;
 @end
 
 @implementation ArticleDisplayTableViewController
@@ -41,6 +45,7 @@
 	[self hideBackButtonText];
 	[self configTableView];
 	[self configCtr];
+//	[self configHeader];
 	[self reloadData];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -63,20 +68,51 @@
 	
 	[self.tableView registerNib: [UINib nibWithNibName:@"ArticlePhotoTableViewCell" bundle:nil] forCellReuseIdentifier:@"photo"];
 	
+	[self.tableView registerNib: [UINib nibWithNibName:@"ArticleHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:@"header"];
+
 	
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	self.tableView.rowHeight = UITableViewAutomaticDimension;
 	self.tableView.estimatedRowHeight = 400;
 }
 
+- (void)configHeader {
+	
+	_headerView = [[[NSBundle mainBundle] loadNibNamed:@"TestHeader" owner:nil options:nil] lastObject];
+	
+//	[self.tableView setTableHeaderView:_headerView];
+	
+	UILabel *label = [_headerView viewWithTag:2];
+	UIView *view = [_headerView viewWithTag:1];
+	
+	label.text = @"注册自定义 URL Scheme 的第一步是创建 URL Scheme — 在 Xcode Project Navigator 中找到并点击工程 info.plist 文件。当该文件显示在右边窗口，在列表上点击鼠标右键，选择 Add Row:";
+	
+	[self.tableView setTableHeaderView:view];
+
+	
+//	_headerView.rest.userInteractionEnabled = YES;
+//	
+//	UITapGestureRecognizer *Tap1 = [[UITapGestureRecognizer alloc]
+//									initWithTarget:self
+//									action:@selector(openMap)];
+//	
+//	Tap1.numberOfTapsRequired = 1;
+//	
+//	[_headerView.rest addGestureRecognizer:Tap1];
+}
+
 - (void)reloadData {
 	[self processData];
+//	[self configHeader];
 	[self configHeaderFooter];
 }
 
 - (void)processData {
 	NSMutableArray *array = [NSMutableArray new];
 	NSMutableArray *photos = [NSMutableArray new];
+	
+	//As Header placeholder 
+	[array addObject:[NSNumber numberWithInt:0]];
 	for(ArticleEntry *entry in _article.entryList) {
 		if([self hasDescInEntry:entry]) {
 			[array addObject:entry.desc];
@@ -93,12 +129,14 @@
 	_dataArray = [array copy];
 	_photos = [photos copy];
 	
-	self.title = _article.title;
+//	self.title = _article.title;
 }
 
 -(void)configHeaderFooter {
-	UIView *headerView = ![self hasDescInEntry:_article.entryList.firstObject]? [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 8)]: nil;
-	[self.tableView setTableHeaderView:headerView];
+//	UIView *headerView = ![self hasDescInEntry:_article.entryList.firstObject]? [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 8)]: nil;
+//	[self.tableView setTableHeaderView:headerView];
+	
+//	[_headerView configHeader:_article.title date:_article.date restName:_article.rest.name];
 	
 	UIView *footView = ![self hasPhotoInEntry:_article.entryList.lastObject]? [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 8)]: nil;
 	[self.tableView setTableFooterView:footView];
@@ -120,7 +158,7 @@
 
 -(void)editArticle:(id)sender {
 	EditTableViewController *ctr = [[UIStoryboard storyboardWithName:@"Article" bundle:nil] instantiateViewControllerWithIdentifier:@"edit"];
-	ctr.existingArticle = _article;
+	ctr.article = _article;
 	[self.navigationController pushViewController:ctr animated:YES];
 }
 
@@ -186,8 +224,8 @@
 -(void)shareToWXWithOption:(enum WXScene)scene {
 	
 	CBLService *manager = [CBLService sharedManager];
-	Shop *shop = [manager loadShop];
-	NSString *shareDesc = shop? [NSString stringWithFormat:@"分享自「%@」", shop.name]: @"由「小店长APP」制作";
+//	Shop *shop = [manager loadShop];
+	NSString *shareDesc = [NSString stringWithFormat:@"分享自「%@」的美食", _article.rest.name];
 	
 	[ProgressHUD showInThread];
 	[manager syncToServerForArticle:_article completion:^(BOOL success) {
@@ -221,7 +259,7 @@
 					if(![WXApiRequestHandler sendImageData:UIImageJPEGRepresentation(snapShotImage, 0.8)
 												   TagName:_article.title
 												MessageExt:_article.title
-													Action:@"由「小店长APP」制作"
+													Action:@""
 												ThumbImage:[[_article thumbImage] resizeToWidth:500]
 												   InScene:scene]) {
 						[Helper showAlertMessage:@"未安装微信" withMessage:@"请下载安装"];
@@ -243,6 +281,31 @@
 	//	imagePickerVc.maxImagesCount = 30;
 	//	imagePickerVc.photoPreviewMaxWidth = 1000;
 	[self presentViewController:imagePickerVc animated:YES completion:nil];
+}
+
+- (void)openMap{
+	CLLocation* fromLocation = [[CLLocation alloc] initWithLatitude:_article.rest.lat longitude:_article.rest.lng];
+ 
+	// Create a region centered on the starting point with a 10km span
+//	MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(fromLocation.coordinate, 2000, 2000);
+	
+	MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:fromLocation.coordinate addressDictionary:nil];
+	
+	MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+	[mapItem setName:_article.rest.name];
+	
+	MKMapItem *currentLocationMapItem = [MKMapItem mapItemForCurrentLocation];
+	
+	NSDictionary *launchOptions = @{MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving};
+	
+	[MKMapItem openMapsWithItems:@[currentLocationMapItem, mapItem]
+				   launchOptions:launchOptions];
+ 
+	// Open the item in Maps, specifying the map region to display.
+//	[MKMapItem openMapsWithItems:[NSArray arrayWithObject:mapItem]
+//				   launchOptions:[NSDictionary dictionaryWithObjectsAndKeys:
+//								  [NSValue valueWithMKCoordinate:region.center], MKLaunchOptionsMapCenterKey,
+//								  [NSValue valueWithMKCoordinateSpan:region.span], MKLaunchOptionsMapSpanKey, nil]];
 }
 
 #pragma mark - Picker delegate
@@ -319,7 +382,15 @@
 	
 	id rowData = _dataArray[indexPath.row];
 	
-	if([self isPhotoCellWithRowData:rowData]) {
+	if(indexPath.row == 0) {
+		ArticleHeaderTableViewCell *hCell = [tableView dequeueReusableCellWithIdentifier:@"header" forIndexPath:indexPath];
+		[hCell configHeader:_article.title date:_article.date restName:_article.rest.name];
+		WeakSelf
+		hCell.clickLocHandle = ^{
+			[weakSelf openMap];
+		};
+		return hCell;
+	}else if([self isPhotoCellWithRowData:rowData]) {
 //		ArticleEntry *entry = (ArticleEntry *)rowData;
 		BrowserPhoto *photo = (BrowserPhoto *)rowData;
 		ArticlePhotoTableViewCell *pCell = [tableView dequeueReusableCellWithIdentifier:@"photo" forIndexPath:indexPath];

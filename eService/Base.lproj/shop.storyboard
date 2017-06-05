@@ -11,7 +11,7 @@
         <!--Shop Location Selection-->
         <scene sceneID="S49-FM-pWA">
             <objects>
-                <viewController title="Shop Location Selection" id="j1A-Hd-FN9" customClass="ShopLocationViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="map" title="Shop Location Selection" id="j1A-Hd-FN9" customClass="ShopLocationViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="maX-oV-ybO"/>
                         <viewControllerLayoutGuide type="bottom" id="F2L-vW-i6d"/>

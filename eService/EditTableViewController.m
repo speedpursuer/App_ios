@@ -17,6 +17,7 @@
 #import "CategoryViewController.h"
 #import "TZImagePickerController.h"
 #import "ShopSettingTableViewController.h"
+#import "ShopLocationViewController.h"
 #import <AdobeCreativeSDKCore/AdobeCreativeSDKCore.h>
 #import <AdobeCreativeSDKImage/AdobeCreativeSDKImage.h>
 //#import <imglyKit/imglyKit-Swift.h>
@@ -27,11 +28,12 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelBtn;
 @property NSInteger indexInEditing;
-@property NSString *articleTitle;
-@property NSString *articleCategory;
+//@property NSString *articleTitle;
+//@property NSString *articleCategory;
 @property ArticleHeader *headerView;
 @property UIImage *blankPhoto;
 @property BOOL isShopSetup;
+@property BOOL isEditMode;
 @end
 
 @implementation EditTableViewController
@@ -39,6 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[self configCrl];
+//	[AdobeImageEditorOpenGLManager beginOpenGLLoad];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -77,21 +80,38 @@
 //	[self.tableView addGestureRecognizer:longPress];
 }
 
+- (void)setupEntryData {
+	
+	if(_article) {
+		_isEditMode = YES;
+		_entriesToEdit = [[_article copyOfEntryList] mutableCopy];
+	}else {
+		//首次编辑状态
+		_entriesToEdit = [NSMutableArray new];
+		for (NSInteger i = 0; i < _images.count; i++) {
+			ArticleEntry *entry = [[ArticleEntry alloc]initWithImage:_images[i] withImagePath:[[_imageInfos[i] objectForKey:@"PHImageFileURLKey"]absoluteString]];
+			//			entry.cachedImage = [[CachedImage alloc] initWithURL:@"test" withUploaded:NO];
+			[_entriesToEdit addObject:entry];
+		}
+		_article = [[CBLService sharedManager] creatNewArticle];
+	}
+}
+
 - (void)configHeader {
 	_headerView = [[[NSBundle mainBundle] loadNibNamed:@"ArticleHeader" owner:nil options:nil] lastObject];
 	
 //	Shop *shop = [[CBLService sharedManager] loadShop];
 	
 	if([self isEditMode]) {
-		_headerView.background.image = [[_existingArticle thumbImage] applyLightDarkEffect];
-		_headerView.title.text = _articleTitle = _existingArticle.title;
-		_headerView.category.text = _articleCategory = _existingArticle.category;
-		_headerView.enableShopSwitch.on = _existingArticle.isShopEnabled;
+		_headerView.background.image = [[_article thumbImage] applyLightDarkEffect];
+		_headerView.title.text = _article.title;
+		_headerView.category.text = _article.rest.name? _article.rest.name: NSLocalizedString(@"Select Rest", @"Init rest");
+		_headerView.enableShopSwitch.on = _article.isShopEnabled;
 	}else {
 		_headerView.background.image = [_entriesToEdit[0].image applyLightDarkEffect];
 		_headerView.title.text = [self defaultTitle];
-		_articleTitle = @"";
-		_headerView.category.text = _articleCategory = NSLocalizedString(@"Default Category", @"Init category");
+//		_article.title = @"";
+		_headerView.category.text = NSLocalizedString(@"Select Rest", @"Init rest");
 	}
 	
 //	[view setPickerData:@[@"Wash", @"Care", @"Others"]];
@@ -111,7 +131,7 @@
 	
 	UITapGestureRecognizer *Tap2 = [[UITapGestureRecognizer alloc]
 									initWithTarget:self
-									action:@selector(changeCategory)];
+									action:@selector(selectRest)];
 	
 	Tap2.numberOfTapsRequired = 1;
 	
@@ -152,23 +172,6 @@
 	_blankPhoto = [icon imageWithSize:imageSize];
 }
 
-- (void)setupEntryData {
-	
-	if([self isEditMode]) {
-//		_dataArray = [[NSMutableArray alloc] initWithArray:_existingArticle.entryList];
-//		_entriesToEdit = [_existingArticle.entryList mutableCopy];
-		_entriesToEdit = [[_existingArticle copyOfEntryList] mutableCopy];
-	}else {
-		//首次编辑状态
-		_entriesToEdit = [NSMutableArray new];
-		for (NSInteger i = 0; i < _images.count; i++) {
-			ArticleEntry *entry = [[ArticleEntry alloc]initWithImage:_images[i] withImagePath:[[_imageInfos[i] objectForKey:@"PHImageFileURLKey"]absoluteString]];
-//			entry.cachedImage = [[CachedImage alloc] initWithURL:@"test" withUploaded:NO];
-			[_entriesToEdit addObject:entry];
-		}
-	}
-}
-
 #pragma mark - Edit Article Delegate for cell action
 
 - (void)editPhoto:(UITableViewCell *)cell {
@@ -204,7 +207,6 @@
 	//	[AdobeImageEditorCustomization setToolOrder:@[kAdobeImageEditorEnhance, kAdobeImageEditorEffects, kAdobeImageEditorStickers, kAdobeImageEditorOrientation, kAdobeImageEditorCrop, kAdobeImageEditorDraw, kAdobeImageEditorText, kAdobeImageEditorBlur, kAdobeImageEditorFrames, kAdobeImageEditorFocus]];
 	AdobeUXImageEditorViewController *ctr  = [[AdobeUXImageEditorViewController alloc] initWithImage:imageToEdit];
 	[ctr setDelegate:self];
-	[AdobeImageEditorOpenGLManager beginOpenGLLoad];
 	[self presentViewController:ctr animated:YES completion:nil];
 }
 
@@ -267,7 +269,7 @@
 	DescViewController *ctr = [[UIStoryboard storyboardWithName:@"common" bundle:nil] instantiateViewControllerWithIdentifier:@"desc"];
 	
 //	ctr.delegate = self;
-	ctr.text = _articleTitle;
+	ctr.text = _article.title;
 	ctr.descPlaceholder = NSLocalizedString(@"Please enter title", @"text for title");
 	WeakSelf
 	ctr.saveDescHandle = ^(NSString *desc){
@@ -285,6 +287,20 @@
 	[self.navigationController pushViewController:ctr animated:YES];
 }
 
+- (void)selectRest {
+	ShopLocationViewController *ctr = [[UIStoryboard storyboardWithName:@"shop" bundle:nil] instantiateViewControllerWithIdentifier:@"map"];
+	if(_article.rest) {
+		ctr.initLat = _article.rest.lat;
+		ctr.initLng = _article.rest.lng;
+	}
+	ctr.selectAddressHandle = ^(NSString *city, NSString *name, NSString *address, float lat, float lng){
+		Restaurant *rest = [[Restaurant alloc] initWithName:name address:address lat:lat lng:lng];
+		_article.rest = rest;
+		_headerView.category.text = name;
+	};
+	[self.navigationController pushViewController:ctr animated:YES];
+}
+
 #pragma mark - Desc Delegate
 
 - (void)saveDesc:(NSString *)desc {
@@ -295,9 +311,9 @@
 }
 
 -(void)saveTitle:(NSString *)title {
-	if(![_articleTitle isEqualToString:title]) {
-		_articleTitle = _headerView.title.text = title;
-		if(_articleTitle.length == 0) {
+	if(![_article.title isEqualToString:title]) {
+		_article.title = _headerView.title.text = title;
+		if(title.length == 0) {
 			_headerView.title.text = [self defaultTitle];
 		}
 	}
@@ -311,15 +327,17 @@
 
 - (void)saveArticle {
 	
-	if(_articleTitle.length == 0) {
-		_articleTitle = [self defaultTitle];
+	if(_article.title.length == 0) {
+		_article.title = [self defaultTitle];
 	}
+	_article.entryList = _entriesToEdit;
+	[[CBLService sharedManager] saveArticle:_article];
 	
-	if([self isEditMode]) {
-		[[CBLService sharedManager] updateArticle:_existingArticle WithTitle:_articleTitle category:_articleCategory entryList:_entriesToEdit isShopEnabled:_headerView.enableShopSwitch.on];
-	}else {
-		[[CBLService sharedManager] creatArticleWithTitle:_articleTitle category:_articleCategory entryList:_entriesToEdit isShopEnabled:_headerView.enableShopSwitch.on];
-	}
+//	if([self isEditMode]) {
+//		[[CBLService sharedManager] updateArticle:_article WithTitle:_articleTitle category:_articleCategory entryList:_entriesToEdit isShopEnabled:_headerView.enableShopSwitch.on];
+//	}else {
+//		[[CBLService sharedManager] creatArticleWithTitle:_articleTitle category:_articleCategory entryList:_entriesToEdit isShopEnabled:_headerView.enableShopSwitch.on];
+//	}
 }
 
 #pragma mark - Navigation
@@ -338,9 +356,10 @@
 	if(sender == self.saveButton) {
 		[self saveArticle];
 	}else {
-		if([self isEditMode]) {
-			[_existingArticle revertChanges];
-		}
+		[_article revertChanges];
+//		if([self isEditMode]) {
+//			[_article revertChanges];
+//		}
 	}
 }
 
@@ -355,7 +374,7 @@
 
 - (IBAction)unwindFromCategoryView:(UIStoryboardSegue *)segue {
 	CategoryViewController *source = [segue sourceViewController];
-	_headerView.category.text = _articleCategory = source.selectedCategory;
+	_headerView.category.text = _article.category = source.selectedCategory;
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -377,9 +396,9 @@
 	return NSLocalizedString(@"Untitled", @"Init title");
 }
 
-- (BOOL)isEditMode {
-	return (_existingArticle != nil);
-}
+//- (BOOL)isEditMode {
+//	return _isEditMode;
+//}
 
 - (ArticleEntry *)entryForCell:(UITableViewCell *)cell {
 	return [self entityForIndex:[self indexForCell:cell]];

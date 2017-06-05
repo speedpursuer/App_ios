@@ -98,7 +98,7 @@
 - (void)configEditor {
 	[[AdobeUXAuthManager sharedManager] setAuthenticationParametersWithClientID:@"4da6f2e8f07b4a2284438ac00bde5267"
 															   withClientSecret:@"261bb449-a8e2-4107-af64-e5de57c7bf41"];
-//	[AdobeImageEditorOpenGLManager beginOpenGLLoad];
+	[AdobeImageEditorOpenGLManager beginOpenGLLoad];
 }
 
 

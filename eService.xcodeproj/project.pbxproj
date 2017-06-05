@@ -67,6 +67,9 @@
 		766BCD001EA9E99C0068E44A /* TZProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 766BCCF01EA9E99C0068E44A /* TZProgressView.m */; };
 		766BCD011EA9E99C0068E44A /* TZVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 766BCCF21EA9E99C0068E44A /* TZVideoPlayerController.m */; };
 		766BCD021EA9E99C0068E44A /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 766BCCF41EA9E99C0068E44A /* UIView+Layout.m */; };
+		7670A13C1EDD0A310035E11F /* Restaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = 7670A13B1EDD0A310035E11F /* Restaurant.m */; };
+		7670A1471EE102B80035E11F /* ArticleHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7670A1451EE102B80035E11F /* ArticleHeaderTableViewCell.m */; };
+		7670A1481EE102B80035E11F /* ArticleHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7670A1461EE102B80035E11F /* ArticleHeaderTableViewCell.xib */; };
 		767260A71EC6EF8D00DB848B /* BrowserPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 767260A61EC6EF8D00DB848B /* BrowserPhoto.m */; };
 		767260D11ECB08EC00DB848B /* ShopLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767260D01ECB08EC00DB848B /* ShopLocationViewController.m */; };
 		767260D31ECB09DC00DB848B /* map.html in Resources */ = {isa = PBXBuildFile; fileRef = 767260D21ECB09DC00DB848B /* map.html */; };
@@ -107,9 +110,6 @@
 		76C8ACBE1EDC4C3B00E41941 /* AdobeCreativeSDKImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACBA1EDC4C3B00E41941 /* AdobeCreativeSDKImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		76C8ACC21EDC4CF300E41941 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACC11EDC4CF300E41941 /* MobileCoreServices.framework */; };
 		76C8ACC41EDC4D8A00E41941 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACC31EDC4D8A00E41941 /* Accelerate.framework */; };
-		76C8ACC61EDC4D9200E41941 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACC51EDC4D9200E41941 /* CoreData.framework */; };
-		76C8ACC81EDC4D9A00E41941 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACC71EDC4D9A00E41941 /* libsqlite3.0.tbd */; };
-		76C8ACCA1EDC4DA300E41941 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACC91EDC4DA300E41941 /* libz.1.2.5.tbd */; };
 		76C8ACCC1EDC4DAF00E41941 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACCB1EDC4DAF00E41941 /* Foundation.framework */; };
 		76C8ACCE1EDC4DB800E41941 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACCD1EDC4DB800E41941 /* MessageUI.framework */; };
 		76C8ACD01EDC4DC000E41941 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C8ACCF1EDC4DC000E41941 /* OpenGLES.framework */; };
@@ -323,6 +323,11 @@
 		766BCCF21EA9E99C0068E44A /* TZVideoPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZVideoPlayerController.m; sourceTree = "<group>"; };
 		766BCCF31EA9E99C0068E44A /* UIView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Layout.h"; sourceTree = "<group>"; };
 		766BCCF41EA9E99C0068E44A /* UIView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layout.m"; sourceTree = "<group>"; };
+		7670A13A1EDD0A310035E11F /* Restaurant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Restaurant.h; sourceTree = "<group>"; };
+		7670A13B1EDD0A310035E11F /* Restaurant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Restaurant.m; sourceTree = "<group>"; };
+		7670A1441EE102B80035E11F /* ArticleHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleHeaderTableViewCell.h; sourceTree = "<group>"; };
+		7670A1451EE102B80035E11F /* ArticleHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleHeaderTableViewCell.m; sourceTree = "<group>"; };
+		7670A1461EE102B80035E11F /* ArticleHeaderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		767260A51EC6EF8D00DB848B /* BrowserPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BrowserPhoto.h; path = lib/BrowserPhoto.h; sourceTree = "<group>"; };
 		767260A61EC6EF8D00DB848B /* BrowserPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BrowserPhoto.m; path = lib/BrowserPhoto.m; sourceTree = "<group>"; };
 		767260CF1ECB08EC00DB848B /* ShopLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopLocationViewController.h; sourceTree = "<group>"; };
@@ -549,9 +554,6 @@
 				76C8ACD01EDC4DC000E41941 /* OpenGLES.framework in Frameworks */,
 				76C8ACCE1EDC4DB800E41941 /* MessageUI.framework in Frameworks */,
 				76C8ACCC1EDC4DAF00E41941 /* Foundation.framework in Frameworks */,
-				76C8ACCA1EDC4DA300E41941 /* libz.1.2.5.tbd in Frameworks */,
-				76C8ACC81EDC4D9A00E41941 /* libsqlite3.0.tbd in Frameworks */,
-				76C8ACC61EDC4D9200E41941 /* CoreData.framework in Frameworks */,
 				76C8ACC41EDC4D8A00E41941 /* Accelerate.framework in Frameworks */,
 				76C8ACC21EDC4CF300E41941 /* MobileCoreServices.framework in Frameworks */,
 				7686B61C1EDAA4D10017DD28 /* YBTagViewLib.a in Frameworks */,
@@ -740,6 +742,8 @@
 				76D98DFE1EA399F40027B272 /* Article.m */,
 				764612441ED5115F002CC396 /* CachedImage.h */,
 				764612451ED5115F002CC396 /* CachedImage.m */,
+				7670A13A1EDD0A310035E11F /* Restaurant.h */,
+				7670A13B1EDD0A310035E11F /* Restaurant.m */,
 			);
 			name = Model;
 			path = ../..;
@@ -833,6 +837,9 @@
 				7682476F1EA3B17600F8AF0D /* ArticleDisplayTableViewCell.h */,
 				768247701EA3B17600F8AF0D /* ArticleDisplayTableViewCell.m */,
 				768247711EA3B17600F8AF0D /* ArticleDisplayTableViewCell.xib */,
+				7670A1441EE102B80035E11F /* ArticleHeaderTableViewCell.h */,
+				7670A1451EE102B80035E11F /* ArticleHeaderTableViewCell.m */,
+				7670A1461EE102B80035E11F /* ArticleHeaderTableViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1447,6 +1454,7 @@
 				766A74801EBEA88C0017809C /* PEPhotoCropEditor.bundle in Resources */,
 				7686B61B1EDAA4D10017DD28 /* test.png in Resources */,
 				76D98DC31EA1D43A0027B272 /* LFImagePickerController.bundle in Resources */,
+				7670A1481EE102B80035E11F /* ArticleHeaderTableViewCell.xib in Resources */,
 				76F1DDFD1E9FA4D800507F9E /* common.storyboard in Resources */,
 				7646124C1ED71CD1002CC396 /* Article.storyboard in Resources */,
 				767260F71ECD464800DB848B /* nprogress.css in Resources */,
@@ -1606,6 +1614,7 @@
 				76D98DD61EA1D43A0027B272 /* LFClippingView.m in Sources */,
 				76D98DE11EA1D43A0027B272 /* LFMovingView.m in Sources */,
 				76AE01AA1EBD5F3800808478 /* UITableView+TYSnapshot.m in Sources */,
+				7670A13C1EDD0A310035E11F /* Restaurant.m in Sources */,
 				76D98DF01EA254300027B272 /* UIImage+ImageEffects.m in Sources */,
 				76D98DD91EA1D43A0027B272 /* LFZoomingView.m in Sources */,
 				767260D11ECB08EC00DB848B /* ShopLocationViewController.m in Sources */,
@@ -1646,6 +1655,7 @@
 				767260E81ECB432200DB848B /* WebViewJavascriptBridgeBase.m in Sources */,
 				76D98DDE1EA1D43A0027B272 /* LFResizeControl.m in Sources */,
 				76D98DCA1EA1D43A0027B272 /* LFAlbum.m in Sources */,
+				7670A1471EE102B80035E11F /* ArticleHeaderTableViewCell.m in Sources */,
 				76D98DC51EA1D43A0027B272 /* LFLayoutPickerController.m in Sources */,
 				767260E71ECB432200DB848B /* WebViewJavascriptBridge_JS.m in Sources */,
 				766BCCF71EA9E99C0068E44A /* TZAssetModel.m in Sources */,

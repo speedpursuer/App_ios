@@ -16,7 +16,7 @@
 - (void)awakeFromNib {
 	[super awakeFromNib];
 	self.frame = CGRectMake(0, 0, self.frame.size.width, 160);
-	_category.hidden = YES;
+//	_category.hidden = YES;
 //	self.backgroundColor = [UIColor lightGrayColor];
 //	_title.placeholder = NSLocalizedString(@"Please enter title", @"Article title");
 //	_category.delegate = self;

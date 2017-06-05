@@ -17,9 +17,6 @@
 /* Shop text edit */
 "Click to edit" = "点击修改";
 
-/* Init category */
-"Default Category" = "默认分类";
-
 /* clip edit */
 "Edit Comment" = "编辑文字";
 
@@ -77,6 +74,9 @@
 
 /* 选择地址 */
 "Select Address" = "选择地址";
+
+/* Init rest */
+"Select Rest" = "选择餐厅";
 
 /* Share to weibo */
 "Send" = "保存";

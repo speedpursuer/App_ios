@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CBLBaseModel.h"
 #import "ArticleEntry.h"
+#import "Restaurant.h"
 
 @interface Article : CBLBaseModel
 @property (copy) NSArray *entryList;
@@ -17,6 +18,8 @@
 @property UIImage *thumb;
 @property NSString *thumbURL;
 @property BOOL isShopEnabled;
+@property NSString *date;
+@property Restaurant *rest;
 
 + (Article*) createArticleInDatabase:(CBLDatabase*) database withUUID:(NSString *)uuid;
 

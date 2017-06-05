@@ -72,6 +72,23 @@
 
 #pragma mark - Public methods
 
+- (Article *)creatNewArticle {
+	return [Article createArticleInDatabase:_database withUUID:_uuid];
+}
+
+- (void)saveArticle:(Article *)article {
+	[self cachePhotosForArticle:article];
+	
+	NSError *error;
+	if ([article save:&error]) {
+		[self syncToServerForArticleAsyncly:article completion:nil];
+		[self notifyArticleChanges];
+	}else {
+		[self showError];
+	}
+}
+
+
 - (Article*)creatArticleWithTitle:(NSString *) title category:(NSString *)category entryList:(NSArray *)entryList isShopEnabled:(BOOL)isShopEnabled{
 	
 	Article* article = [Article createArticleInDatabase:_database withUUID:_uuid];

@@ -28,6 +28,14 @@
 				<string>wx515ffccc2692d76d</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.lee.foodAlbum</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>foodAlbum</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>2</string>

@@ -11,13 +11,15 @@
 @interface ArticleTableViewCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *thumb;
 @property (weak, nonatomic) IBOutlet UILabel *articleTitle;
-@property (weak, nonatomic) IBOutlet UILabel *articleCount;
+@property (weak, nonatomic) IBOutlet UILabel *rest;
+@property (weak, nonatomic) IBOutlet UILabel *date;
 @end
 
 @implementation ArticleTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+	[[_thumb layer] setCornerRadius:10.0];
     // Initialization code
 }
 
@@ -27,10 +29,11 @@
     // Configure the view for the selected state
 }
 
-- (void)setCellData:(NSString *)thumbURL title:(NSString *)title count:(NSString *)count {
+- (void)setCellData:(NSString *)thumbURL title:(NSString *)title restName:(NSString *)name date:(NSString *)date {
 	[_thumb requestImageWithURL:thumbURL];
 	_articleTitle.text = title;
-	_articleCount.text = count;	
+	_rest.text = name;
+	_date.text = date;
 }
 
 @end

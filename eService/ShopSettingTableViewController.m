@@ -11,7 +11,7 @@
 #import "ShopLocationViewController.h"
 #import "TZImagePickerController.h"
 //#import "VPImageCropperViewController.h"
-//#import <CoreLocation/CoreLocation.h>
+#import <CoreLocation/CoreLocation.h>
 #import "TOCropViewController.h"
 
 @interface ShopSettingTableViewController () <TZImagePickerControllerDelegate, TOCropViewControllerDelegate, CLLocationManagerDelegate>
@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *phone;
 @property (weak, nonatomic) IBOutlet UIImageView *avatar;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveBtn;
-//@property CLLocationManager *locationManager;
+@property CLLocationManager *locationManager;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelBtn;
 @property Shop *shop;
 @end
@@ -30,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[self addClickControlToImageView];
-//	[self startStandardUpdates];
+	[self startStandardUpdates];
 	[self setupData];
 	[self setTitle];
     
@@ -68,21 +68,21 @@
 	[self showCropVCWithImage:_avatar.image];
 }
 
-//- (void)dealloc {
-//	[_locationManager stopUpdatingLocation];
-////	_locationManager = nil;
-//}
+- (void)dealloc {
+	[_locationManager stopUpdatingLocation];
+//	_locationManager = nil;
+}
 
-//- (void)startStandardUpdates
-//{
-//	// Create the location manager if this object does not
-//	// already have one.
-//	if (nil == _locationManager)
-//	_locationManager = [[CLLocationManager alloc] init];
-//	_locationManager.delegate = self;
-////	_locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-//	[_locationManager startUpdatingLocation];
-//}
+- (void)startStandardUpdates
+{
+	// Create the location manager if this object does not
+	// already have one.
+	if (nil == _locationManager)
+	_locationManager = [[CLLocationManager alloc] init];
+	_locationManager.delegate = self;
+//	_locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+	[_locationManager startUpdatingLocation];
+}
 
 - (void)setupData {
 	

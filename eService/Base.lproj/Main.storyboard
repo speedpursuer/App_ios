@@ -85,9 +85,15 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QKk-wo-StE">
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QKk-wo-StE">
+                                            <frame key="frameInset" minX="82" minY="47" width="89" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZA-Qy-Y00">
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -96,9 +102,11 @@
                                         <constraint firstItem="QKk-wo-StE" firstAttribute="leading" secondItem="vD3-N4-cuf" secondAttribute="leading" id="IWo-Og-Q4V"/>
                                         <constraint firstItem="EcU-KQ-TXE" firstAttribute="centerY" secondItem="O7k-uO-jEh" secondAttribute="centerY" id="LUA-aw-Rpn"/>
                                         <constraint firstItem="vD3-N4-cuf" firstAttribute="top" secondItem="O7k-uO-jEh" secondAttribute="topMargin" constant="6" id="NDq-SJ-0bD"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="QKk-wo-StE" secondAttribute="trailing" id="YBu-qo-TS9"/>
+                                        <constraint firstItem="rZA-Qy-Y00" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QKk-wo-StE" secondAttribute="trailing" constant="8" id="Wmi-4k-nZ5"/>
                                         <constraint firstItem="vD3-N4-cuf" firstAttribute="leading" secondItem="EcU-KQ-TXE" secondAttribute="trailing" constant="10" id="YC7-zD-DsG"/>
                                         <constraint firstAttribute="topMargin" secondItem="EcU-KQ-TXE" secondAttribute="top" id="gBq-lv-0VC"/>
+                                        <constraint firstItem="rZA-Qy-Y00" firstAttribute="centerY" secondItem="QKk-wo-StE" secondAttribute="centerY" id="hMq-wr-ftB"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="rZA-Qy-Y00" secondAttribute="trailing" id="pe3-Vt-Cxf"/>
                                         <constraint firstItem="EcU-KQ-TXE" firstAttribute="leading" secondItem="O7k-uO-jEh" secondAttribute="leadingMargin" id="uEF-F0-Vfs"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -106,8 +114,9 @@
                                     <constraint firstAttribute="bottom" secondItem="QKk-wo-StE" secondAttribute="bottom" constant="16" id="GCV-BM-Y4q"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="articleCount" destination="QKk-wo-StE" id="g3F-JG-DGf"/>
                                     <outlet property="articleTitle" destination="vD3-N4-cuf" id="2nw-h4-jze"/>
+                                    <outlet property="date" destination="rZA-Qy-Y00" id="BKA-xD-Num"/>
+                                    <outlet property="rest" destination="QKk-wo-StE" id="oyb-JW-CYv"/>
                                     <outlet property="thumb" destination="EcU-KQ-TXE" id="THp-PW-TKX"/>
                                 </connections>
                             </tableViewCell>

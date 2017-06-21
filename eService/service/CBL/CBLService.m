@@ -56,6 +56,7 @@
 			NSLog(@"Cannot create database with an error : %@", [error description]);
 		
 		_uuid = [FCUUID uuidForDevice];
+//		_uuid = @"b2db86caf5a74b4d8a645d61ce5ede9c";
 		
 		_isSynced = ((Configuration *)[Configuration load]).isSynced;
 	}
@@ -70,7 +71,7 @@
 	return self;
 }
 
-#pragma mark - Public methods
+#pragma mark - Article
 
 - (Article *)creatNewArticle {
 	return [Article createArticleInDatabase:_database withUUID:_uuid];
@@ -85,71 +86,6 @@
 		[self notifyArticleChanges];
 	}else {
 		[self showError];
-	}
-}
-
-
-- (Article*)creatArticleWithTitle:(NSString *) title category:(NSString *)category entryList:(NSArray *)entryList isShopEnabled:(BOOL)isShopEnabled{
-	
-	Article* article = [Article createArticleInDatabase:_database withUUID:_uuid];
-	
-	article.title = title;
-	article.category = category;
-	article.entryList = entryList;
-	article.isShopEnabled = isShopEnabled;
-	
-	[self cachePhotosForArticle:article];
-	
-	NSError *error;
-	if ([article save:&error]) {
-		[self syncToServerForArticleAsyncly:article completion:nil];
-		[self notifyArticleChanges];
-//		[JDStatusBarNotification showWithStatus:[NSString stringWithFormat:NSLocalizedString(@"New article \"%@\" created", @"cblservice"), article.title] dismissAfter:2.0 styleName:JDStatusBarStyleSuccess];
-		return article;
-	}else {
-		[self showError];
-		return nil;
-	}
-}
-
-- (Article*)updateArticle:(Article*)article WithTitle:(NSString *) title category:(NSString *)category entryList:(NSArray *)entryList isShopEnabled:(BOOL)isShopEnabled{
-	
-	article.title = title;
-	article.category = category;
-	article.entryList = entryList;
-	article.isShopEnabled = isShopEnabled;
-	
-	[self cachePhotosForArticle:article];
-	
-	NSError *error;
-	if ([article save:&error]) {
-		[self syncToServerForArticleAsyncly:article completion:nil];
-		[self notifyArticleChanges];
-//		[JDStatusBarNotification showWithStatus:[NSString stringWithFormat:NSLocalizedString(@"Article \"%@\" modified", @"cblservice"), article.title] dismissAfter:2.0 styleName:JDStatusBarStyleSuccess];
-		return article;
-	}else {
-		[self showError];
-		return nil;
-	}
-}
-
-- (void)cachePhotosForArticle:(Article *)article {
-	CacheManager *cacheMgr = [CacheManager sharedManager];
-	
-	//首先保存第一张为缩略图
-	ArticleEntry *firstEntry = [self getFirstEntryWithArticle:article];
-	if(firstEntry && [firstEntry needCache]) {
-		UIImage *thumb = [firstEntry.image resizeToWidth:300];
-		article.thumbURL = [self remoteURLForThumbWithDocID:[article docID]];
-		article.thumb = thumb;
-		[cacheMgr saveImage:thumb forKey:article.thumbURL];
-	}
-	
-	for(ArticleEntry *entry in article.entryList) {
-		if([entry needCache]) {
-			entry.imageURL = [self remoteURLForImagePath:entry.imagePath withDocID:[article docID]];
-			[cacheMgr saveImage:entry.image forKey:entry.imageURL];
-		}
 	}
 }
 
@@ -172,34 +108,6 @@
 	}
 	
 	return [allArticles copy];
-}
-
-- (Shop *)loadShop {
-	return [Shop getShopInDatabase:_database withUUID:_uuid];
-}
-
-- (void)saveShop:(Shop *)shop withAvatar:(UIImage *)avatar {
-	
-	CacheManager *cacheMgr = [CacheManager sharedManager];
-	shop.avatar = avatar;
-	shop.avatarURL = [self remoteURLForShopAvatar];
-	
-	[cacheMgr saveImage:avatar forKey:shop.avatarURL];
-	
-	NSError *error;
-	if ([shop save:&error]) {
-		[self syncToServerForShopAsyncly:shop completion:nil];
-	}else {
-		[self showError];
-	}
-	
-//	[cacheMgr saveImage:avatar forKey:shop.avatarURL completion:^{
-//		dispatch_group_leave(group);
-//	}];
-
-	
-//	dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-//	});
 }
 
 - (void)deleteArticle:(Article *)article {
@@ -230,6 +138,26 @@
 	});
 }
 
+- (void)cachePhotosForArticle:(Article *)article {
+	CacheManager *cacheMgr = [CacheManager sharedManager];
+	
+	//首先保存第一张为缩略图
+	ArticleEntry *firstEntry = [article firstImageEntry];
+	if(firstEntry && [firstEntry needCache]) {
+		UIImage *thumb = [firstEntry.image resizeToWidth:300];
+		article.thumbURL = [self remoteURLForThumbWithDocID:[article docID]];
+		article.thumb = thumb;
+		[cacheMgr saveImage:thumb forKey:article.thumbURL];
+	}
+	
+	for(ArticleEntry *entry in article.entryList) {
+		if([entry needCache]) {
+			entry.imageURL = [self remoteURLForImagePath:entry.imagePath withDocID:[article docID]];
+			[cacheMgr saveImage:entry.image forKey:entry.imageURL];
+		}
+	}
+}
+
 - (void)uploadPhotosForArticle:(Article *)article completion:(void (^)(BOOL success))completion {
 	
 	dispatch_group_t group = dispatch_group_create();
@@ -240,7 +168,7 @@
 	__block int numberOfPhotosUploaded = 0;
 	
 	//上传第一张为缩略图
-	ArticleEntry *firstEntry = [self getFirstEntryWithArticle:article];
+	ArticleEntry *firstEntry = [article firstImageEntry];
 	if(firstEntry && !firstEntry.uploaded) {
 		dispatch_group_enter(group);
 		UIImage *thumb = article.thumb? article.thumb: [article thumbImage];
@@ -285,6 +213,69 @@
 	});
 }
 
+- (void)syncToServerForArticleAsyncly:(Article *)article completion:(void (^)(BOOL success))completion{
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		[self syncToServerForArticle:article completion:^(BOOL success) {
+			dispatch_async(dispatch_get_main_queue(), ^{
+				if(completion) completion(success);
+			});
+		}];
+	});
+}
+
+- (void)syncToServerForArticle:(Article *)article completion:(void (^)(BOOL success))completion{
+	
+	_group = dispatch_group_create();
+	
+	dispatch_group_enter(_group);
+	
+	[self uploadPhotosForArticle:article completion:^(BOOL sucesss) {
+		if(sucesss) {
+			[self syncToRemote];
+		}else {
+			completion(NO);
+		}
+	}];
+	
+	dispatch_group_notify(_group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+		if(_push.lastError) {
+			completion(NO);
+		}else {
+			completion(YES);
+		}
+	});
+}
+
+#pragma mark - Shop
+
+- (Shop *)loadShop {
+	return [Shop getShopInDatabase:_database withUUID:_uuid];
+}
+
+- (void)saveShop:(Shop *)shop withAvatar:(UIImage *)avatar {
+	
+	CacheManager *cacheMgr = [CacheManager sharedManager];
+	shop.avatar = avatar;
+	shop.avatarURL = [self remoteURLForShopAvatar];
+	
+	[cacheMgr saveImage:avatar forKey:shop.avatarURL];
+	
+	NSError *error;
+	if ([shop save:&error]) {
+		[self syncToServerForShopAsyncly:shop completion:nil];
+	}else {
+		[self showError];
+	}
+	
+	//	[cacheMgr saveImage:avatar forKey:shop.avatarURL completion:^{
+	//		dispatch_group_leave(group);
+	//	}];
+	
+	
+	//	dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+	//	});
+}
+
 - (void)uploadAvaterForShop:(Shop *)shop completion:(void (^)(BOOL success))completion {
 	
 	CacheManager *cacheMgr = [CacheManager sharedManager];
@@ -298,25 +289,6 @@
 			completion(NO);
 		}
 	}];
-}
-
-- (ArticleEntry *)getFirstEntryWithArticle:(Article *)article {
-	for(ArticleEntry *entry in article.entryList) {
-		if(entry.imagePath.length > 0) {
-			return entry;
-		}
-	}
-	return nil;
-}
-
-- (void)syncToServerForArticleAsyncly:(Article *)article completion:(void (^)(BOOL success))completion{
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		[self syncToServerForArticle:article completion:^(BOOL success) {
-			dispatch_async(dispatch_get_main_queue(), ^{
-				if(completion) completion(success);
-			});
-		}];
-	});
 }
 
 - (void)syncToServerForShopAsyncly:(Shop *)shop completion:(void (^)(BOOL success))completion{
@@ -352,28 +324,23 @@
 	});
 }
 
-- (void)syncToServerForArticle:(Article *)article completion:(void (^)(BOOL success))completion{
-	
-	_group = dispatch_group_create();
-	
-	dispatch_group_enter(_group);
-	
-	[self uploadPhotosForArticle:article completion:^(BOOL sucesss) {
-		if(sucesss) {
-			[self syncToRemote];
-		}else {
-			completion(NO);
-		}
-	}];
-	
-	dispatch_group_notify(_group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-		if(_push.lastError) {
-			completion(NO);
-		}else {
-			completion(YES);
-		}
-	});
+#pragma mark - Tip
+
+- (Tips *)loadTips {
+	return (Tips *)[Tips getModelInDatabase:_database withUUID:_uuid];
 }
+
+- (void)saveTips:(Tips *)tips {
+	NSError *error;
+	[tips save:&error];
+}
+
+- (void)deleteTips:(Tips *)tips {
+	NSError *error;
+	[tips deleteDocument:&error];
+}
+
+#pragma mark - Sync
 
 - (void)syncToRemote {
 	
@@ -436,7 +403,8 @@
 			if(_pull.completedChangesCount == _pull.changesCount) {
 				NSLog(@"Sync to remote completed");
 				[self setSynced];
-				[self notifyArticleChanges];				
+				[self notifyArticleChanges];
+//				[self notifyTipsChanges];
 			}else{
 				NSLog(@"Sync to remote in progress");
 			}
@@ -456,6 +424,28 @@
 - (id<CBLAuthenticator>)CBLAuthenticator {
 	return [CBLAuthenticator basicAuthenticatorWithName: @"eservice_user"
 											   password: @"xiaodianzhang123"];
+}
+
+#pragma mark - Generic DB Opt
+
+- (NSDictionary *)propertiesWithDocID:(NSString *)docID {
+	CBLDocument* doc = [_database documentWithID:docID];
+	return doc.properties? doc.properties: @{};
+}
+
+- (BOOL)saveDocWithProperties:(NSDictionary *)properties withDocID:(NSString *)docID withType:(NSString *)type{
+	CBLDocument* document = [_database documentWithID:docID];
+	NSError* error;
+	NSMutableDictionary *dict = [properties mutableCopy];
+	[dict setValue:type forKey:@"type"];
+	[dict setValue:_uuid forKey:@"owner"];
+	return [document putProperties:[dict copy] error:&error];
+}
+
+- (BOOL)deleteDocWithDocID:(NSString *)docID {
+	CBLDocument* doc = [_database documentWithID:docID];
+	NSError* error;
+	return [doc deleteDocument: &error];
 }
 
 #pragma mark - Helper 
@@ -490,6 +480,10 @@
 
 - (void)notifyArticleChanges {
 	[[NSNotificationCenter defaultCenter] postNotificationName:kArticleListChange object:nil];
+}
+
+- (void)notifyTipsChanges {
+	[[NSNotificationCenter defaultCenter] postNotificationName:kTipsChange object:nil];
 }
 
 - (void)enableLogging {

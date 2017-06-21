@@ -7,14 +7,14 @@
 //
 
 #import "ArticleTableViewController.h"
-#import "LFImagePickerController.h"
+//#import "LFImagePickerController.h"
 #import "EditTableViewController.h"
 #import "ArticleTableViewCell.h"
 #import "ArticleDisplayTableViewController.h"
 #import "TZImagePickerController.h"
 #import "ShopSettingTableViewController.h"
 
-@interface ArticleTableViewController ()  <TZImagePickerControllerDelegate, LFImagePickerControllerDelegate, UISearchResultsUpdating>
+@interface ArticleTableViewController ()  <TZImagePickerControllerDelegate, UISearchResultsUpdating>
 @property (strong, nonatomic) UISearchController *searchController;
 @property NSArray <Article*> *filteredArticles;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *setupBtn;
@@ -25,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[self configCrl];
+	[self showHelpOverlay];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,6 +67,10 @@
 	FAKIonIcons *icon = [FAKIonIcons iosGearIconWithSize:20];
 	_setupBtn.image = [icon imageWithSize:CGSizeMake(20, 20)];
 	_setupBtn.title = @"";
+}
+
+- (void)showHelpOverlay {
+	[[TipsService shared] showHelpType:CreateNewArticle];
 }
 
 - (void)configSearchbar {
@@ -116,12 +121,12 @@
 
 - (IBAction)unwindFromEditView:(UIStoryboardSegue *)segue {
 //	[self loadData];
-//	WeakSelf
-//	[Helper performBlock:^{
-//		ArticleDisplayTableViewController *vc = [ArticleDisplayTableViewController new];
-//		vc.article = _articles[0];
-//		[weakSelf.navigationController pushViewController:vc animated:YES];
-//	} afterDelay:0.2];
+	WeakSelf
+	[Helper performBlock:^{
+		ArticleDisplayTableViewController *vc = [ArticleDisplayTableViewController new];
+		vc.article = _articles[0];
+		[weakSelf.navigationController pushViewController:vc animated:YES];
+	} afterDelay:0.1];
 }
 
 #pragma mark - Search bar delegate 
@@ -191,19 +196,10 @@
 		
 	[cell setCellData:article.thumbURL
 				title:article.title
-				restName:[self restNameForArticle:article]
-				 date:article.date
 //				count:[NSString stringWithFormat:@"%ld %@", article.entryList.count, NSLocalizedString(@"pics", @"pics")]
 	];
     
     return cell;
-}
-
-- (NSString *)restNameForArticle:(Article *)article {
-	if(article.rest) {
-		return article.rest.name;
-	}
-	return @"";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

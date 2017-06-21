@@ -29,6 +29,7 @@
 #import "ArticleEntry.h"
 #import "Article.h"
 #import "Shop.h"
+#import "Tips.h"
 //Service
 #import "CBLService.h"
 #import "CacheManager.h"
@@ -40,7 +41,7 @@
 #import "ProgressHUD.h"
 #import <FontAwesomeKit/FAKIonIcons.h>
 #import "UIAlertView+LF_Block.h"
-
+#import "TipsService.h"
 #endif
 
 #ifndef DEBUG

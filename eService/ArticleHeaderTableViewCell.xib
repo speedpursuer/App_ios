@@ -9,54 +9,38 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="135" id="KGk-i7-Jjw" customClass="ArticleHeaderTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="135"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ArticleHeaderTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="234"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="320" height="134"/>
+                <frame key="frameInset" width="320" height="233"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rest" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLh-3e-48P">
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pfV-NT-mom">
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ShA-8v-GGo">
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k2w-bg-OSD">
-                        <connections>
-                            <action selector="clickRest:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="cMZ-mK-kH3"/>
-                        </connections>
-                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Read" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pF6-iE-4AM">
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="jLh-3e-48P" firstAttribute="centerY" secondItem="pfV-NT-mom" secondAttribute="centerY" id="0cF-tK-hrj"/>
-                    <constraint firstItem="k2w-bg-OSD" firstAttribute="centerY" secondItem="pfV-NT-mom" secondAttribute="centerY" id="4L0-cZ-ZPV"/>
-                    <constraint firstItem="jLh-3e-48P" firstAttribute="leading" secondItem="pfV-NT-mom" secondAttribute="trailing" constant="8" id="69H-6g-gfm"/>
-                    <constraint firstItem="k2w-bg-OSD" firstAttribute="leading" secondItem="jLh-3e-48P" secondAttribute="trailing" constant="5" id="6DS-xr-fCF"/>
                     <constraint firstItem="ShA-8v-GGo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="8mP-6j-hXk"/>
-                    <constraint firstItem="pfV-NT-mom" firstAttribute="top" secondItem="ShA-8v-GGo" secondAttribute="bottom" constant="20" id="MCE-KL-1aQ"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="pfV-NT-mom" secondAttribute="bottom" constant="15" id="OA9-px-6Xm"/>
+                    <constraint firstItem="pF6-iE-4AM" firstAttribute="leading" secondItem="ShA-8v-GGo" secondAttribute="leading" id="HYZ-c6-awR"/>
+                    <constraint firstItem="pF6-iE-4AM" firstAttribute="top" secondItem="ShA-8v-GGo" secondAttribute="bottom" constant="10" id="Kb2-mo-nPk"/>
+                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="pF6-iE-4AM" secondAttribute="bottom" constant="15" id="QoW-rT-Tyj"/>
                     <constraint firstItem="ShA-8v-GGo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="VZL-YT-SYh"/>
                     <constraint firstAttribute="trailingMargin" secondItem="ShA-8v-GGo" secondAttribute="trailing" id="jwb-tz-tgc"/>
-                    <constraint firstItem="pfV-NT-mom" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="mFY-PZ-Sqb"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="date" destination="pfV-NT-mom" id="MKe-lK-6i5"/>
+                <outlet property="count" destination="pF6-iE-4AM" id="KGn-H9-cb5"/>
                 <outlet property="headTitle" destination="ShA-8v-GGo" id="WN1-kC-BAw"/>
-                <outlet property="locBtn" destination="k2w-bg-OSD" id="hJE-IC-Y3o"/>
-                <outlet property="rest" destination="jLh-3e-48P" id="WEB-0e-fEg"/>
             </connections>
-            <point key="canvasLocation" x="131" y="117.5"/>
+            <point key="canvasLocation" x="131" y="167"/>
         </tableViewCell>
     </objects>
 </document>

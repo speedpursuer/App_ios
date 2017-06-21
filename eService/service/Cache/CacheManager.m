@@ -45,6 +45,7 @@
 
 - (void)setup {
 	_imageCache = [self setImageCache];
+	_imageCache.allowAnimatedImage = NO;
 	NSOperationQueue *queue = [NSOperationQueue new];
 	_imageManager = [[YYWebImageManager alloc] initWithCache:_imageCache queue:queue];
 	
@@ -95,23 +96,17 @@
 }
 
 - (void)getImageWithKey:(NSString *)key progress:(void(^)(NSInteger receivedSize, NSInteger expectedSize))progress completion:(void (^)(UIImage *image))completion {
-	if([_imageCache containsImageForKey:[self URLWithImageURL:key] withType:YYImageCacheTypeDisk]){
-		[_imageCache getImageForKey:[self URLWithImageURL:key] withType:YYImageCacheTypeAll withBlock:^(UIImage *image, YYImageCacheType type) {
-			completion(image);
-		}];
-	}else {
-		[_imageManager requestImageWithURL:[NSURL URLWithString:[self URLWithImageURL:key]]
-								   options:YYWebImageOptionShowNetworkActivity
-								  progress:progress
-								 transform:nil
-								completion:^(UIImage *image,
-											 NSURL *url,
-											 YYWebImageFromType from,
-											 YYWebImageStage stage,
-											 NSError *error){
-									completion(image);
-								}];
-	}
+	[_imageManager requestImageWithURL:[NSURL URLWithString:[self URLWithImageURL:key]]
+							   options:YYWebImageOptionShowNetworkActivity
+							  progress:progress
+							 transform:nil
+							completion:^(UIImage *image,
+										 NSURL *url,
+										 YYWebImageFromType from,
+										 YYWebImageStage stage,
+										 NSError *error){
+								completion(image);
+							}];
 }
 
 - (void)getImageWithKey:(NSString *)key completion:(void (^)(UIImage *image))completion{

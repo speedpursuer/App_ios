@@ -10,9 +10,8 @@
 
 @interface ArticleHeaderTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *headTitle;
-@property (weak, nonatomic) IBOutlet UILabel *date;
-@property (weak, nonatomic) IBOutlet UILabel *rest;
-@property (weak, nonatomic) IBOutlet UIButton *locBtn;
-@property (nonatomic, copy) void (^clickLocHandle)();
-- (void)configHeader:(NSString *)title date:(NSString *)date restName:(NSString *)name;
+@property (weak, nonatomic) IBOutlet UILabel *count;
+
+- (void)configTitle:(NSString *)title count:(NSInteger)count;
+- (void)updateCount:(NSInteger)count;
 @end

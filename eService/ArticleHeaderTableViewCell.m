@@ -12,39 +12,20 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-	[self setupBtn];
-	[self addClickControl];
     // Initialization code
 }
 
-- (void)setupBtn {
-	FAKIonIcons *icon = [FAKIonIcons iosLocationIconWithSize:14];
-	[_locBtn setImage:[icon imageWithSize:CGSizeMake(14, 14)] forState:UIControlStateNormal];
-}
-
-- (void)addClickControl{
-	
-	_rest.userInteractionEnabled = YES;
-	
-	UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]
-										 initWithTarget:self
-										 action:@selector(clickRest:)];
-	
-	singleTap.numberOfTapsRequired = 1;
-	
-	[_rest addGestureRecognizer:singleTap];
-}
-
-- (IBAction)clickRest:(id)sender {
-	if(_clickLocHandle) _clickLocHandle();
-}
-
-- (void)configHeader:(NSString *)title date:(NSString *)date restName:(NSString *)name{	
-	if(!name) _locBtn.hidden = YES;
+- (void)configTitle:(NSString *)title count:(NSInteger)count{
 	_headTitle.text = title;
-	_rest.text = name;
-	_date.text = date;
+	[self updateCount:count];
 }
 
+- (void)updateCount:(NSInteger)count {
+	if(count != -1) {
+		_count.text = [NSString stringWithFormat:@"%@ %ld %@", NSLocalizedString(@"Read", @"阅读"), (long)count, NSLocalizedString(@"Times", @"次")];
+	}else {
+		_count.text = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Read", @"阅读"), NSLocalizedString(@"Times", @"次")];
+	}
+}
 
 @end

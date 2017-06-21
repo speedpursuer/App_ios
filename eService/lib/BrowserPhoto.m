@@ -9,6 +9,7 @@
 #import "BrowserPhoto.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <MWPhotoBrowser.h>
+#import "UIImage+Resize.h"
 
 @interface BrowserPhoto() {
 	BOOL _loadingInProgress;
@@ -228,7 +229,8 @@
 				MWLog(@"SDWebImage failed to download image");
 			}
 //			_webImageOperation = nil;
-			self.underlyingImage = image;
+			self.underlyingImage = [image resizeToSize:_size];
+//			self.underlyingImage = image;
 			dispatch_async(dispatch_get_main_queue(), ^{
 				[self imageLoadingComplete];
 			});

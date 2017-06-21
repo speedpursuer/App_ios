@@ -17,7 +17,7 @@
                         <constraint firstAttribute="height" constant="150" id="d4W-nC-QRs"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVQ-D9-Fm8">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVQ-D9-Fm8">
                     <constraints>
                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="7Sm-rW-UZd"/>
                     </constraints>
@@ -25,17 +25,9 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gJt-pD-xNE">
-                    <frame key="frameInset" minX="142" minY="114" width="51" height="31"/>
-                </switch>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Enable Shop Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPV-X0-nhS">
-                    <frame key="frameInset" minX="15" minY="119" width="129" height="20.5"/>
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gJt-pD-xNE"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Shop Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPV-X0-nhS">
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GTI-b3-Na1">
-                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -44,12 +36,10 @@
             <constraints>
                 <constraint firstItem="yXU-WE-sOm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="27j-UY-reI"/>
                 <constraint firstItem="gJt-pD-xNE" firstAttribute="leading" secondItem="SPV-X0-nhS" secondAttribute="trailing" constant="8" id="IJs-SH-SSQ"/>
-                <constraint firstItem="GTI-b3-Na1" firstAttribute="trailing" secondItem="yXU-WE-sOm" secondAttribute="trailing" constant="-15" id="VMN-wj-sej"/>
+                <constraint firstItem="gJt-pD-xNE" firstAttribute="trailing" secondItem="ZVQ-D9-Fm8" secondAttribute="trailing" id="NeQ-91-H4h"/>
                 <constraint firstAttribute="trailing" secondItem="yXU-WE-sOm" secondAttribute="trailing" id="a4n-Qz-WJE"/>
-                <constraint firstItem="gJt-pD-xNE" firstAttribute="leading" secondItem="yXU-WE-sOm" secondAttribute="leading" constant="100" id="fuI-g7-CPi"/>
                 <constraint firstItem="ZVQ-D9-Fm8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="jyg-0F-IvA"/>
                 <constraint firstItem="gJt-pD-xNE" firstAttribute="centerY" secondItem="SPV-X0-nhS" secondAttribute="centerY" id="pZJ-HO-ZOM"/>
-                <constraint firstItem="GTI-b3-Na1" firstAttribute="bottom" secondItem="yXU-WE-sOm" secondAttribute="bottom" constant="-10" id="prs-G9-5nT"/>
                 <constraint firstItem="yXU-WE-sOm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sZd-ox-61T"/>
                 <constraint firstItem="ZVQ-D9-Fm8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="sn7-y9-KgX"/>
                 <constraint firstItem="gJt-pD-xNE" firstAttribute="bottom" secondItem="yXU-WE-sOm" secondAttribute="bottom" constant="-10" id="wA5-8J-PqB"/>
@@ -57,7 +47,6 @@
             </constraints>
             <connections>
                 <outlet property="background" destination="yXU-WE-sOm" id="547-aG-NgL"/>
-                <outlet property="category" destination="GTI-b3-Na1" id="OQG-lh-p6B"/>
                 <outlet property="enableShopSwitch" destination="gJt-pD-xNE" id="DjS-35-B4V"/>
                 <outlet property="title" destination="ZVQ-D9-Fm8" id="eIk-R7-enz"/>
             </connections>

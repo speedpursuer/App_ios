@@ -7,7 +7,7 @@
 /* Class = "UILabel"; text = "Name"; ObjectID = "6n6-O4-DfK"; */
 "6n6-O4-DfK.text" = "店名";
 
-/* Class = "UILabel"; text = "Avatar"; ObjectID = "BFz-JJ-y6P"; */
+/* Class = "UILabel"; text = "WX QR"; ObjectID = "BFz-JJ-y6P"; */
 "BFz-JJ-y6P.text" = "照片";
 
 /* Class = "UITableViewController"; title = "Shop Settings"; ObjectID = "Gzr-jL-0Tw"; */

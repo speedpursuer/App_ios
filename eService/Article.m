@@ -12,7 +12,7 @@
 
 @implementation Article
 
-@dynamic entryList, title, category, thumbURL, isShopEnabled, date, rest;
+@dynamic entryList, title, category, thumbURL, isShopEnabled, date;
 @synthesize thumb;
 
 + (NSString*) docType {
@@ -52,6 +52,15 @@
 
 - (UIImage *)thumbImage {
 	return [[CacheManager sharedManager] getImageWithKey:self.thumbURL];
+}
+
+- (ArticleEntry *)firstImageEntry{
+	for(ArticleEntry *entry in self.entryList) {
+		if(entry.imagePath.length > 0) {
+			return entry;
+		}
+	}
+	return nil;
 }
 
 #pragma mark - Private

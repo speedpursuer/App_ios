@@ -11,14 +11,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[EditTableViewController lf_PhotoEdittingController:didFinishPhotoEdit:]:EditTableViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[self entityForIndex:_indexInEditing].image">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "-[ArticleTableViewController loadData]:ArticleTableViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -27,10 +19,34 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[EditTableViewController lf_PhotoEdittingController:didFinishPhotoEdit:]:EditTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[self entityForIndex:_indexInEditing].image">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[CBLService loadArticles]:CBLService.m">
          <PersistentStrings>
             <PersistentString
                value = "row.document">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[YYImageCache getImageForKey:withType:]:YYImageCache.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_allowAnimatedImage">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[CBLService saveDocWithProperties:withDocID:withType:]:CBLService.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "document.properties">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

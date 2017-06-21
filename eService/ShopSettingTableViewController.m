@@ -33,6 +33,7 @@
 	[self startStandardUpdates];
 	[self setupData];
 	[self setTitle];
+	[self showHelpOverlay];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -48,6 +49,10 @@
 
 - (void)setTitle {
 	self.title = NSLocalizedString(@"Set Shop Info", @"设置门店信息");
+}
+
+- (void)showHelpOverlay {
+	[[TipsService shared] showHelpType:ShopPhoto];
 }
 
 - (void)addClickControlToImageView{
@@ -162,7 +167,7 @@
 }
 
 - (BOOL)isValidShop:(Shop *)shop {
-	if(shop.name.length > 0 && shop.phone.length > 0 && shop.address.length > 0 && shop.avatar) {
+	if(shop.name.length > 0 && shop.phone.length > 0 && shop.address.length > 0) {
 		return YES;
 	}
 	return NO;

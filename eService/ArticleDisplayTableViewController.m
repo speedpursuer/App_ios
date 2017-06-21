@@ -26,6 +26,7 @@
 #import "MBProgressHUD.h"
 #import "ArticleDisplayHeader.h"
 #import "ArticleHeaderTableViewCell.h"
+#import "ArticleFooterTableViewCell.h"
 //#import "UITableView+FDTemplateLayoutCell.h"
 
 #define photoWidth ([[UIScreen mainScreen] bounds].size.width - 2 * 8)
@@ -36,6 +37,8 @@
 @property MBProgressHUD *hud;
 //@property ArticleDisplayHeader *headerView;
 @property UIView *headerView;
+@property Shop *shop;
+@property NSInteger countOfRead;
 @end
 
 @implementation ArticleDisplayTableViewController
@@ -47,11 +50,30 @@
 	[self configCtr];
 //	[self configHeader];
 	[self reloadData];
+	[self showHelpOverlay];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)showHelpOverlay {
+	[self showPhotoTip];
+	[[TipsService shared] showHelpType:ShareToWX];
+}
+
+- (void)showPhotoTip {
+	for (UITableViewCell *cell in [self.tableView visibleCells]) {
+		if([cell isKindOfClass:[ArticlePhotoTableViewCell class]]) {
+			NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+			CGRect rectOfCellInTableView = [self.tableView rectForRowAtIndexPath: indexPath];
+			CGRect rectOfCellInSuperview = [self.tableView convertRect: rectOfCellInTableView toView: self.tableView.superview];
+//			NSLog(@"x: %f, y: %f, height: %f", rectOfCellInSuperview.origin.x, rectOfCellInSuperview.origin.y, rectOfCellInSuperview.size.height);
+			[[TipsService shared] showHelpType:PhotoGallery atPoint:CGPointMake(UIScreenWidth/2, rectOfCellInSuperview.origin.y + (rectOfCellInSuperview.size.height/2) + 64)];
+			break;
+		}
+	}
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,41 +91,16 @@
 	[self.tableView registerNib: [UINib nibWithNibName:@"ArticlePhotoTableViewCell" bundle:nil] forCellReuseIdentifier:@"photo"];
 	
 	[self.tableView registerNib: [UINib nibWithNibName:@"ArticleHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:@"header"];
-
+	
+	[self.tableView registerNib: [UINib nibWithNibName:@"ArticleFooterTableViewCell" bundle:nil] forCellReuseIdentifier:@"footer"];
 	
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	self.tableView.rowHeight = UITableViewAutomaticDimension;
 	self.tableView.estimatedRowHeight = 400;
 }
 
-- (void)configHeader {
-	
-	_headerView = [[[NSBundle mainBundle] loadNibNamed:@"TestHeader" owner:nil options:nil] lastObject];
-	
-//	[self.tableView setTableHeaderView:_headerView];
-	
-	UILabel *label = [_headerView viewWithTag:2];
-	UIView *view = [_headerView viewWithTag:1];
-	
-	label.text = @"注册自定义 URL Scheme 的第一步是创建 URL Scheme — 在 Xcode Project Navigator 中找到并点击工程 info.plist 文件。当该文件显示在右边窗口，在列表上点击鼠标右键，选择 Add Row:";
-	
-	[self.tableView setTableHeaderView:view];
-
-	
-//	_headerView.rest.userInteractionEnabled = YES;
-//	
-//	UITapGestureRecognizer *Tap1 = [[UITapGestureRecognizer alloc]
-//									initWithTarget:self
-//									action:@selector(openMap)];
-//	
-//	Tap1.numberOfTapsRequired = 1;
-//	
-//	[_headerView.rest addGestureRecognizer:Tap1];
-}
-
 - (void)reloadData {
 	[self processData];
-//	[self configHeader];
 	[self configHeaderFooter];
 }
 
@@ -119,17 +116,54 @@
 		}
 		
 		if([self hasPhotoInEntry:entry]) {
-//			ArticleEntry *newEntry = [[ArticleEntry alloc] initForPhotoDisplayOnlyWithImageURL:entry.imageURL withSize:entry.size];
 			BrowserPhoto *photo = [BrowserPhoto photoWithURL:[NSURL URLWithString:entry.imageURL] size:entry.size index:photos.count];
 			photo.caption = entry.desc;
 			[array addObject:photo];
 			[photos addObject:photo];
 		}		
 	}
+	if(_article.isShopEnabled) {
+		[array addObject:[NSNumber numberWithInt:0]];
+	}
 	_dataArray = [array copy];
 	_photos = [photos copy];
 	
+	_shop = [[CBLService sharedManager] loadShop];
+	
+	[self loadCountOfRead];
+	
 //	self.title = _article.title;
+}
+
+- (void)loadCountOfRead {
+	
+	_countOfRead = -1;
+	
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", @"http://www.carlub.cn/count", _article.docID]];
+	
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+	
+	[NSURLConnection sendAsynchronousRequest:request
+									   queue:[NSOperationQueue mainQueue]
+						   completionHandler:^(NSURLResponse *response,
+											   NSData *data, NSError *connectionError) {
+							   if (data.length > 0 && connectionError == nil) {
+								   NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data
+																						options:0
+																						  error:NULL];
+								   _countOfRead = [dict[@"count"] integerValue];
+							   }
+							   [self updateCountOfRead:_countOfRead];
+						   }];
+}
+
+- (void)updateCountOfRead:(NSInteger)count {
+	for (UITableViewCell *cell in [self.tableView visibleCells]) {
+		if([cell isKindOfClass:[ArticleHeaderTableViewCell class]]) {
+			ArticleHeaderTableViewCell *_cell = (ArticleHeaderTableViewCell *) cell;
+			[_cell updateCount:count];
+		}
+	}
 }
 
 -(void)configHeaderFooter {
@@ -138,7 +172,7 @@
 	
 //	[_headerView configHeader:_article.title date:_article.date restName:_article.rest.name];
 	
-	UIView *footView = ![self hasPhotoInEntry:_article.entryList.lastObject]? [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 8)]: nil;
+	UIView *footView = (!_article.isShopEnabled && ![self hasPhotoInEntry:_article.entryList.lastObject])? [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 8)]: nil;
 	[self.tableView setTableFooterView:footView];
 }
 
@@ -166,12 +200,14 @@
 	PopoverView *popoverView = [PopoverView popoverView];
 	[popoverView showToPoint:CGPointMake(UIScreenWidth - 20, 64) withActions:[self WXActions]];
 	popoverView.style = PopoverViewStyleDark;
+	popoverView.showShade = YES;
 }
 
 -(void)selectAcitonsForPhoto:(UIImage *)image {
 	PopoverView *popoverView = [PopoverView popoverView];
 	[popoverView showToPoint:CGPointMake(UIScreenWidth - 20, 64) withActions:[self photoActionsForImage:image]];
 	popoverView.style = PopoverViewStyleDark;
+	popoverView.showShade = YES;
 }
 
 
@@ -224,8 +260,7 @@
 -(void)shareToWXWithOption:(enum WXScene)scene {
 	
 	CBLService *manager = [CBLService sharedManager];
-//	Shop *shop = [manager loadShop];
-	NSString *shareDesc = [NSString stringWithFormat:@"分享自「%@」的美食", _article.rest.name];
+	NSString *shareDesc = [NSString stringWithFormat:@"分享自「%@」", _shop.name];
 	
 	[ProgressHUD showInThread];
 	[manager syncToServerForArticle:_article completion:^(BOOL success) {
@@ -284,7 +319,7 @@
 }
 
 - (void)openMap{
-	CLLocation* fromLocation = [[CLLocation alloc] initWithLatitude:_article.rest.lat longitude:_article.rest.lng];
+	CLLocation* fromLocation = [[CLLocation alloc] initWithLatitude:_shop.lat longitude:_shop.lng];
  
 	// Create a region centered on the starting point with a 10km span
 //	MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(fromLocation.coordinate, 2000, 2000);
@@ -292,7 +327,7 @@
 	MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:fromLocation.coordinate addressDictionary:nil];
 	
 	MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
-	[mapItem setName:_article.rest.name];
+	[mapItem setName:_shop.name];
 	
 	MKMapItem *currentLocationMapItem = [MKMapItem mapItemForCurrentLocation];
 	
@@ -384,12 +419,17 @@
 	
 	if(indexPath.row == 0) {
 		ArticleHeaderTableViewCell *hCell = [tableView dequeueReusableCellWithIdentifier:@"header" forIndexPath:indexPath];
-		[hCell configHeader:_article.title date:_article.date restName:_article.rest.name];
+//		[hCell configHeader:_article.title date:_article.date restName:_article.rest.name];
+		[hCell configTitle:_article.title count:_countOfRead];
+		return hCell;
+	}else if(_article.isShopEnabled && indexPath.row == _dataArray.count - 1) {
+		ArticleFooterTableViewCell *fCell = [tableView dequeueReusableCellWithIdentifier:@"footer" forIndexPath:indexPath];
+		[fCell configShopName:_shop.name tel:_shop.phone address:_shop.address];
 		WeakSelf
-		hCell.clickLocHandle = ^{
+		fCell.clickAddressHandle = ^{
 			[weakSelf openMap];
 		};
-		return hCell;
+		return fCell;
 	}else if([self isPhotoCellWithRowData:rowData]) {
 //		ArticleEntry *entry = (ArticleEntry *)rowData;
 		BrowserPhoto *photo = (BrowserPhoto *)rowData;
@@ -449,6 +489,10 @@
 	[browser setCurrentPhotoIndex:index];
 	
 	[self.navigationController pushViewController:browser animated:YES];
+	
+	[Helper performBlock:^{
+		[[TipsService shared] showHelpType:PhotoSave];
+	} afterDelay:0.3];
 }
 
 - (void)saveImageToAlbum:(UIImage *)image {

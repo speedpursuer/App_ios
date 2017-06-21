@@ -12,14 +12,14 @@
 #import "Restaurant.h"
 
 @interface Article : CBLBaseModel
-@property (copy) NSArray *entryList;
+@property NSArray *entryList;
 @property NSString *title;
 @property NSString *category;
 @property UIImage *thumb;
 @property NSString *thumbURL;
 @property BOOL isShopEnabled;
 @property NSString *date;
-@property Restaurant *rest;
+//@property Restaurant *rest;
 
 + (Article*) createArticleInDatabase:(CBLDatabase*) database withUUID:(NSString *)uuid;
 
@@ -28,5 +28,7 @@
 - (BOOL)updateEntryList: (NSError**)outError;
 
 - (NSArray <ArticleEntry *>*)copyOfEntryList;
+
+- (ArticleEntry *)firstImageEntry;
 
 @end

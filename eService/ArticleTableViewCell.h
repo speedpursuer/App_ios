@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ArticleTableViewCell : UITableViewCell
-- (void)setCellData:(NSString *)thumbURL title:(NSString *)title restName:(NSString *)name date:(NSString *)date;
+- (void)setCellData:(NSString *)thumbURL title:(NSString *)title;
 @end

@@ -14,14 +14,14 @@
 + (id)sharedManager;
 - (Article *)creatNewArticle;
 - (void)saveArticle:(Article *)article;
-- (Article*)creatArticleWithTitle:(NSString *) title category:(NSString *)category entryList:(NSArray *)entryList isShopEnabled:(BOOL)isShopEnabled;
-- (Article*)updateArticle:(Article*)article WithTitle:(NSString *) title category:(NSString *)category entryList:(NSArray *)entryList isShopEnabled:(BOOL)isShopEnabled;
 - (NSArray <Article *> *)loadArticles;
 - (Shop *)loadShop;
 - (void)saveShop:(Shop *)shop withAvatar:(UIImage *)avatar;
 - (void)deleteArticle:(Article *)article;
 - (void)syncToServerForArticle:(Article *)article completion:(void (^)(BOOL success))completion;
 - (void)loadAllImagesForArticle:(Article *)article completion:(void (^)(BOOL success))completion;
-//- (void)loadAllImagesForArticle:(Article *)article;
 - (void)syncFromRemote;
+- (Tips *)loadTips;
+- (void)saveTips:(Tips *)tips;
+- (void)deleteTips:(Tips *)tips;
 @end

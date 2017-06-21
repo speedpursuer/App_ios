@@ -11,6 +11,30 @@
 /* title for category */
 "Choose Category" = "选择类别";
 
+/* 点击图片放大或生产9宫图 */
+"Click Photo to zoom" = "点击图片放大浏览（可制作九宫切图）";
+
+/* 点击这里新建 */
+"Click here to Create" = "选择几张照片开始新建广告";
+
+/* 点击这里分享文章到微信 */
+"Click here to Share To WeChat" = "点这里发送到微信";
+
+/* 点击这里修改标题 */
+"Click here to change title" = "点这里修改标题";
+
+/* 点击这里显示门店信息 */
+"Click here to display Shop" = "选择是否显示门店信息";
+
+/* 点击这里保存九宫图 */
+"Click here to save photo" = "点击这里生成九宫切图或保存图片";
+
+/* 点击这里设置门店Logo或微信二维码 */
+"Click here to set photo" = "点这里选择图片设置店招或微信二维码";
+
+/* 点击这里修图 */
+"Click image to edit" = "点照片开始修图";
+
 /* Add desc for image */
 "Click to add desc" = "点击添加文字";
 
@@ -32,8 +56,7 @@
 /* Message for empty table view */
 "No Content" = "点击右上角添加内容";
 
-/* Confirm photo selection
-   for alertView
+/* for alertView
    OK
    photo deletion */
 "OK" = "确定";
@@ -66,6 +89,9 @@
 /* Post */
 "REComposeSheetView_Post" = "保存";
 
+/* 阅读 */
+"Read" = "阅读";
+
 /* cblservice */
 "Request failed, please retry" = "操作失败，请重试";
 
@@ -75,14 +101,8 @@
 /* 选择地址 */
 "Select Address" = "选择地址";
 
-/* Init rest */
-"Select Rest" = "选择餐厅";
-
 /* Share to weibo */
 "Send" = "保存";
-
-/* Main page title */
-"Service Catalog" = "分类";
 
 /* 设置门店信息 */
 "Set Shop Info" = "设置门店";
@@ -93,8 +113,17 @@
 /* setShopName */
 "Set Shop Phone" = "门店电话";
 
+/* 设定 */
+"Setup" = "设定";
+
 /* Share button */
-"Share" = "分享";
+"Share" = "发送";
+
+/* 次 */
+"Times" = "次";
+
+/* 标题未设定，请点击“未命名标题”进行修改 */
+"Title not set, please click on the title to change?" = "标题未设定，请点击“未命名标题”进行设定";
 
 /* Init title */
 "Untitled" = "未命名标题";

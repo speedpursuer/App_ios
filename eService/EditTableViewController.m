@@ -8,8 +8,8 @@
 
 #import "EditTableViewController.h"
 #import "EditTableViewCell.h"
-#import "LFPhotoEdittingController.h"
-#import "LFImagePickerController.h"
+//#import "LFPhotoEdittingController.h"
+//#import "LFImagePickerController.h"
 #import "DescViewController.h"
 #import "ArticleEntry.h"
 #import "ArticleHeader.h"
@@ -22,7 +22,7 @@
 #import <AdobeCreativeSDKImage/AdobeCreativeSDKImage.h>
 //#import <imglyKit/imglyKit-Swift.h>
 
-@interface EditTableViewController () <EditArticle, LFPhotoEdittingControllerDelegate, TZImagePickerControllerDelegate, AdobeUXImageEditorViewControllerDelegate>
+@interface EditTableViewController () <EditArticle, TZImagePickerControllerDelegate, AdobeUXImageEditorViewControllerDelegate>
 //@property (strong, nonatomic) IBOutlet XRDragTableView *dragTableView;
 @property NSMutableArray <ArticleEntry *> *entriesToEdit;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
@@ -41,7 +41,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[self configCrl];
-//	[AdobeImageEditorOpenGLManager beginOpenGLLoad];
+	[self showHelpOverlay];
+	[AdobeImageEditorOpenGLManager beginOpenGLLoad];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -80,6 +81,12 @@
 //	[self.tableView addGestureRecognizer:longPress];
 }
 
+- (void)showHelpOverlay {
+	[[TipsService shared] showHelpType:EditTitle];
+	[[TipsService shared] showHelpType:EditPhoto];
+//	[[TipsService shared] showHelpType:EnableShop];
+}
+
 - (void)setupEntryData {
 	
 	if(_article) {
@@ -105,14 +112,12 @@
 	if([self isEditMode]) {
 		_headerView.background.image = [[_article thumbImage] applyLightDarkEffect];
 		_headerView.title.text = _article.title;
-		_headerView.category.text = _article.rest.name? _article.rest.name: NSLocalizedString(@"Select Rest", @"Init rest");
 		_headerView.enableShopSwitch.on = _article.isShopEnabled;
 	}else {
 		_headerView.background.image = [_entriesToEdit[0].image applyLightDarkEffect];
-		_headerView.title.text = [self defaultTitle];
-//		_article.title = @"";
-		_headerView.category.text = NSLocalizedString(@"Select Rest", @"Init rest");
 	}
+	
+	[self setTitlePlaceHolder];
 	
 //	[view setPickerData:@[@"Wash", @"Care", @"Others"]];
 	[self.tableView setTableHeaderView:_headerView];
@@ -126,16 +131,6 @@
 	Tap1.numberOfTapsRequired = 1;
 	
 	[_headerView.title addGestureRecognizer:Tap1];
-	
-	_headerView.category.userInteractionEnabled = YES;
-	
-	UITapGestureRecognizer *Tap2 = [[UITapGestureRecognizer alloc]
-									initWithTarget:self
-									action:@selector(selectRest)];
-	
-	Tap2.numberOfTapsRequired = 1;
-	
-	[_headerView.category addGestureRecognizer:Tap2];
 	
 	[_headerView.enableShopSwitch addTarget:self
 				 action:@selector(switchChanged:)
@@ -160,8 +155,6 @@
 			}
 		}];
 		[alert show];
-		
-		
 	}
 }
 
@@ -204,7 +197,7 @@
 
 - (void)displayEditorForImage:(UIImage *)imageToEdit
 {
-	//	[AdobeImageEditorCustomization setToolOrder:@[kAdobeImageEditorEnhance, kAdobeImageEditorEffects, kAdobeImageEditorStickers, kAdobeImageEditorOrientation, kAdobeImageEditorCrop, kAdobeImageEditorDraw, kAdobeImageEditorText, kAdobeImageEditorBlur, kAdobeImageEditorFrames, kAdobeImageEditorFocus]];
+	[AdobeImageEditorCustomization setToolOrder:@[kAdobeImageEditorEnhance, kAdobeImageEditorEffects, kAdobeImageEditorCrop, kAdobeImageEditorOrientation, kAdobeImageEditorFrames, kAdobeImageEditorText, kAdobeImageEditorStickers, kAdobeImageEditorDraw, kAdobeImageEditorBlur, kAdobeImageEditorFocus, kAdobeImageEditorSharpness, kAdobeImageEditorOverlay, kAdobeImageEditorVignette, kAdobeImageEditorSplash, kAdobeImageEditorColorAdjust]];
 	AdobeUXImageEditorViewController *ctr  = [[AdobeUXImageEditorViewController alloc] initWithImage:imageToEdit];
 	[ctr setDelegate:self];
 	[self presentViewController:ctr animated:YES completion:nil];
@@ -287,20 +280,6 @@
 	[self.navigationController pushViewController:ctr animated:YES];
 }
 
-- (void)selectRest {
-	ShopLocationViewController *ctr = [[UIStoryboard storyboardWithName:@"shop" bundle:nil] instantiateViewControllerWithIdentifier:@"map"];
-	if(_article.rest) {
-		ctr.initLat = _article.rest.lat;
-		ctr.initLng = _article.rest.lng;
-	}
-	ctr.selectAddressHandle = ^(NSString *city, NSString *name, NSString *address, float lat, float lng){
-		Restaurant *rest = [[Restaurant alloc] initWithName:name address:address lat:lat lng:lng];
-		_article.rest = rest;
-		_headerView.category.text = name;
-	};
-	[self.navigationController pushViewController:ctr animated:YES];
-}
-
 #pragma mark - Desc Delegate
 
 - (void)saveDesc:(NSString *)desc {
@@ -313,9 +292,7 @@
 -(void)saveTitle:(NSString *)title {
 	if(![_article.title isEqualToString:title]) {
 		_article.title = _headerView.title.text = title;
-		if(title.length == 0) {
-			_headerView.title.text = [self defaultTitle];
-		}
+		[self setTitlePlaceHolder];
 	}
 }
 
@@ -326,11 +303,10 @@
 }
 
 - (void)saveArticle {
-	
-	if(_article.title.length == 0) {
-		_article.title = [self defaultTitle];
-	}
+	[self setTitlePlaceHolder];
 	_article.entryList = _entriesToEdit;
+	_article.title = _headerView.title.text;
+	_article.isShopEnabled = _headerView.enableShopSwitch.on;
 	[[CBLService sharedManager] saveArticle:_article];
 	
 //	if([self isEditMode]) {
@@ -343,6 +319,14 @@
 #pragma mark - Navigation
 
 - (IBAction)goBack:(id)sender {
+	if(_article.title.length == 0) {
+		[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Title not set, please click on the title to change?", @"标题未设定，请点击“未命名标题”进行修改") message:nil cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cacel") otherButtonTitles:NSLocalizedString(@"Setup", @"设定") block:^(UIAlertView *alertView, NSInteger buttonIndex) {
+			if (buttonIndex == 1) {
+				[self changeTitle];
+			}
+		}] show];
+		return;
+	}
 	NSString *identifier;
 	if([self isEditMode]) {
 		identifier = @"backToDisplayPage";
@@ -372,11 +356,6 @@
 	[alert show];
 }
 
-- (IBAction)unwindFromCategoryView:(UIStoryboardSegue *)segue {
-	CategoryViewController *source = [segue sourceViewController];
-	_headerView.category.text = _article.category = source.selectedCategory;
-}
-
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alert didDismissWithButtonIndex:(NSInteger)buttonIndex {
@@ -392,8 +371,10 @@
 	[self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_indexInEditing inSection:0]] withRowAnimation:UITableViewRowAnimationLeft];
 }
 
-- (NSString *)defaultTitle {
-	return NSLocalizedString(@"Untitled", @"Init title");
+- (void)setTitlePlaceHolder {
+	if(_headerView.title.text.length == 0) {
+		_headerView.title.text = NSLocalizedString(@"Untitled", @"Init title");
+	}
 }
 
 //- (BOOL)isEditMode {
@@ -429,16 +410,16 @@
 
 #pragma mark - LFPhotoEdittingControllerDelegate
 
-- (void)lf_PhotoEdittingController:(LFPhotoEdittingController *)photoEdittingVC didCancelPhotoEdit:(LFPhotoEdit *)photoEdit {
-	[self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)lf_PhotoEdittingController:(LFPhotoEdittingController *)photoEdittingVC didFinishPhotoEdit:(LFPhotoEdit *)photoEdit {
-	if(photoEdit) {
-		[self savePhoto:photoEdit.editPreviewImage];
-	}
-	[self dismissViewControllerAnimated:YES completion:nil];
-}
+//- (void)lf_PhotoEdittingController:(LFPhotoEdittingController *)photoEdittingVC didCancelPhotoEdit:(LFPhotoEdit *)photoEdit {
+//	[self dismissViewControllerAnimated:YES completion:nil];
+//}
+//
+//- (void)lf_PhotoEdittingController:(LFPhotoEdittingController *)photoEdittingVC didFinishPhotoEdit:(LFPhotoEdit *)photoEdit {
+//	if(photoEdit) {
+//		[self savePhoto:photoEdit.editPreviewImage];
+//	}
+//	[self dismissViewControllerAnimated:YES completion:nil];
+//}
 
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto infos:(NSArray<NSDictionary *> *)infos {
 	if(photos.count > 0) {
